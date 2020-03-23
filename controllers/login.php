@@ -1,7 +1,7 @@
 
 <?php
 
-class Main extends Controller{
+class Login extends Controller{
 
     function __construct(){
         parent::__construct();
@@ -9,12 +9,9 @@ class Main extends Controller{
     }
 
     function render(){
-        $this->view->render('main/index');
+        $this->view->render('login/index');
     }
 
-    function saludo(){
-        echo "<p>Ejecutaste el método Saludo</p>";
-    }
 }
 
 ?>

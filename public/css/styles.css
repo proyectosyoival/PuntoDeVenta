@@ -1,9 +1,3 @@
-/* Reset css :  Con este código eliminamos márgenes,
-padding y otras propiedades que los navegadores
-añaden automáticamente */
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
-@import url('https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight');
-
 *{
 	margin: 0;
 	padding: 0;
@@ -192,4 +186,30 @@ a img{
 
 #content a:hover img{
 	opacity: 1;
+}
+
+#cont-login{
+	background-color: #51596C;
+	border-radius: 10px;
+	position: absolute;
+	top: 50%; /* Buscamos el centro horizontal (relativo) del navegador */
+	left: 50%; /* Buscamos el centro vertical (relativo) del navegador */
+	width: 600 px; /* Definimos el ancho del objeto a centrar */
+	height: 400px; /* Definimos el alto del objeto a centrar */
+	margin-top: -200px; /* Restamos la mitad de la altura del objeto con un margin-top */
+	margin-left: -300px; /* Restamos la mitad de la anchura del objeto con un margin-left */
+}
+
+#head-login{
+	font-size: 50px; 
+	color: #FFFFFF;
+}
+
+#img-login{
+	margin-bottom: 10px;
+}
+
+#body-login{
+	font-size: 20px;
+	color: #FFFFFF;
 }
