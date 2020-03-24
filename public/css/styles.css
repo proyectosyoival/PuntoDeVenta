@@ -2,13 +2,14 @@
 	margin: 0;
 	padding: 0;
     box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
 }
 html{
 	font-family: 'Raleway', sans-serif;
 }
 body{
 	 font-family: 'Raleway', sans-serif;
-	 background:#D2D3D8;
+	 background-color:#D2D3D8;
 	 height: 100%;
 	 width: 100%;
 }
@@ -189,27 +190,73 @@ a img{
 }
 
 #cont-login{
-	background-color: #51596C;
+	background-color: #6F7E95;
 	border-radius: 10px;
 	position: absolute;
+	height:100%
 	top: 50%; /* Buscamos el centro horizontal (relativo) del navegador */
 	left: 50%; /* Buscamos el centro vertical (relativo) del navegador */
-	width: 600 px; /* Definimos el ancho del objeto a centrar */
-	height: 400px; /* Definimos el alto del objeto a centrar */
-	margin-top: -200px; /* Restamos la mitad de la altura del objeto con un margin-top */
-	margin-left: -300px; /* Restamos la mitad de la anchura del objeto con un margin-left */
+	width: 100%; /* Definimos el ancho del objeto a centrar */
+	margin-top: 50px; /* Restamos la mitad de la altura del objeto con un margin-top */
+	margin-left: -190px; /* Restamos la mitad de la anchura del objeto con un margin-left */
 }
 
 #head-login{
-	font-size: 50px; 
+	font-size: 30px; 
 	color: #FFFFFF;
+	font-weight: bold;
+}
+
+#cont-img{
+	width: 50%;
+	height: 100%;
 }
 
 #img-login{
 	margin-bottom: 10px;
+	width: 100px; 
+	height: 100px;
+	padding: 0;
+	margin: 0;
+	border-radius: 100%;
 }
 
 #body-login{
-	font-size: 20px;
-	color: #FFFFFF;
+	margin-top: 10px;
+	font-size: 16px;
+	color: #000;
+	font-weight: bold;
+	text-align: center;
+}
+
+#btn-sub-login{
+	background-color: #DEE5F6;
+	color: #000;
+	font-weight: bold;
+}
+
+#btn-sub-login:hover{
+	background-color: #DEE5F6;
+	color: #000;
+	font-weight: bold;
+	opacity: 0.90;
+}
+
+.my-error-class {
+    color: white;
+    font-size: 16px;
+    padding-left: 5px;
+    border-color: red;
+    background-color: red;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#h1 {
+	text-align: center;
+	color: #444444;
+	background: #FFFFFF;
+	text-shadow: 1px 0px 1px #CCCCCC, 0px 1px 1px #EEEEEE, 2px 1px 1px #CCCCCC, 1px 2px 1px #EEEEEE, 3px 2px 1px #CCCCCC, 2px 3px 1px #EEEEEE, 4px 3px 1px #CCCCCC, 3px 4px 1px #EEEEEE, 5px 4px 1px #CCCCCC, 4px 5px 1px #EEEEEE, 6px 5px 1px #CCCCCC, 5px 6px 1px #EEEEEE, 7px 6px 1px #CCCCCC;
+	color: #444444;
+	background: #FFFFFF;
 }

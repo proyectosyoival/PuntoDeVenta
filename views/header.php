@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/fonts/style.css">
     <!-- script para js -->
-    <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/jquery-3.2.1.slim.min.js"></script> 
+    <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/jquery-3.4.1.min.js"></script> 
     <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/functions.js"></script> 
-    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/js/bootstrap.min.js">
+    <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/jquery.validate.min.js"></script>
     <!-- links o script de internet -->
     <!-- Cargamos la fuente de Google Raleway : visitar Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
