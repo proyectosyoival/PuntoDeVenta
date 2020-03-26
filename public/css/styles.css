@@ -8,16 +8,10 @@ html{
 	font-family: 'Raleway', sans-serif;
 }
 body{
-<<<<<<< HEAD
-	 font-family: 'Raleway', sans-serif;
-	 background-color:#D2D3D8;
-	 height: 100%;
-=======
 	font-family: 'Raleway', sans-serif;
 	background-color:#D2D3D8;
 	height: 100%;
 	width: 100%;
->>>>>>> 88d5fcb77816997e0d27c5284e101d8a21b4ee27
 }
 header{
 	background:#51596C;
