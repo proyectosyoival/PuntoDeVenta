@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body> 
+<body id="body"> 
 	<?php require 'views/header.php'; ?>
 	<h1 id="h1">PUNTO DE VENTA BOOMBACHAS v1.0</h1>
-	<form action="<?php echo constant('URL'); ?>nuevo/registrarAlumno" method="POST" id="form-login">
+	<form action="<?php echo constant('URL'); ?>login/checklogin" method="POST" id="form-login">
 		<div class="container justify-content-center col-md-3" id="cont-login">
 	    	<div class="text-center">
 	    		<p id="head-login">INICIAR SESIÓN</p>
@@ -19,7 +19,7 @@
 	    	<div class="justify-content-center" id="body-login">
 	    		<div class="form-group">
 	    			<label>Usuario</label> <span class="icon-user"></span> 
-	    			<input type="email" name="email" class="form-control text-center" placeholder="Ingresa un usuario">
+	    			<input type="text" name="usuario" class="form-control text-center" placeholder="Ingresa un usuario">
 	    		</div>
 	    		<div class="form-group">
 	    			<label>Contraseña</label> <span class="icon-lock"></span> 
@@ -40,14 +40,14 @@ jQuery.validator.setDefaults({
    errorClass: "my-error-class"
 });
 jQuery.validator.addMethod("letterandnumbers", function(value, element) {
-        return this.optional(element) || /^[a-z0-9\s]+$/i.test(value);
+       return this.optional(element) || /^[a-z0-9\s\.]+$/i.test(value);
     }, "Solo letras y numeros");
 $(function validar() {
    $("#form-login" ).validate({
            rules: {
-                   email: {
+                   usuario: {
                            required:true,
-                           email:true
+                           letterandnumbers:true
                    },
                 	contrasena:{
 		                    required:true,
@@ -55,9 +55,9 @@ $(function validar() {
                 	}
            },
            messages: {
-                   email: {
-                           required: "&#x1f5d9; Ingresa un email",
-                           email: "&#x1f5d9; Ingresa un email valido"
+                   usuario: {
+                           required: "&#x1f5d9; Ingresa un usuario",
+                           letterandnumbers: "&#x1f5d9; Ingresa solo letras, números o signo de punto"
                    },
                 	contrasena:{
 		                    required:"&#x1f5d9; Ingresa tu contraseña",

@@ -20,7 +20,7 @@ class Nuevo extends Controller{
         $mensaje = "";
 
         if($this->model->insert(['matricula' => $matricula, 'nombre' => $nombre, 'apellido' => $apellido])){
-            $mensaje = "Nuevo alumno creado";
+            echo  "Nuevo alumno creado";
         }else{
             $mensaje = "La matrícula ya existe";
         }
