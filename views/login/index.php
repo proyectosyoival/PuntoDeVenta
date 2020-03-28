@@ -9,7 +9,11 @@
 <body id="body"> 
 	<?php require 'views/header.php'; ?>
 	<h1 id="h1">PUNTO DE VENTA BOOMBACHAS v1.0</h1>
-	<form action="<?php echo constant('URL'); ?>login/checklogin" method="POST" id="form-login">
+	 <?php
+        if(isset($errorLogin)){?>
+                <div class="row justify-content-center" id="msj-error"><h2><?php echo $errorLogin;?></h2></div>
+      <?php } ?>
+	<form action="" method="POST" id="form-login">
 		<div class="container justify-content-center col-md-3" id="cont-login">
 	    	<div class="text-center">
 	    		<p id="head-login">INICIAR SESIÓN</p>

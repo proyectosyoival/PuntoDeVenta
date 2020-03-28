@@ -12,14 +12,15 @@ class App{
 
         // cuando se ingresa sin definir controlador
         if(empty($url[0])){
-            $archivoController = 'controllers/login.php';
+            $archivoController = 'controllers/main.php';
             require_once $archivoController;
-            $controller = new Login();
-            $controller->loadModel('login');
+            $controller = new Main();
+            $controller->loadModel('main');
             $controller->render();
             return false;
         }
         $archivoController = 'controllers/' . $url[0] . '.php';
+        // echo $archivoController;
 
         if(file_exists($archivoController)){
             require_once $archivoController;
