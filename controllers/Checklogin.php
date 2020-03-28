@@ -1,9 +1,8 @@
 <?php
-// include 'libs/database.php';
 
 class User extends Database{
-    private $nombre;
-    private $username;
+    public $nombre;
+    private $usuario;
 
 
     public function userExists($usuario, $contrasena){
@@ -23,8 +22,8 @@ class User extends Database{
         $query->execute(['usuario' => $usuario]);
         
         foreach ($query as $currentUser) {
-            $this->nombre = $currentUser['nombre'];
-            $this->usename = $currentUser['usuario'];
+            $this->nom = $currentUser['nombre'];
+            $this->usuario = $currentUser['usuario'];
         }
     }
 
