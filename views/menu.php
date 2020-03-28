@@ -4,7 +4,7 @@
     <div id="wrapper">
         <section>
             <header>
-                <a href="#" id="exit">
+                <a href="<?php echo constant('URL'); ?>controllers/logout.php" id="exit">
                     <span class="icon-switch"></span>
                 </a>
                 <a href="#" id="menu_on">
