@@ -9,7 +9,8 @@
 <body>
     <?php require 'views/header.php'; ?>
     <?php require 'views/menu.php'; ?>
+    <!-- <h1>Bienvenido <?php //echo $nombre->getNombre(); ?></h1> -->
     <?php require 'views/footer.php'; ?>
-     <div class="center"><?php echo $this->mensaje; ?></div>
+
 </body>
 </html>

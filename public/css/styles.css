@@ -44,29 +44,45 @@ footer{
 	border-radius: 4px;
 	display: block;
 	position: absolute;
-	background: #7A95C3;
+	background: #F4F7FA;
 	transition: all 0.25s ease;
 	transform-origin : 0px 100%;
 }
+
+#menu_on:hover span{
+	background: #7A95C3;
+}
+
 a{
 	text-decoration: none;
 }
+
 a:link{
 	text-decoration: none;
 }
+
 a:hover{
-	text -decoration: none;
+	text-decoration: none;
 }
+
 a:visited{
 	text-decoration: none;
 
 }
+
 #exit{
 	position: absolute;
+	top: 0;
 	right: 20px;
-	color: #7A95C3;
+	/*background: #DEE5F6;*/
+	color: #F4F7FA;
 	font-size: 25px;
-	align:center;
+	text-align:center;
+	height: 100%;
+}
+
+#exit:hover{
+	color: #7A95C3;
 }
 
 #menu_on span:nth-child(2){
@@ -90,8 +106,8 @@ nav{
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	lenft:-300px;
-	width: 300px;
+	left:-300px;
+	width: 250px;
 	z-index: 1;
 	padding: 90px 30px 30px;
 	background: #6F7E95;
@@ -109,18 +125,25 @@ nav{
 	opacity: 1;
 }
 
+/*estilos para las opciones del menu lateral*/
 nav a{
+	font-size: 16px;
 	display:block;
 	text-decoration: none;
 	padding: 10px;
-	color: rgba(255,255,255,0.75);
+	color: #F4F7FA;
 	border-bottom: 1px solid rgba(255,255,255,0.2);
 	transition: all ease 0.25s;
+	text-align: left;
 }
 
 nav a:hover{
-	color: rgba(255,255,255,1);
-	border-bottom-color:rgba(255,255,255,0.4);
+	color: #7A95C3;
+	/*border-bottom-color:rgba(255,255,255,0.4);*/
+}
+
+ul, li{
+	list-style: none;
 }
 #modulo1_head{
 	width: 100%;
@@ -255,13 +278,34 @@ a img{
 
 #h1 {
 	text-align: center;
-	color: #444444;
-	background: #FFFFFF;
-	text-shadow: 1px 0px 1px #CCCCCC, 0px 1px 1px #EEEEEE, 2px 1px 1px #CCCCCC, 1px 2px 1px #EEEEEE, 3px 2px 1px #CCCCCC, 2px 3px 1px #EEEEEE, 4px 3px 1px #CCCCCC, 3px 4px 1px #EEEEEE, 5px 4px 1px #CCCCCC, 4px 5px 1px #EEEEEE, 6px 5px 1px #CCCCCC, 5px 6px 1px #EEEEEE, 7px 6px 1px #CCCCCC;
-	color: #444444;
-	background: #FFFFFF;
+	color: #FFF;
+	background: #51596C;
 }
 
-#body{
-	background-image: url('../img/body1.jpg');
+#cont-msj-error-login{
+	margin-top: 20px;
+	margin-bottom: -20px;
+}
+#msj-error-login{
+	background-color: red;
+	color: #FFF;
+	-webkit-box-shadow: 4px 5px 9px -4px rgba(0,0,0,0.75);
+	-moz-box-shadow: 4px 5px 9px -4px rgba(0,0,0,0.75);
+	box-shadow: 4px 5px 9px -4px rgba(0,0,0,0.75);
+}
+
+#btn-cerrar{
+	color: #FFF;
+}
+
+#modal-header{
+	background: #51596C;
+	color: #F4F7FA; 
+	font-weight: bolder;
+}
+
+#btn-cancelar-modal{
+	color: #FFF;
+    background-color: #7A95C3;
+    border-color: #7A95C3;
 }

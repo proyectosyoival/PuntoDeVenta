@@ -8,10 +8,17 @@
 </head>
 <body id="body"> 
 	<?php require 'views/header.php'; ?>
-	<h1 id="h1">PUNTO DE VENTA BOOMBACHAS v1.0</h1>
+	<h1 id="h1"><span class="icon-cart"></span> PUNTO DE VENTA BAMBOOCHAS <span class="icon-cart"></span></h1>
 	 <?php
         if(isset($errorLogin)){?>
-                <div class="row justify-content-center" id="msj-error"><h2><?php echo $errorLogin;?></h2></div>
+        <div class="d-flex justify-content-center" id="cont-msj-error-login">
+        	<div class="alert alert-dismissible fade show col-md-4 text-center" id="msj-error-login" role="alert" style="background-color: red">
+  				<strong><?php echo $errorLogin;?></strong>
+  				<button type="button" class="close" id="btn-cerrar" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  				</button>
+			</div>
+        </div>	
       <?php } ?>
 	<form action="" method="POST" id="form-login">
 		<div class="container justify-content-center col-md-3" id="cont-login">
