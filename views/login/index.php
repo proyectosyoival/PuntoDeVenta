@@ -8,7 +8,7 @@
 </head>
 <body id="body"> 
 	<?php require 'views/header.php'; ?>
-	<h1 id="h1"><span class="icon-cart"></span> PUNTO DE VENTA BOOMBACHAS <span class="icon-cart"></span></h1>
+	<h1 id="h1"><span class="icon-cart"></span> PUNTO DE VENTA BAMBOOCHAS <span class="icon-cart"></span></h1>
 	 <?php
         if(isset($errorLogin)){?>
         <div class="d-flex justify-content-center" id="cont-msj-error-login">

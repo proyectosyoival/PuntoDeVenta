@@ -1,3 +1,3 @@
 <footer>
- © Derechos Reservados a Boombacha S.A. de C.V. 2020
+ © Derechos Reservados a Bamboocha S.A. de C.V. 2020
 </footer>
