@@ -158,9 +158,9 @@ ul, li{
 }
 
 #content{
-	padding:250px 8%;
+	padding:70px 50px 5%;
 	text-align: left;
-	height: 100vh;
+	height: 10vh;
 	position: relative;
 	display: table;
 	width: 10%;
