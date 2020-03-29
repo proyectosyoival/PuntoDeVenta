@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Prodcutos</title>
+	<title>Productos</title>
 </head>
 <body>
 	<?php require 'views/header.php'; ?>

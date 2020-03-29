@@ -12,7 +12,7 @@ class Consulta extends Controller{
     function render(){
         $alumnos = $this->model->get();
         $this->view->alumnos = $alumnos;
-        $this->view->render('consulta/index');
+        $this->view->render('nuevo/index');
     }
 
     function verAlumno($param = null){

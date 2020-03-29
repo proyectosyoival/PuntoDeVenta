@@ -6,11 +6,11 @@ botones.forEach(boton => {
     boton.addEventListener("click", function(){
         const matricula = this.dataset.matricula;
         
-        const confirm = window.confirm("¿Deseas eliminar al alumno " + matricula + "?");
+        const confirm = window.confirm("¿Deseas eliminar el registro " + matricula + "?");
 
         if(confirm){
             // solicitud AJAX
-            httpRequest("http://localhost/MVC/consulta/eliminarAlumno/" + matricula, function(){
+            httpRequest("http://localhost/PuntodeVenta/consulta/eliminarAlumno/" + matricula, function(){
                 console.log(this.responseText);
                 document.querySelector("#respuesta").innerHTML = this.responseText;
 

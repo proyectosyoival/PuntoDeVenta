@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Prodcutos</title>
+	<title>Productos</title>
 </head>
 <body>
 	<?php require 'views/header.php'; ?>
@@ -13,7 +13,7 @@
 		<h1 class="">Productos</h1>
 
 		<div>
-			<a href="<?php echo constant('URL'); ?>producto/nuevo">Nuevo Prodcuto</a>
+			<a href="<?php echo constant('URL'); ?>producto/nuevo">Nuevo Producto</a>
 		</div>
         <hr>
 		<table width="1100px">
