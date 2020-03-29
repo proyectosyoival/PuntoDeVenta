@@ -9,7 +9,7 @@
 	<?php require 'views/menu.php'; ?>
 
 	<div id="content">
-
+         <div id="respuesta" class="center"></div>
 		<h1 class="">Iva</h1>
 
 		<div>
@@ -24,19 +24,19 @@
                     <th>Fecha de registro</th>
                 </tr>
             </thead>
-            <tbody id="tbody-alumnos">
+            <tbody id="tbody-general">
                 <?php
                     include_once 'models/iva.php';
                     foreach($this->iva as $row){
                         $iva = new Iva();
                         $iva = $row; 
                 ?>
-                <tr id="fila<?php echo $iva->id_iva; ?>">
+                <tr id="fila-<?php echo $iva->id_iva; ?>">
                     <td><?php echo $iva->id_iva; ?></td>
                     <td><?php echo $iva->porcentaje;?> %</td>
                     <td><?php echo $iva->fecha_alta; ?></td>
                     <td><a href="#">Editar</a></td>
-                    <td><a class="bEliminar" data-matricula="<?php echo $iva->id_iva; ?>">Eliminar</a></td>
+                    <td><a class="bEliminar" data-id="<?php echo $iva->id_iva;?>" data-function="iva/eliminarIva">Eliminar</a></td>
                 </tr>
 
                 <?php } ?>

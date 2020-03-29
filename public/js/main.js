@@ -4,18 +4,19 @@ const botones = document.querySelectorAll(".bEliminar");
 botones.forEach(boton => {
 
     boton.addEventListener("click", function(){
-        const matricula = this.dataset.matricula;
+        const id = this.dataset.id;
+        const funcion = this.dataset.function;
         
-        const confirm = window.confirm("¿Deseas eliminar el registro " + matricula + "?");
+        const confirm = window.confirm("¿Deseas eliminar el registro?");
 
         if(confirm){
             // solicitud AJAX
-            httpRequest("http://localhost/PuntodeVenta/consulta/eliminarAlumno/" + matricula, function(){
+            httpRequest("http://localhost/PuntodeVenta/"+funcion+"/"+ id, function(){
                 console.log(this.responseText);
                 document.querySelector("#respuesta").innerHTML = this.responseText;
 
-                const tbody = document.querySelector("#tbody-alumnos");
-                const fila  = document.querySelector("#fila-" + matricula);
+                const tbody = document.querySelector("#tbody-general");
+                const fila  = document.querySelector("#fila-" + id);
 
                 tbody.removeChild(fila);
             });

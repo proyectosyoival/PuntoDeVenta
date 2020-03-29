@@ -72,16 +72,16 @@ class Iva extends Controller{
         $id_iva = $param[0];
 
         if($this->model->delete($id_iva)){
-            //$this->view->mensaje = "Alumno eliminado correctamente";
-            // $mensaje = "Alumno eliminado correctamente";
+            // $this->view->mensaje = "Alumno eliminado correctamente";
+            $mensaje = "Iva eliminado correctamente";
         }else{
             // mensaje de error
-            //$this->view->mensaje = "No se pudo eliminar el alumno";
-            // $mensaje = "No se pudo eliminar el alumno";
+            // $this->view->mensaje = "No se pudo eliminar el alumno";
+            $mensaje = "No se pudo eliminar el Iva";
         }
-        //$this->render();
+        // $this->render();
         
-        // echo $mensaje;
+        echo $mensaje;
     }
 }
 
