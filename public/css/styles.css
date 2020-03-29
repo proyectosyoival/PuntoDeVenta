@@ -6,6 +6,8 @@
 }
 html{
 	font-family: 'Raleway', sans-serif;
+	min-height: 100%;
+  	position: relative;
 }
 body{
 	font-family: 'Raleway', sans-serif;
@@ -28,7 +30,8 @@ footer{
 	z-index: 2;
 	text-align: center;
 	color:#DEE5F6;
-	bottom: 0;
+	font-style: italic;
+	bottom: 0px;
 }
 
 #menu_on{
