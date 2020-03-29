@@ -13,7 +13,7 @@ class UserSession{
         $query->execute(['usuario' => $user, 'contrasena' => $contrasena]);
         
         foreach ($query as $currentUser) {
-            $query->nombre = $currentUser['nombre'];
+            $query->nombre = $currentUser['nombrePers'];
             $query->apellido = $currentUser['apellido'];
             $query->rol = $currentUser['id_rol'];
         }

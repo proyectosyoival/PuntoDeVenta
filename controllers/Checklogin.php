@@ -21,10 +21,6 @@ class User extends Database{
         // echo $user;
         $query = $this->connect()->prepare('SELECT * FROM persona WHERE usuario = :usuario');
         $query->execute(['usuario' => $user]);
-        
-        foreach ($query as $currentUser) {
-            $this->nombre = $currentUser['nombre'];
-        }
     }
 
     // public function getNombre(){
