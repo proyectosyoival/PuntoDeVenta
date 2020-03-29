@@ -1,21 +1,34 @@
+<?php 
+    $rol=$_SESSION['rol'];
+    $nombre_rol="";
+    // consulta para sacar el nombre del rol
+    $db= new Database();
+    $query = $db->connect()->prepare('SELECT * FROM rol WHERE id_rol = :id_rol');
+        $query->execute(['id_rol' => $rol]);
+        
+        foreach ($query as $currentUser) {
+            $query->nombre = $currentUser['nombre'];
+        }
+    $nombre_rol=$query->nombre;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <body> 
     <div id="wrapper">
         <section>
             <header>
-                <!-- boton de modal para salir -->
-                 <button type="button" class="btn" data-toggle="modal" data-target="#modalsalir" id="exit">
-                    <span class="icon-switch"></span>
-                </button>
-                <!-- <a href="<?php echo constant('URL'); ?>controllers/logout.php" id="exit">
-                    <span class="icon-switch"></span>
-                </a> -->
-                <a href="#" id="menu_on">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                 </a>
+                <div class="row container">
+                    <a href="#" id="menu_on">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                     </a>
+                    <span id="span-sesion"><?php echo $_SESSION['nombre']/*." ".$_SESSION['apellido']*/."-".$nombre_rol;?></span>  
+                    <!-- boton de modal para salir -->
+                    <button type="button" class="btn" data-toggle="modal" data-target="#modalsalir" id="exit">
+                        <span class="icon-switch"></span>
+                    </button> 
+                </div>
             </header>
             <nav>
                 <ul>

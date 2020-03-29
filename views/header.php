@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Punto de Venta</title>
     <!-- links para css -->
-    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/fonts/style.css">
     <!-- script para js -->
     <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/jquery-3.4.1.min.js"></script> 

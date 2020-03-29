@@ -12,31 +12,30 @@ $userSession = new UserSession();
 $user = new User();
 
 if(isset($_SESSION['usuario'])){
-    //echo "hay sesion";
     $user->setUser($userSession->getCurrentUser());
     $app = new App();
 
 }else if(isset($_POST['usuario']) && isset($_POST['contrasena'])){
     
-    $userForm = $_POST['usuario'];
-    $passForm = $_POST['contrasena'];
+    $usuario = $_POST['usuario'];
+    $contrasena = $_POST['contrasena'];
 
     $user = new User();
-    if($user->userExists($userForm, $passForm)){
-        //echo "Existe el usuario";
-        $userSession->setCurrentUser($userForm);
-        $user->setUser($userForm);
+    if($user->userExists($usuario, $contrasena)){
+        // echo "Existe el usuario";
+        $userSession->setCurrentUser($usuario,$contrasena);
+        $user->setUser($usuario);
 
          $app = new App();
         // include_once 'views/main/index.php';
     }else{
-        //echo "No existe el usuario";
+        echo "No existe el usuario";
         $errorLogin = "Nombre de usuario y/o password incorrecto";
         include_once 'views/login/index.php';
         // $app = new App();
     }
 }else{
-    //echo "login";
+    // echo "login";
     include_once 'views/login/index.php';
     // $app = new App();
 }

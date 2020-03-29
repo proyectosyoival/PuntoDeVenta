@@ -9,6 +9,8 @@ class Main extends Controller{
     }
 
     function render(){
+    	$nombre1 = new User();
+    	$nombre1->getNombre();
         $this->view->render('main/index');
     }
 

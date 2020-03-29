@@ -165,7 +165,6 @@ ul, li{
 	display: table;
 	width: 10%;
 	transition: all 0.75s ease;
-
 }
 
 
@@ -309,3 +308,24 @@ a img{
     background-color: #7A95C3;
     border-color: #7A95C3;
 }
+
+#content-body{
+	padding:250px 8%;
+	text-align: left;
+	height: 100vh;
+	position: relative;
+	display: table;
+	width: 10%;
+	transition: all 0.75s ease;
+}
+#span-sesion{
+	position: absolute;
+	margin-right: 20px;
+	right: 50px;
+	/*background: #DEE5F6;*/
+	color: #F4F7FA;
+	font-size: 16px;
+	text-align:center;
+	height: 100%;
+}
+

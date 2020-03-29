@@ -2,7 +2,7 @@
 
 class User extends Database{
     public $nombre;
-    private $usuario;
+    public $usuario;
 
 
     public function userExists($usuario, $contrasena){
@@ -17,19 +17,20 @@ class User extends Database{
         }
     }
 
-    public function setUser($usuario){
+    public function setUser($user){
+        // echo $user;
         $query = $this->connect()->prepare('SELECT * FROM persona WHERE usuario = :usuario');
-        $query->execute(['usuario' => $usuario]);
+        $query->execute(['usuario' => $user]);
         
         foreach ($query as $currentUser) {
-            $this->nom = $currentUser['nombre'];
-            $this->usuario = $currentUser['usuario'];
+            $this->nombre = $currentUser['nombre'];
         }
     }
 
-    public function getNombre(){
-        return $this->nombre;
-    }
+    // public function getNombre(){
+    //     // echo "ahora";
+    //     return $this->nombre;
+    // }   
 }
 
 ?>

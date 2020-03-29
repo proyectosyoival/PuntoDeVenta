@@ -6,8 +6,20 @@ class UserSession{
         session_start();
     }
 
-    public function setCurrentUser($usuario){
-        $_SESSION['usuario'] = $usuario;
+    public function setCurrentUser($user,$contrasena){
+        $db= new Database();
+        $_SESSION['usuario'] = $user;
+        $query = $db->connect()->prepare('SELECT * FROM persona WHERE usuario = :usuario AND contrasena=:contrasena');
+        $query->execute(['usuario' => $user, 'contrasena' => $contrasena]);
+        
+        foreach ($query as $currentUser) {
+            $query->nombre = $currentUser['nombre'];
+            $query->apellido = $currentUser['apellido'];
+            $query->rol = $currentUser['id_rol'];
+        }
+         $_SESSION['nombre'] = $query->nombre;
+         $_SESSION['apellido'] = $query->apellido;
+         $_SESSION['rol'] = $query->rol;
     }
 
     public function getCurrentUser(){
