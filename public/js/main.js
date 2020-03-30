@@ -12,13 +12,19 @@ botones.forEach(boton => {
         if(confirm){
             // solicitud AJAX
             httpRequest("http://localhost/PuntodeVenta/"+funcion+"/"+ id, function(){
-                console.log(this.responseText);
-                document.querySelector("#respuesta").innerHTML = this.responseText;
+                var respuesta=this.responseText;
+                console.log(respuesta);
+                if (respuesta==1) {
+                    const tbody = document.querySelector("#tbody-general");
+                    const fila  = document.querySelector("#fila-" + id);
+                    tbody.removeChild(fila);
+                    document.querySelector("#respuesta").innerHTML = "REGISTRO ELIMINADO";
+                     // document.querySelector(".respuestat").hidden=false;
+                }else{
+                    document.querySelector("#respuesta").innerHTML = "NO SE ELIMINO EL REGISTRO";
+                    // document.querySelector(".respuestaf").hidden=false;
+                }
 
-                const tbody = document.querySelector("#tbody-general");
-                const fila  = document.querySelector("#fila-" + id);
-
-                tbody.removeChild(fila);
             });
         }
     });
