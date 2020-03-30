@@ -8,26 +8,29 @@
 	<?php require 'views/header.php'; ?>
 	<?php require 'views/menu.php'; ?>
 
-	<div id="content">
+	<div class="container-fluid">
 
-		<h1 class="">Nuevo Producto</h1>
-
+		<h1 id="h1-form">Nuevo Producto</h1>
+		<hr>
 		<form action="<?php echo constant('URL'); ?>producto/registrarProducto" method="POST">
-			<div>
+			<div class="form-group">
 				<label for="nombre">Nombre:</label>
-				<input type="text" name="nombre" id="nombre" placeholder="Nombre del producto" required>
+				<input type="text" name="nombre" id="nombre" class="form-control col-md-4" placeholder="Nombre del producto" required>
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label for="descripcion">Descripción:</label>
-				<textarea minlength="10" id="descripcion" maxlength="200" placeholder="Descripción..."></textarea>
+				<textarea minlength="10" id="descripcion" class="form-control col-md-4" maxlength="200" placeholder="Descripción..."></textarea>
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label for="talla">Talla:</label>
-				<input type="text" name="talla" id="talla" placeholder="Talla del producto" required>
+				<input type="text" name="talla" id="talla" class="form-control col-md-4" placeholder="Talla del producto" required>
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label>Tipo de Tela:</label>
-				<select>
+				<select class="form-control col-md-4">
 					<option value="0">Algodon</option>
 					<option value="1">Poliester</option>
 					<option value="2">Licra</option>
@@ -35,55 +38,63 @@
 					<option value="4">Mesclilla</option>
 				</select>
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label for="descuento">Descuento:</label>
-				<input type="text" name="descuento" id="descuento" placeholder="Porcentaje de descuento" required>
+				<input type="text" name="descuento" id="descuento" class="form-control col-md-4" placeholder="Porcentaje de descuento" required>
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label for="estado">Estado:</label><br>
 				<input type="radio" name="estado" id="estado" value="1"> Activo <br>
 				<input type="radio" name="esta" id="estado" value="0"> Inactivo
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label for="foto">Foto:</label>
-				<input type="file" name="foto" id="foto">
+				<input type="file" name="foto" id="foto" class="form-control col-md-4">
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label for="codigointerno">Codigo Interno:</label>
-				<input type="text" name="codigointerno" id="codigointerno" placeholder="Codigo Interno" required>
+				<input type="text" name="codigointerno" id="codigointerno" class="form-control col-md-4" placeholder="Codigo Interno" required>
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label for="codigoexterno">Codigo Externo:</label>
-				<input type="text" name="codigoexterno" id="codigoexterno" placeholder="Codigo Externo" required>
+				<input type="text" name="codigoexterno" id="codigoexterno" class="form-control col-md-4" placeholder="Codigo Externo" required>
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label for="precio">Precio:</label>
-				<input type="text" name="precio" id="precio" placeholder="Precio base del producto" required>
+				<input type="text" name="precio" id="precio" class="form-control col-md-4" placeholder="Precio base del producto" required>
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label for="cantidad">Cantidad:</label>
-				<input type="text" name="cantidad" id="cantidad" placeholder="Numero de unidades" required>
+				<input type="text" name="cantidad" id="cantidad" class="form-control col-md-4" placeholder="Numero de unidades" required>
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label>Categoría:</label>
-				<select>
+				<select class="form-control col-md-4">
 					<option value="0">Deportes</option>
 					<option value="1">Casualr</option>
 				</select>
 			</div>
-			<div>
+
+			<div class="form-group">
 				<label for="proveedor">Proveedor:</label>
-				<input type="text" name="proveedor" id="proveedor" placeholder="Nombre de proveedor" required>
+				<input type="text" name="proveedor" id="proveedor" class="form-control col-md-4" placeholder="Nombre de proveedor" required>
 			</div>
+
 			<div>
-				<input type="submit" value="Crear Producto">
+				<a type="button" class="btn" id="btn-regresar" href="#">Crear Producto</a>
 			</div>
 
 		</form>
-
 	</div>
 	
 	<?php require 'views/footer.php'; ?>
-	<script src="<?php echo constant('URL'); ?>public/js/main.js"></script>
 </body>
 </html>
