@@ -72,6 +72,10 @@
 				</select>
 			</div>
 			<div>
+				<label for="proveedor">Proveedor:</label>
+				<input type="text" name="proveedor" id="proveedor" placeholder="Nombre de proveedor" required>
+			</div>
+			<div>
 				<input type="submit" value="Crear Producto">
 			</div>
 

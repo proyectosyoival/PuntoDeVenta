@@ -30,10 +30,14 @@ class Producto extends Controller{
 		$estado				= $_POST['estado'];				//Se registra en la tabla producto
 		$foto				= $_POST['foto'];				//Se registra en la tabla producto
 		$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)
-		$idPersona			= $_POST['idpersona'];			//Se obtiene de la session activa (automatco)
-		$idCodigoDeBarras	= $_POST['idcodigodebarras'];	//Se obtiene de la tabla de codigos de barras
-		$idPrecio			= $_POST['idprecio'];			//Se obtiene de la tabla de precio
-		$idCategoria		= $_POST['idcategoria'];		//Se obtiene de la tabla de categoria
+		//$idPersona			= $_POST['idpersona'];			//Se obtiene de la session activa (automatco)
+		//$idCodigoDeBarras	= $_POST['idcodigodebarras'];	//Se obtiene de la tabla de codigos de barras
+		$codigoInterno		= $_POST['codigointerno'];
+		$codigoExterno		= $_POST['codigoexterno'];
+		//$idPrecio			= $_POST['idprecio'];			//Se obtiene de la tabla de precio
+		$idPrecio			= $_POST['precio'];
+		//$idCategoria		= $_POST['idcategoria'];		//Se obtiene de la tabla de categoria
+		$categoria 			= $_POST['categoria'];
 		$proveedor			= $_POST['proveedor'];			//Se registra en la tabla producto
 
 		$mensaje = "";
