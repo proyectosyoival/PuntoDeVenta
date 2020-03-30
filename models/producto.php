@@ -6,9 +6,9 @@
 class Product{
 	
 	public $id_producto;
-	public $nombre;
-	public $descripcion;
-	public $estado;
+	public $nombreProd;
+	public $descripcionProd;
+	public $estadoProd;
 	public $talla;
 	public $tipo_tela;
 	public $proveedor;

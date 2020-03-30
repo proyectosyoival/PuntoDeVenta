@@ -31,20 +31,20 @@ class ProductoModel extends Model{
             while($row = $query->fetch()){
                 $item = new Producto();
                 $item->id_producto 			= $row[0];	//id_producto
-                $item->nombre    			= $row[1];	//nombre
-                $item->descripcion  		= $row[2];	//descripcion
-                $item->estado  				= $row[3];	//estado
+                $item->nombreProd  			= $row[1];	//nombre
+                $item->descripcionProd 		= $row[2];	//descripcion
+                $item->estadoProd			= $row[3];	//estado
                 $item->talla  				= $row[4];	//talla
                 $item->tipo_tela  			= $row[5];	//tipo_tela
-                $item->descuento  			= $row[6];	//descuento
-                $item->foto  				= $row[7];	//foto
+                $item->foto       			= $row[6];	//foto
+                $item->descuento 			= $row[7];	//descuento
                 $item->fecha_reg  			= $row[8];	//fecha_reg
-                $item->nombre  				= $row[9];	//nombre persona quien registra
+                $item->nombrePers			= $row[9];	//nombre persona quien registra
                 $item->apellido				= $row[10];	//apellido persona quien registra
                 $item->codigo_interno  		= $row[11];	//codigo de barras interno
                 $item->codigo_externo  		= $row[12];	//codigo de barras externo
                 $item->general  			= $row[13]; //precio
-                $item->nombre		  		= $row[14]; //categoria
+                $item->nombreCate	  		= $row[14]; //categoria
                 $item->proveedor 	 		= $row[15];	//proveedor
                 array_push($items, $item);
             }
