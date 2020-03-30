@@ -12,12 +12,12 @@
 	 <?php
         if(isset($errorLogin)){?>
         <div class="d-flex justify-content-center" id="cont-msj-error-login">
-        	<div class="alert alert-dismissible fade show col-md-4 text-center" id="msj-error-login" role="alert" style="background-color: red">
+        	<div class="alert alert-dismissible fade show col-md-4 text-center" id="msj-error-login" role="alert">
   				<strong><?php echo $errorLogin;?></strong>
   				<button type="button" class="close" id="btn-cerrar" data-dismiss="alert" aria-label="Close">
     			<span aria-hidden="true">&times;</span>
   				</button>
-			</div>
+			   </div>
         </div>	
       <?php } ?>
 	<form action="" method="POST" id="form-login">

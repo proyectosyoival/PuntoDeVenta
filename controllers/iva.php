@@ -22,11 +22,9 @@ class Iva extends Controller{
 
     function registrarIva(){
         $porcentaje    = $_POST['porcentaje'];
-        $fecha_alta  = date('d/m/Y H:i:s');
-
         $mensaje = "";
 
-        if($this->model->insert(['porcentaje' => $porcentaje, 'fecha_alta' => $fecha_alta])){
+        if($this->model->insert(['porcentaje' => $porcentaje])){
             $mensaje = "IVA creado";
         }else{
             // $mensaje = "La matrícula ya existe";
@@ -73,11 +71,11 @@ class Iva extends Controller{
 
         if($this->model->delete($id_iva)){
             // $this->view->mensaje = "Alumno eliminado correctamente";
-            $mensaje = "Iva eliminado correctamente";
+            $mensaje = 1;
         }else{
             // mensaje de error
             // $this->view->mensaje = "No se pudo eliminar el alumno";
-            $mensaje = "No se pudo eliminar el Iva";
+            $mensaje = 0;
         }
         // $this->render();
         

@@ -11,8 +11,8 @@ class IvaModel extends Model{
     public function insert($datos){
         // insertar datos en la BD
         try{
-            $query = $this->db->connect()->prepare('INSERT INTO IVA (porcentaje, fecha_alta) VALUES(:porcentaje, :fecha_alta)');
-            $query->execute(['porcentaje' => $datos['porcentaje'], 'fecha_alta' => $datos['fecha_alta']]);
+            $query = $this->db->connect()->prepare('INSERT INTO IVA (porcentaje) VALUES(:porcentaje)');
+            $query->execute(['porcentaje' => $datos['porcentaje']]);
             return true;
         }catch(PDOException $e){
             //echo $e->getMessage();
