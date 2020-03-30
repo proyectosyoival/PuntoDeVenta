@@ -10,7 +10,7 @@
 
 	<div class="container-fluid">
          <div id="respuesta" class="center"></div>
-		<h1 class="text-center" id="h1-tab-titulo">IVA</h1>
+		<h1 class="text-left" id="h1-tab-titulo">IVA</h1>
 
 		<div>
 			<a type="button" class="btn" id="btn-table" href="<?php echo constant('URL'); ?>iva/nuevo"><span class="icon-plus"></span> Nuevo</a>
