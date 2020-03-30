@@ -190,6 +190,11 @@ ul, li{
 	font-weight: bold;
 }
 
+#h1-form{
+	color: #6C6C6D;
+	font-weight: bold;
+}
+
 p{
 	font-size: 1.5em;
 	opacity: 0.82;
@@ -240,6 +245,8 @@ a img{
 	font-size: 30px; 
 	color: #FFFFFF;
 	font-weight: bold;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #cont-img{
@@ -278,13 +285,17 @@ a img{
 }
 
 .my-error-class {
-	color: white;
+	color: #F4F7FA; 
 	font-size: 16px;
 	padding-left: 5px;
-	border-color: red;
+	border-color: white;
 	background-color: red;
 	border-radius: 5px;
-	width: 100%;
+	padding-right: 5px;
+}
+.my-error-class input{
+	color:  #F4F7FA; 
+	background: white;
 }
 
 #h1 {
@@ -372,8 +383,50 @@ a img{
     opacity: 0.9;
 }
 
+#btn-registrar{
+	color: #FFF;
+    background-color: #7A95C3;
+    border-color: #7A95C3;
+}
+
+#btn-registrar:hover{
+	color: #FFF;
+    background-color: #7A95C3;
+    border-color: #7A95C3;
+    opacity: 0.9;
+}
+
+#btn-regresar{
+	color: #FFF;
+    background-color: #A1A7B7;
+    border-color: #A1A7B7;
+}
+
+#btn-regresar:hover{
+	color: #FFF;
+    background-color: #A1A7B7;
+    border-color: #A1A7B7;
+    opacity: 0.9;
+}
+
+#btn-editar{
+	color: #FFF;
+    background-color: #7A95C3;
+    border-color: #7A95C3;
+    font-size: 12px;
+}
+
+#btn-editar:hover{
+	color: #FFF;
+    background-color: #7A95C3;
+    border-color: #7A95C3;
+    opacity: 0.9;
+} 
+
 a.btn.btn-danger{
 	color: #F4F7FA;
+	font-size: 12px;
+}
 }
 a.btn.btn-danger:hover{
 	color: #F4F7FA;

@@ -10,15 +10,16 @@
 
 	<div class="container-fluid">
 
-		<h1 class="">Nuevo Iva</h1>
-
+		<h1 id="h1-form">Nuevo Iva</h1>
+		<hr>
 		<form action="<?php echo constant('URL'); ?>iva/registrarIva" method="POST" id="form-iva">
 			<div class="form-group">
 				<label for="porcentaje">Porcentaje:</label>
-				<input type="number" name="porcentaje" id="porcentaje" class="form-control col-md-4" placeholder="Agrega un nuevo IVA Ejemplo. 0.16" step="0.1" min="0" max="1">
+				<input type="number" name="porcentaje" id="porcentaje" class="form-control col-md-4" placeholder="Agrega un nuevo IVA Ejemplo. 0.16" step="0.01" min="0" max="1"><!-- el uso de la clase col-md-4 es para darle el tamaño, el tamaño maximoes 12 que ocuparia toda la pantalla -->
 			</div>
 			<div>
-				<input type="submit" value="Crear Producto">
+				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>iva">Regresar</a>
+				<button type="submit" class="btn" id="btn-registrar">Registrar</button>
 			</div>
 		</form>
 	</div>
@@ -50,10 +51,10 @@ $(function validar() {
                 	// }
            },
            messages: {//mensaje si no se cumplen las validaciones
-                   porcentaje {
+                   porcentaje: {
                            required: "&#x1f5d9; Ingresa un IVA",
-                           min: "El valor debe ser mayor a 0",
-                           max: "El valor debe ser menor a 1"//poner el mensaje que quieres que se muestre si no se cumple la validacion, el &#x1f5d9 es el simbolo de equis que se va mostrar si no se cumple la validacon
+                           min: "&#x1f5d9; El valor debe ser mayor a 0",
+                           max: "&#x1f5d9; El valor debe ser menor a 1"//poner el mensaje que quieres que se muestre si no se cumple la validacion, el &#x1f5d9 es el simbolo de equis que se va mostrar si no se cumple la validacon
                    }
                 	// contrasena:{
 		               //      required:"&#x1f5d9; Ingresa tu contraseña",

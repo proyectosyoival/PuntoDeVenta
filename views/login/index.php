@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Boombachas</title>
 </head>
-<body id="body"> 
+<body> 
 	<?php require 'views/header.php'; ?>
 	<h1 id="h1"><span class="icon-cart"></span> PUNTO DE VENTA BAMBOOCHAS <span class="icon-cart"></span></h1>
 	 <?php

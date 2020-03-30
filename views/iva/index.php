@@ -37,10 +37,9 @@
                     <td><?php echo $iva->id_iva; ?></td>
                     <td><?php echo $iva->porcentaje;?> %</td>
                     <td><?php echo $iva->fecha_alta; ?></td>
-                    <td><a type="button" class="btn" id="btn-table" href="#"><span class="icon-pencil2"></span></a></td>
+                    <td><a type="button" class="btn" id="btn-editar" href="#"><span class="icon-pencil2"></span></a></td>
                     <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $iva->id_iva;?>" data-function="iva/eliminarIva"><span class="icon-bin"></span></a></td>
                 </tr>
-
                 <?php } ?>
             </tbody>
         </table>
