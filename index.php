@@ -29,7 +29,7 @@ if(isset($_SESSION['usuario'])){
          $app = new App();
         // include_once 'views/main/index.php';
     }else{
-        echo "No existe el usuario";
+        // echo "No existe el usuario";
         $errorLogin = "Nombre de usuario y/o password incorrecto";
         include_once 'views/login/index.php';
         // $app = new App();

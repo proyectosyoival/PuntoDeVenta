@@ -7,7 +7,7 @@
         $query->execute(['id_rol' => $rol]);
         
         foreach ($query as $currentUser) {
-            $query->nombre = $currentUser['nombre'];
+            $query->nombre = $currentUser['nombreRol'];
         }
     $nombre_rol=$query->nombre;
 ?>

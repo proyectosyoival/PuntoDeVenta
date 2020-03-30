@@ -6,6 +6,8 @@
 }
 html{
 	font-family: 'Raleway', sans-serif;
+	min-height: 100%;
+  	position: relative;
 }
 body{
 	font-family: 'Raleway', sans-serif;
@@ -24,11 +26,16 @@ footer{
 	background:#51596C;
 	position: absolute;
 	width: 100%;
+	height: 40px;
 	padding: 15px;
 	z-index: 2;
 	text-align: center;
 	color:#DEE5F6;
+	font-style: italic;
 	bottom: 0;
+}
+.visible_menu footer{
+	display: none;
 }
 
 #menu_on{
@@ -172,10 +179,15 @@ ul, li{
 	transform: translateX(260px);
 }
 
-h1{
+/*h1{
 	font-size: 2em;
 	color: rgba(0,0,0,0.5);
 	margin-bottom: 20px;
+}*/
+
+#h1-tab-titulo{
+	color: #6C6C6D;
+	font-weight: bold;
 }
 
 p{
@@ -309,15 +321,19 @@ a img{
     border-color: #7A95C3;
 }
 
-#content-body{
-	padding:250px 8%;
-	text-align: left;
-	height: 100vh;
+.container-fluid{
 	position: relative;
-	display: table;
-	width: 10%;
+	min-height: 100%;
+	margin: auto;
+	margin-bottom: 80px;
+	padding-top: 60px;
+	padding-left: 40px;
 	transition: all 0.75s ease;
 }
+.visible_menu .container-fluid{
+	transform: translateX(260px);
+}
+
 #span-sesion{
 	position: absolute;
 	margin-right: 20px;
@@ -327,5 +343,39 @@ a img{
 	font-size: 16px;
 	text-align:center;
 	height: 100%;
+}
+
+.table{
+	font-size: 14px;
+}
+
+.thead-tabla{
+	background-color: #6F7E95;
+	border-color: #6F7E95;
+	color: #F4F7FA;
+}
+
+#tbody-general{
+ background: #F4F7FA
+}
+
+#btn-table{
+	color: #FFF;
+    background-color: #7A95C3;
+    border-color: #7A95C3;
+}
+
+#btn-table:hover{
+	color: #FFF;
+    background-color: #7A95C3;
+    border-color: #7A95C3;
+    opacity: 0.9;
+}
+
+a.btn.btn-danger{
+	color: #F4F7FA;
+}
+a.btn.btn-danger:hover{
+	color: #F4F7FA;
 }
 
