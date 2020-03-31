@@ -30,7 +30,7 @@ class IvaModel extends Model{
             $query = $this->db->connect()->query("SELECT*FROM iva");
 
             while($row = $query->fetch()){
-                $item = new Iva();
+                $item = new Iv();
                 $item->id_iva = $row['id_iva'];
                 $item->porcentaje = $row['porcentaje'];
                 $item->fecha_alta = $row['fecha_alta'];
@@ -44,8 +44,8 @@ class IvaModel extends Model{
         }
     }
 
-    public function getById($id){
-        $item = new Iva();
+    public function getById($id_iva){
+        $item = new Iv();
 
         $query = $this->db->connect()->prepare("SELECT * FROM iva WHERE id_iva = :id_iva");
         try{

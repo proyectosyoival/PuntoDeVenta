@@ -4,7 +4,7 @@ class Iva extends Controller{
 
     function __construct(){
         parent::__construct();
-        $this->view->iva = [];
+        $this->view->ivas = [];
         
         //echo "<p>Nuevo controlador Main</p>";
     }
@@ -14,8 +14,8 @@ class Iva extends Controller{
     }
 
     function render(){
-        $iva = $this->model->get();
-        $this->view->iva = $iva;
+        $ivas = $this->model->get();
+        $this->view->ivas = $ivas;
 
         $this->view->render('iva/index');
     }
@@ -34,36 +34,37 @@ class Iva extends Controller{
     }
 
     function verIva($param = null){
-        $idAlumno = $param[0];
-        $alumno = $this->model->getById($idAlumno);
+        $id_iva = $param[0];
+        $iva = $this->model->getById($id_iva);
 
-        session_start();
+        // session_start();
         $_SESSION['id_iva'] = $iva->id_iva;
         $this->view->iva = $iva;
         $this->view->mensaje = "";
-        $this->view->render('iva/index');
+        $this->view->render('iva/edit');
     }
 
-    function actualizarAlumno(){
-        session_start();
+    function actualizarIva(){
+        // session_start();
         $id_iva = $_SESSION['id_iva'];
-        $porcentaje    = $_POST['porcentaje'];
+        // echo $id_iva;
+        $porcentaje = $_POST['porcentaje'];
 
-        unset($_SESSION['id_iva']);
+        // unset($_SESSION['id_iva']);
 
         if($this->model->update(['id_iva' => $id_iva, 'porcentaje' => $porcentaje] )){
             // actualizar alumno exito
-            $iva = new Iva();
+            $iva = new Iv();
             $iva->id_iva = $id_iva;
             $iva->porcentaje = $porcentaje;
             
             $this->view->iva = $iva;
-            // $this->view->mensaje = "Alumno actualizado correctamente";
+            $this->view->mensaje = "Registro actualizado correctamente";
         }else{
             // mensaje de error
-            // $this->view->mensaje = "No se pudo actualizar el alumno";
+            $this->view->mensaje = "No se pudo actualizar el registro";
         }
-        $this->view->render('iva/index');
+        $this->view->render('iva/edit');
     }
 
     function eliminarIva($param = null){

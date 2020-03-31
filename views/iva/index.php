@@ -41,15 +41,15 @@
             <tbody id="tbody-general">
                 <?php
                     include_once 'models/iva.php';
-                    foreach($this->iva as $row){
-                        $iva = new Iva();
+                    foreach($this->ivas as $row){
+                        $iva = new Iv();
                         $iva = $row; 
                 ?>
                 <tr id="fila-<?php echo $iva->id_iva; ?>">
                     <!-- <td><?php echo $iva->id_iva; ?></td> -->
                     <td><?php echo $iva->porcentaje;?> %</td>
                     <td><?php $fecha=$iva->fecha_alta; $date = date("d/m/Y H:i:s", strtotime($fecha)); echo $date;?></td>
-                    <td><a type="button" class="btn" id="btn-editar" href="#"><span class="icon-pencil2"></span></a></td>
+                    <td><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'iva/verIva/' . $iva->id_iva; ?>"><span class="icon-pencil2"></span></a></td>
                     <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $iva->id_iva;?>" data-function="iva/eliminarIva"><span class="icon-bin"></span></a></td>
                 </tr>
                 <?php } ?>
