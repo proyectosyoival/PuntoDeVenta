@@ -2,20 +2,23 @@
 
 class departamento extends Controller{
 
-  function __construct(){
-    parent::__construct();
-    $this->view->mensaje =[];
+  function _construct(){
+    parent::_construct();
+    $this->view->departamento =[];
   }
 
   function render(){
-  $this->view->render('departamento/index');
+    $departamento = $this->model->getDepartamento();
+    $this->view->departamento = $departamento;
+    $this->view->render('departamento/index');
   }
-
+  function nuevo(){
+    $this->view->render('departamento/nuevo');
+  }
   function nuevoDepartamento(){
     $nombreDepa = $_POST['nombreDepa'];
     $estadoDepa = $_POST['estadoDepa'];
     $fecha_alta = $_POST['fecha_alta'];
-
     $mensaje = "";
 
     if ($this->model->insert(['nombreDepa' =>$nombreDepa, 'estadoDepa' => $estadoDepa, 'fecha_alta' => $fecha_alta])) {

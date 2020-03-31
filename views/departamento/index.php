@@ -9,12 +9,15 @@
 	<?php require 'views/header.php'; ?>
 	<?php require 'views/menu.php'; ?>
 
-	<div id="content">
+	<div class="container-fluid">
+				 <div id="respuesta" class="center"></div>
+		<h1 class="text-center" id="h1-tab-titulo">DEPARTAMENTO</h1>
 
-	<h1 class"">Departamento</h1>
-	
-	<div class="table-responsive-">
-		<table  width ="1100px" >
+		<div>
+			<a type="button" class="btn" id="btn-table" href="<?php echo constant('URL'); ?>departamento/nuevo"><span class="icon-plus"></span>Nuevo</a>
+		</div>
+		<hr>
+		<table  class ="table table-hover text-center">
 			<thead class="thead-dark" id="thead_table">
 				<th scope="col">#id</th>
 				<th scope="col">Departamento</th>
@@ -23,10 +26,22 @@
 				<th scope="col">Editar</th>
 				<th scope="col">Borrar</th>
 			</thead>
-			<tbody>
-				<tr>
-					<th scope="row"></th>
-				</tr>
+			<tbody id="tbody-general">
+				<?php
+					include_once 'models/departamento.php';
+					foreach($this->departamento as $row) {
+						$departamento = new Depto();
+						$departamento = $row;
+				 ?>
+				 <tr id="fila-<?php echo $departamento->id_departamento; ?>">
+						 <td><?php echo $departamento->id_departamento; ?></td>
+						 <td><?php echo $departamento->nombreDepa; ?></td>
+						 <td><?php echo $departamento->estadoDepa; ?></td>
+						 <td><?php echo $departamento->fecha_alta;?></tb>
+						 <td><a type="button" class="btn" id="btn-table" href="#"><span class="icon-pencil2"></span></a></td>
+						 <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $iva->id_iva;?>" data-function="iva/eliminarIva"><span class="icon-bin"></span></a></td>
+				 </tr>
+				 <?php } ?>
 			</tbody>
 		</table>
 	</div>
