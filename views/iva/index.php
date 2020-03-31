@@ -9,9 +9,60 @@
 	<?php require 'views/menu.php'; ?>
   <?php include 'views/mensajes.php'; ?>
 	<div class="container-fluid">
+<<<<<<< HEAD
 
 
 
+=======
+    <!-- <div class="alert alert-dismissible fade show col-md-4 text-center respuestaf" id="msj-error-login" role="alert" d" hidden="true">
+      <strong><?php echo $error_eliminar?></strong>
+      <button type="button" class="close" id="btn-cerrar" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="alert alert-dismissible fade show col-md-4 text-center respuestat" id="msj-error-login" role="alert" style="background-color: green" hidden="true">
+      <strong><?php echo $exit_eliminar?></strong>
+      <button type="button" class="close" id="btn-cerrar" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> -->
+    <div class="text-left" id="respuesta"></div>
+		<h1 class="text-left" id="h1-tab-titulo">IVA</h1>
+
+		<div>
+			<a type="button" class="btn" id="btn-table" href="<?php echo constant('URL'); ?>iva/nuevo"><span class="icon-plus"></span> Nuevo</a>
+		</div>
+        <hr>
+		<table class="table table-hover text-center"><!-- agregar a la clase table-responsive si tabla es muy larga en columnas o el contenido de las filas e smuy larga -->
+            <thead class="thead-tabla">
+                <tr>
+                	<!-- <th>Id</th> -->
+                  <th>Porcentaje</th>
+                  <th>Fecha de registro</th>
+                  <th>Editar</th>
+                  <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-general">
+                <?php
+                    include_once 'models/iva.php';
+                    foreach($this->iva as $row){
+                        $iva = new Iva();
+                        $iva = $row; 
+                ?>
+                <tr id="fila-<?php echo $iva->id_iva; ?>">
+                    <!-- <td><?php echo $iva->id_iva; ?></td> -->
+                    <td><?php echo $iva->porcentaje;?> %</td>
+                    <td><?php $fecha=$iva->fecha_alta; $date = date("d/m/Y H:i:s", strtotime($fecha)); echo $date;?></td>
+                    <td><a type="button" class="btn" id="btn-editar" href="#"><span class="icon-pencil2"></span></a></td>
+                    <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $iva->id_iva;?>" data-function="iva/eliminarIva"><span class="icon-bin"></span></a></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+	</div>
+    <!-- Modal -->
+>>>>>>> 9b4be560a0d4f7902f74da5f067a3613a28c4f49
     <!-- <div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
