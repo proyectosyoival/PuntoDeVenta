@@ -15,12 +15,12 @@
 		<form action="<?php echo constant('URL'); ?>producto/registrarProducto" method="POST">
 			<div class="form-group">
 				<label for="nombre">Nombre:</label>
-				<input type="text" name="nombre" id="nombre" class="form-control col-md-4" placeholder="Nombre del producto" required>
+				<input type="text" name="nombreProd" id="nombre" class="form-control col-md-4" placeholder="Nombre del producto" required>
 			</div>
 
 			<div class="form-group">
 				<label for="descripcion">Descripción:</label>
-				<textarea minlength="10" id="descripcion" class="form-control col-md-4" maxlength="200" placeholder="Descripción..."></textarea>
+				<textarea minlength="10" name="descripcionProd" id="descripcionProd" class="form-control col-md-4" maxlength="200" placeholder="Descripción..."></textarea>
 			</div>
 
 			<div class="form-group">
@@ -30,12 +30,12 @@
 
 			<div class="form-group">
 				<label>Tipo de Tela:</label>
-				<select class="form-control col-md-4">
-					<option value="0">Algodon</option>
-					<option value="1">Poliester</option>
-					<option value="2">Licra</option>
-					<option value="3">Nilon</option>
-					<option value="4">Mesclilla</option>
+				<select class="form-control col-md-4" name="tipotela">
+					<option value="Algodon">Algodon</option>
+					<option value="Poliester">Poliester</option>
+					<option value="Licra">Licra</option>
+					<option value="Nilon">Nilon</option>
+					<option value="Mesclilla">Mesclilla</option>
 				</select>
 			</div>
 
@@ -46,8 +46,8 @@
 
 			<div class="form-group">
 				<label for="estado">Estado:</label><br>
-				<input type="radio" name="estado" id="estado" value="1"> Activo <br>
-				<input type="radio" name="esta" id="estado" value="0"> Inactivo
+				<input type="radio" name="estadoProd" id="estado" value="1"> Activo <br>
+				<input type="radio" name="estadoProd" id="estado" value="0"> Inactivo
 			</div>
 
 			<div class="form-group">
@@ -77,7 +77,7 @@
 
 			<div class="form-group">
 				<label>Categoría:</label>
-				<select class="form-control col-md-4">
+				<select class="form-control col-md-4" name="idcategoria">
 					<option value="0">Deportes</option>
 					<option value="1">Casualr</option>
 				</select>
@@ -89,7 +89,8 @@
 			</div>
 
 			<div>
-				<a type="button" class="btn" id="btn-regresar" href="#">Crear Producto</a>
+				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>producto">Regresar</a>
+				<button type="submit" class="btn" id="btn-registrar">Registrar</button>
 			</div>
 
 		</form>

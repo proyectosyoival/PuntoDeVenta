@@ -23,6 +23,7 @@ class Product{
 	//Campos extraidos por medio de las id de foraneos
 	public $nombre_persona;
 	public $apellido_persona;
+	public $cantidad;
 	public $codigo_interno;
 	public $codigo_externo;
 	public $general;

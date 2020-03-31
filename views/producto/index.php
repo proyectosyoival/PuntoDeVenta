@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Iva</title>
+    <title>Productos</title>
 </head>
 <body>
     <?php require 'views/header.php'; ?>
@@ -33,6 +33,7 @@
            <th>Cod Barras Int</th>
            <th>Cod Barras Ext</th>
            <th>Precio</th>
+           <th>Cantidad</th>
            <th>Proveedor</th>
            <th>Editar</th>
            <th>Eliminar</th>
@@ -59,6 +60,7 @@
             <td><?php echo $producto->codigo_interno; ?></td>
             <td><?php echo $producto->codigo_externo; ?></td>
             <td>$<?php echo $producto->general; ?></td>
+            <td>$<?php echo $producto->cantidad; ?></td>
             <td><?php echo $producto->proveedor; ?></td>
             <td><a type="button" class="btn" id="btn-editar" href="#"><span class="icon-pencil2"></span></a></td>
             <td><a type="button" class="btn btn-danger bEliminar" href="#"><span class="icon-bin"></span></a></td>

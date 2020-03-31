@@ -21,28 +21,31 @@ class Producto extends Controller{
 		$this->view->render('producto/index');
 	}
 
-	function registraProducto(){
-		$nombre				= $_POST['nombre'];				//Se registra en la tabla producto
-		$descripcion		= $_POST['descripcion'];		//Se registra en la tabla producto
+	function registrarProducto(){
+		$nombreProd			= $_POST['nombreProd'];				//Se registra en la tabla producto
+		$descripcionProd	= $_POST['descripcionProd'];		//Se registra en la tabla producto
 		$talla				= $_POST['talla'];				//Se registra en la tabla producto
 		$tipoTela			= $_POST['tipotela'];			//Se registra en la tabla producto - se deberia de obtener de una tabla externa (tipo tela)
 		$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
-		$estado				= $_POST['estado'];				//Se registra en la tabla producto
+		$estadoProd			= $_POST['estadoProd'];				//Se registra en la tabla producto
 		$foto				= $_POST['foto'];				//Se registra en la tabla producto
-		$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)
-		//$idPersona			= $_POST['idpersona'];			//Se obtiene de la session activa (automatco)
+		//$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)
+		
+		//Recuperamos la session de la persona que esta logeada.
+		$idPersona			= $_SESSION['idPersona'];		//Se obtiene de la session activa (automatco)
+		
 		//$idCodigoDeBarras	= $_POST['idcodigodebarras'];	//Se obtiene de la tabla de codigos de barras
 		$codigoInterno		= $_POST['codigointerno'];
 		$codigoExterno		= $_POST['codigoexterno'];
 		//$idPrecio			= $_POST['idprecio'];			//Se obtiene de la tabla de precio
-		$idPrecio			= $_POST['precio'];
-		//$idCategoria		= $_POST['idcategoria'];		//Se obtiene de la tabla de categoria
-		$categoria 			= $_POST['categoria'];
+		$precio				= $_POST['precio'];
+		$cantidad			= $_POST['cantidad'];
+		$idcategoria 		= $_POST['idcategoria'];	//Se obtiene de la tabla de categoria
 		$proveedor			= $_POST['proveedor'];			//Se registra en la tabla producto
 
 		$mensaje = "";
 
-		if($this->model->insert(['nombre' => $nombre, 'descripcion' => $descripcion, 'talla' => $talla, 'tipotela' => $tipoTela, 'descuento' => $descuento, 'estado' => $estado, 'foto' => $foto, 'fechareg' => $fechaReg, 'idpersona' => $idPersona, 'idcodigodebarras' => $idCodigoDeBarras, 'idprecio' => $idPrecio,'idcategoria' => $idCategoria,'proveedor' => $proveedor])){
+		if($this->model->insert(['nombreProd' => $nombreProd, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'tipotela' => $tipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $foto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor])){
 			$mensaje = "El producto se agreogo correctamente!";
 		}else{
 			$mensaje = "El producto ya existe!";

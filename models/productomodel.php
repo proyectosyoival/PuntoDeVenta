@@ -13,11 +13,25 @@ class ProductoModel extends Model{
 
 	public function insert($datos){
 		try {
-			$query = $this->db->connect()->prepare('INSERT INTO producto (nombre, descripcion, talla, tipo_tela, descuento, estado, foto, fecha_reg, id_persona, id_codigo_de_barras, id_precio, id_categoria, proveedor) VALUES (:nombre, :descripcion, :talla, :tipotela, :descuento, :estado, :foto, :fechareg, :idpersona, :idcodigodebarras, :idprecio, :idcategoria, :proveedor)');
-			$query->execute(['nombre' => $datos['nombre'], 'descripcion' => $datos['descripcion'], 'talla' => $datos['talla'], 'tipotela' => $datos['tipotela'], 'descuento' => $datos['descuento'], 'estado' => $datos['estado'], 'foto' => $datos['foto'], 'fechareg' => $datos['fechareg'], 'idpersona' => $datos['idpersona'], 'idcodigodebarras' => $datos['idcodigodebarras'], 'idprecio' => $datos['idprecio'], 'idcategoria' => $datos['idcategoria'], 'proveedor' => $datos['proveedor']]);
+			$query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			$query->bindParam(1, $datos['nombreProd']); 
+            $query->bindParam(2, $datos['descripcionProd']);
+            $query->bindParam(3, $datos['talla']);
+            $query->bindParam(4, $datos['tipotela']);
+            $query->bindParam(5, $datos['descuento']);
+            $query->bindParam(6, $datos['estadoProd']);
+            $query->bindParam(7, $datos['foto']);
+            $query->bindParam(8, $datos['idPersona']);
+            $query->bindParam(9, $datos['codigointerno']);
+            $query->bindParam(10, $datos['codigoexterno']);
+            $query->bindParam(11, $datos['precio']);
+            $query->bindParam(12, $datos['cantidad']);
+            $query->bindParam(13, $datos['idcategoria']);
+            $query->bindParam(14, $datos['proveedor']);
+            $query->execute();
 			return true;
 		} catch (PDOException $e) {
-			return false;			
+			return false;
 		}
 	}
 
@@ -44,8 +58,9 @@ class ProductoModel extends Model{
                 $item->codigo_interno  		= $row[11];	//codigo de barras interno
                 $item->codigo_externo  		= $row[12];	//codigo de barras externo
                 $item->general  			= $row[13]; //precio
-                $item->nombreCate	  		= $row[14]; //categoria
-                $item->proveedor 	 		= $row[15];	//proveedor
+                $item->cantidad             = $row[14]; //cantidad
+                $item->nombreCate	  		= $row[15]; //categoria
+                $item->proveedor 	 		= $row[16];	//proveedor
                 array_push($items, $item);
             }
 
