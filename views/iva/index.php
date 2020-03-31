@@ -9,11 +9,6 @@
 	<?php require 'views/menu.php'; ?>
   <?php include 'views/mensajes.php'; ?>
 	<div class="container-fluid">
-<<<<<<< HEAD
-
-
-
-=======
     <!-- <div class="alert alert-dismissible fade show col-md-4 text-center respuestaf" id="msj-error-login" role="alert" d" hidden="true">
       <strong><?php echo $error_eliminar?></strong>
       <button type="button" class="close" id="btn-cerrar" data-dismiss="alert" aria-label="Close">
@@ -62,7 +57,6 @@
         </table>
 	</div>
     <!-- Modal -->
->>>>>>> 9b4be560a0d4f7902f74da5f067a3613a28c4f49
     <!-- <div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
