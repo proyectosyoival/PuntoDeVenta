@@ -35,6 +35,7 @@
                     <li><a href="<?php echo constant('URL'); ?>main"><span class="icon-home"></span> Home</a></li>
                     <li><a href="#"><span class="icon-cart"></span> Caja</a></li>
                     <li><a href="#"><span class="icon-search"></span> Consultar precios</a></li>
+                    <li><a href="<?php echo constant('URL'); ?>rol"><span class="icon-users"></span> Roles</a></li>
                     <li><a href="<?php echo constant('URL'); ?>producto"><span class="icon-price-tag"></span> Productos</a></li>
                     <li><a href="#"><span class="icon-search"></span> Inventarios</a></li>
                     <li><a href="#"><span class="icon-man-woman"></span> Empleados</a></li>
