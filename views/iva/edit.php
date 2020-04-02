@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Iva</title>
+  <title>IVA</title>
 </head>
 <body>
   <?php require 'views/header.php'; ?>
@@ -10,12 +10,12 @@
 
   <div class="container-fluid">
      <div class="center"><?php echo $this->mensaje; ?></div>
-    <h1 id="h1-form">Editar Iva</h1>
+    <h1 id="h1-form">Editar IVA</h1>
     <hr>
     <form action="<?php echo constant('URL'); ?>iva/actualizarIva" method="POST" id="form-iva">
       <input type="text" name="id_iva" hidden="true" value="<?php echo $this->iva->id_iva; ?>">
       <div class="form-group">
-        <label for="porcentaje">Porcentaje:</label>
+        <label for="porcentaje">IVA:</label>
         <input type="number" name="porcentaje" id="porcentaje" class="form-control col-md-4" placeholder="Agrega un nuevo IVA Ejemplo. 0.16" step="0.01" min="0" max="1" value="<?php echo $this->iva->porcentaje; ?>"><!-- el uso de la clase col-md-4 es para darle el tamaño, el tamaño maximoes 12 que ocuparia toda la pantalla -->
       </div>
       <div>

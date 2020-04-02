@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Rol</title>
+	<title>Roles</title>
 </head>
 <body>
 	<?php require 'views/header.php'; ?>
