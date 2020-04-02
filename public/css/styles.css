@@ -340,6 +340,7 @@ a img{
 	margin-bottom: 80px;
 	padding-top: 60px;
 	padding-left: 40px;
+	padding-right: 40px;
 	transition: all 0.75s ease;
 }
 .visible_menu .container-fluid{

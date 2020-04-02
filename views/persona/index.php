@@ -67,8 +67,8 @@
                     <td><?php echo $personas->foto;?></td>
                     <td><?php echo $personas->comprobante;?></td>
                     <td><?php echo $personas->id_rol;?></td>
-                    <td><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'persona/verPersona/' . $persona->id_persona; ?>"><span class="icon-pencil2"></span></a></td>
-                    <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $persona->id_persona;?>" data-function="rol/eliminarPersona"><span class="icon-bin"></span></a></td>
+                    <td><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'persona/verPersona/' . $personas->id_persona; ?>"><span class="icon-pencil2"></span></a></td>
+                    <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $personas->id_persona;?>" data-function="persona/eliminarPersona"><span class="icon-bin"></span></a></td>
                 </tr>
                 <?php } ?>
             </tbody>
