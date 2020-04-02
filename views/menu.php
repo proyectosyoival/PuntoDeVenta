@@ -38,7 +38,7 @@
                     <li><a href="<?php echo constant('URL'); ?>rol"><span class="icon-users"></span> Roles</a></li>
                     <li><a href="<?php echo constant('URL'); ?>producto"><span class="icon-price-tag"></span> Productos</a></li>
                     <li><a href="#"><span class="icon-search"></span> Inventarios</a></li>
-                    <li><a href="#"><span class="icon-man-woman"></span> Empleados</a></li>
+                    <li><a href="<?php echo constant('URL'); ?>persona"><span class="icon-man-woman"></span> Empleados</a></li>
                     <li><a href="#"><span class="icon-coin-dollar"></span> Precios</a></li>
                     <li><a href="#"><span class="icon-barcode"></span> Codigos de barras</a></li>
                     <li><a href="#"><span class="icon-search"></span> Tipos de venta</a></li>
