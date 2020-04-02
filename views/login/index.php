@@ -30,11 +30,11 @@
 	    	<div class="justify-content-center" id="body-login">
 	    		<div class="form-group">
 	    			<label>Usuario</label> <span class="icon-user"></span> 
-	    			<input type="text" name="usuario" class="form-control text-center" placeholder="Ingresa un usuario">
+	    			<input type="text" name="usuario" class="form-control text-center" placeholder="Ingresa un usuario" autocomplete="off">
 	    		</div>
 	    		<div class="form-group">
 	    			<label>Contraseña</label> <span class="icon-lock"></span> 
-	    			<input type="password" name="contrasena" class="form-control text-center" placeholder="Ingresa la contraseña">
+	    			<input type="password" name="contrasena" class="form-control text-center" placeholder="Ingresa la contraseña" autocomplete="off">
 	    		</div>
 	    		<div class="form-group">
 	    			<button class="btn" id="btn-sub-login" type="submit">Ingresar</button>

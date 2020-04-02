@@ -11,7 +11,7 @@ class RolModel extends Model{
     public function insert($datos){
         // insertar datos en la BD
         try{
-            $query = $this->db->connect()->prepare('INSERT INTO Rol (nombreRol, descripcionRoL) VALUES(:nombreRol, descripcionRol)');
+            $query = $this->db->connect()->prepare('INSERT INTO rol (nombreRol, descripcionRoL) VALUES(:nombreRol, :descripcionRol)');
             $query->execute(['nombreRol' => $datos['nombreRol'], 'descripcionRol' => $datos['descripcionRol']]);
             return true;
         }catch(PDOException $e){
@@ -45,12 +45,12 @@ class RolModel extends Model{
         }
     }
 
-    public function getById($id_iva){
-        $item = new Iv();
+    public function getById($id_rol){
+        $item = new Roles();
 
         $query = $this->db->connect()->prepare("SELECT * FROM rol WHERE id_rol = :id_rol");
         try{
-            $query->execute(['id_iva' => $id_iva]);
+            $query->execute(['id_rol' => $id_rol]);
 
             while($row = $query->fetch()){
                 $item->id_rol = $row['id_rol'];
@@ -66,7 +66,7 @@ class RolModel extends Model{
     }
 
     public function update($item){
-        $query = $this->db->connect()->prepare("UPDATE rol SET nombreRol = :porcentaje, descripcionRol = :descripcionRol WHERE id_rol = :id_rol");
+        $query = $this->db->connect()->prepare("UPDATE rol SET nombreRol = :nombreRol, descripcionRol = :descripcionRol WHERE id_rol = :id_rol");
         try{
             $query->execute([
                 'id_rol'=> $item['id_rol'],
@@ -83,7 +83,7 @@ class RolModel extends Model{
         $query = $this->db->connect()->prepare("DELETE FROM rol WHERE id_rol= :id_rol");
         try{
             $query->execute([
-                'id_iva'=> $id,
+                'id_rol'=> $id,
             ]);
             return true;
         }catch(PDOException $e){

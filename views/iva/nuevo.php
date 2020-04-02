@@ -15,7 +15,7 @@
 		<form action="<?php echo constant('URL'); ?>iva/registrarIva" method="POST" id="form-iva">
 			<div class="form-group">
 				<label for="porcentaje">Porcentaje:</label>
-				<input type="number" name="porcentaje" id="porcentaje" class="form-control col-md-4" placeholder="Agrega un nuevo IVA Ejemplo. 0.16" step="0.01" min="0" max="1"><!-- el uso de la clase col-md-4 es para darle el tamaño, el tamaño maximoes 12 que ocuparia toda la pantalla -->
+				<input type="number" name="porcentaje" id="porcentaje" class="form-control col-md-4" placeholder="Agrega un nuevo IVA Ejemplo. 0.16" step="0.01" min="0" max="1" autocomplete="off"><!-- el uso de la clase col-md-4 es para darle el tamaño, el tamaño maximoes 12 que ocuparia toda la pantalla -->
 			</div>
 			<div>
 				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>iva">Regresar</a>

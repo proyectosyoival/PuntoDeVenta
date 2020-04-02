@@ -59,6 +59,7 @@ class Rol extends Controller{
             $rol = new Roles();
             $rol->id_rol = $id_rol;
             $rol->nombreRol = $nombreRol;
+            $rol->descripcionRol = $descripcionRol;
             
             $this->view->rol = $rol;
             $this->view->mensaje = "Registro actualizado correctamente";
@@ -69,7 +70,7 @@ class Rol extends Controller{
         $this->view->render('rol/edit');
     }
 
-    function eliminarIva($param = null){
+    function eliminarRol($param = null){
         $id_rol = $param[0];
 
         if($this->model->delete($id_rol)){

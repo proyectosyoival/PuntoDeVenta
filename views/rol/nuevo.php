@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Iva</title>
+	<title>Rol</title>
 </head>
 <body>
 	<?php require 'views/header.php'; ?>
@@ -12,13 +12,18 @@
 
 		<h1 id="h1-form">Nuevo Rol</h1>
 		<hr>
-		<form action="<?php echo constant('URL'); ?>iva/registrarIva" method="POST" id="form-iva">
+		<form action="<?php echo constant('URL'); ?>rol/registrarRol" method="POST" id="form-rol">
 			<div class="form-group">
-				<label for="porcentaje">Porcentaje:</label>
-				<input type="number" name="porcentaje" id="porcentaje" class="form-control col-md-4" placeholder="Agrega un nuevo IVA Ejemplo. 0.16" step="0.01" min="0" max="1"><!-- el uso de la clase col-md-4 es para darle el tamaño, el tamaño maximoes 12 que ocuparia toda la pantalla -->
+				<label for="nombreRol">Nombre del Rol:</label>
+        <input type="text" name="nombreRol" id="nombreRol" class="form-control col-md-4" placeholder="Ingresa el nombre del rol" autocomplete="off">
+				<!-- el uso de la clase col-md-4 es para darle el tamaño, el tamaño maximoes 12 que ocuparia toda la pantalla -->
 			</div>
+      <div class="form-group">
+        <label for="descripcionRol">Descripción del Rol:</label>
+        <textarea name="descripcionRol" id="descripcionRol" class="form-control col-md-4" placeholder="Ingresa una descripción acerca de las funciones del rol" rows="3" autocomplete="off"></textarea>
+      </div>
 			<div>
-				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>iva">Regresar</a>
+				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>rol">Regresar</a>
 				<button type="submit" class="btn" id="btn-registrar">Registrar</button>
 			</div>
 		</form>
@@ -37,29 +42,23 @@ jQuery.validator.addMethod("letterandnumbers", function(value, element) {
        return this.optional(element) || /^[a-z0-9\s\.]+$/i.test(value);
     }, "Solo letras y numeros");
 $(function validar() {
-   $("#form-iva" ).validate({//#debe tener el nombre del id que le pongan en la etiiqueta form de su formulario
+   $("#form-rol" ).validate({//#debe tener el nombre del id que le pongan en la etiiqueta form de su formulario
            rules: {//validaciones que va hacer
-                   porcentaje: {//este es el name del input a validar
+                   nombreRol: {//este es el name del input a validar
                            required:true,
-                           min:0,
-                           max:1
                            //este es el requisito a validar
-                   }
-                	// contrasena:{
-		               //      required:true,
-		               //      minlength:8,
-                	// }
+                   },
+                	 descripcionRol: {
+		                    required:true,
+                	}
            },
            messages: {//mensaje si no se cumplen las validaciones
-                   porcentaje: {
-                           required: "&#x1f5d9; Ingresa un IVA",
-                           min: "&#x1f5d9; El valor debe ser mayor a 0",
-                           max: "&#x1f5d9; El valor debe ser menor a 1"//poner el mensaje que quieres que se muestre si no se cumple la validacion, el &#x1f5d9 es el simbolo de equis que se va mostrar si no se cumple la validacon
-                   }
-                	// contrasena:{
-		               //      required:"&#x1f5d9; Ingresa tu contraseña",
-		               //      minlength:"&#x1f5d9; Tu contraseña debe ser mayor a 8 caracteres",
-                	// } debes agregar el mensaje por cada input que pusiste en rules
+                   nombreRol: {
+                           required: "&#x1f5d9; Ingresa el nombre del rol",//poner el mensaje que quieres que se muestre si no se cumple la validacion, el &#x1f5d9 es el simbolo de equis que se va mostrar si no se cumple la validacon
+                   },
+                	 descripcionRol: {
+		                    required:"&#x1f5d9; Ingresa la descripción del rol",
+                	 } //debes agregar el mensaje por cada input que pusiste en rules
            }
    });
       });
