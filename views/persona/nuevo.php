@@ -12,7 +12,7 @@
 
 		<h1 id="h1-form">Nuevo Empleado</h1>
 		<hr>
-		<form action="<?php echo constant('URL'); ?>persona/registrarPersona" method="POST" id="form-persona">
+		<form action="<?php echo constant('URL'); ?>persona/registrarPersona" method="POST" id="form-persona" enctype="multipart/form-data">
       <!-- div nombre y apellido y fecha denacimiento -->
       <div class="form-row">
         <div class="form-group col-md-3">
@@ -44,7 +44,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="usuario">Usuario:</label>
-         <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Ingresa el usuario: Ej. raul.perez" autocomplete="off" disabled> 
+         <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Ingresa el usuario: Ej. raul.perez" autocomplete="off" readonly> 
       </div>
       <div class="form-group col-md-4">
           <label for="id_rol">Rol del empleado:</label>

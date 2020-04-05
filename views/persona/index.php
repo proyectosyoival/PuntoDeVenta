@@ -59,14 +59,32 @@
                     <td><?php echo $personas->num_empleado;?></td>
                     <td><?php echo $personas->nombrePers;?></td>
                     <td><?php echo $personas->apellido;?></td>
-                    <td><?php $fecha=$personas->fecha_nac; $date = date("d/m/Y H:i:s", strtotime($fecha)); echo $date;?></td>
+                    <td><?php $fecha=$personas->fecha_nac; $date = date("d/m/Y", strtotime($fecha)); echo $date;?></td>
                     <td><?php echo $personas->direccion;?></td>
                     <td><?php echo $personas->telefono;?></td>
                     <td><?php echo $personas->usuario;?></td>
                     <td><?php echo $personas->contrasena;?></td>
-                    <td><?php echo $personas->foto;?></td>
-                    <td><?php echo $personas->comprobante;?></td>
-                    <td><?php echo $personas->id_rol;?></td>
+                    <?php 
+                      if (empty($personas->foto)) { ?>
+                          <td>SIN FOTO</td>
+                      <?php }else{ ?>
+                          <td><a href="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->foto?>"><img src="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->foto?>" class="img-td" title="<?php echo $personas->nombrePers;?>"></a></td>
+                     <?php } 
+                      if (empty($personas->comprobante)) { ?>
+                          <td>SIN FOTO</td>
+                      <?php }else{ ?>
+                            <td><a href="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->comprobante;?>"><img src="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->comprobante;?>" class="img-td" title="<?php echo $personas->direccion;?>"></a></td>
+                     <?php } ?>                    
+                    <?php
+                    $id_rol=$personas->id_rol;
+                    //sacar los nombres de la tabla de roles
+                    $db= new Database();
+                    $query = $db->connect()->prepare('SELECT * FROM rol WHERE id_rol=:id_rol');
+                    $query->execute(['id_rol' => $id_rol]);
+                    foreach ($query as $row) {
+                      $nombreRol=$row['nombreRol'];           
+                    } ?>
+                    <td><?php echo $nombreRol;?></td>
                     <td><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'persona/verPersona/' . $personas->id_persona; ?>"><span class="icon-pencil2"></span></a></td>
                     <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $personas->id_persona;?>" data-function="persona/eliminarPersona"><span class="icon-bin"></span></a></td>
                 </tr>

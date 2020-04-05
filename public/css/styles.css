@@ -74,7 +74,6 @@ a:hover{
 
 a:visited{
 	text-decoration: none;
-
 }
 
 #exit{
@@ -221,7 +220,7 @@ p{
 a img{
 	width: 16px;
 	height: 16px;
-	opacity: 0.5
+	/*opacity: 0.5*/
 }
 
 #content a:hover img{
@@ -444,4 +443,8 @@ a.btn.btn-danger:linked{
 }
 .file_upload{
   border: 4px dashed #292929;
-  }
+ }
+.img-td{
+	width: 100px;
+ 	height: 100px;
+}
