@@ -30,9 +30,15 @@ class Persona extends Controller{
         $contrasena = $_POST['contrasena'];
         $foto = $_POST['foto'];
         $comprobante = $_POST['comprobante'];
-        $num_empleado = $_POST['num_empleado'];
         $id_rol = $_POST['id_rol'];
         $mensaje = "";
+
+        $db=new Database();
+        $query = $db->connect()->prepare('SELECT TOP 1 * FROM PERSONA ORDER BY DESC');
+        $query->execute();
+        foreach ($query as $row) {
+            i
+        }
 
         if($this->model->insert(['nombrePers' => $nombrePers, 'apellido' => $apellido, 'fecha_nac' => $fecha_nac, 'direccion' => $direccion, 'telefono' => $telefono, 'usuario' => $usuario, 'contrasena' => $contrasena, 'foto' => $foto, 'comprobante' => $comprobante, 'num_empleado' => $num_empleado, 'id_rol' => $id_rol,])){
             // $mensaje = "IVA creado";
