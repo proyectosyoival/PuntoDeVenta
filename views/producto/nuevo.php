@@ -30,12 +30,15 @@
 
 			<div class="form-group">
 				<label>Tipo de Tela:</label>
-				<select class="form-control col-md-4" name="tipotela">
-					<option value="Algodon">Algodon</option>
-					<option value="Poliester">Poliester</option>
-					<option value="Licra">Licra</option>
-					<option value="Nilon">Nilon</option>
-					<option value="Mesclilla">Mesclilla</option>
+				<select class="form-control col-md-4" name="idtipotela">
+					<?php
+					include_once 'models/tipotela.php';
+					foreach ($this->tipostela as $row) {
+						$tipotela = new Tipotela();
+						$tipotela = $row;
+					?>
+					<option value="<?php echo $tipotela->id_tipo_tela; ?>"><?php echo $tipotela->nombreTipoTela; ?></option>
+					<?php } ?>
 				</select>
 			</div>
 
@@ -78,8 +81,14 @@
 			<div class="form-group">
 				<label>Categoría:</label>
 				<select class="form-control col-md-4" name="idcategoria">
-					<option value="0">Deportes</option>
-					<option value="1">Casualr</option>
+					<?php
+					include_once 'models/categoria.php';
+					foreach ($this->categorias as $row) {
+						$categoria = new Categoria();
+						$categoria = $row;
+						?>
+						<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
+					<?php } ?>					
 				</select>
 			</div>
 

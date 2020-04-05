@@ -1,7 +1,8 @@
 <?php
 
 include_once 'models/producto.php';
-
+include_once 'models/categoria.php';
+include_once 'models/tipotela.php';
 /**
  * 
  */
@@ -17,7 +18,7 @@ class ProductoModel extends Model{
 			$query->bindParam(1, $datos['nombreProd']); 
             $query->bindParam(2, $datos['descripcionProd']);
             $query->bindParam(3, $datos['talla']);
-            $query->bindParam(4, $datos['tipotela']);
+            $query->bindParam(4, $datos['idtipotela']);
             $query->bindParam(5, $datos['descuento']);
             $query->bindParam(6, $datos['estadoProd']);
             $query->bindParam(7, $datos['foto']);
@@ -49,7 +50,7 @@ class ProductoModel extends Model{
                 $item->descripcionProd 		= $row[2];	//descripcion
                 $item->estadoProd			= $row[3];	//estado
                 $item->talla  				= $row[4];	//talla
-                $item->tipo_tela  			= $row[5];	//tipo_tela
+                $item->tipo_tela  			= $row[5];	//id_tipo_tela
                 $item->foto       			= $row[6];	//foto
                 $item->descuento 			= $row[7];	//descuento
                 $item->fecha_reg  			= $row[8];	//fecha_reg
@@ -69,6 +70,46 @@ class ProductoModel extends Model{
             return [];
         }
 	}
+
+    public function getTipostelaForProduct(){
+        $items = [];
+
+        try {
+
+            $query = $this->db->connect()->query("CALL procGetAllTipostela();");
+
+            while ($row = $query->fetch()) {
+                $item = new Categoria();
+                $item->id_tipo_tela     = $row[0]; //id_categoria
+                $item->nombreTipoTela   = $row[1]; //nombreCate
+                array_push($items, $item);
+            }
+            
+            return $items;
+        } catch (PDOException $e) {
+            return [];
+        }
+    }   
+
+    public function getCategoriesForProduct(){
+        $items = [];
+
+        try {
+
+            $query = $this->db->connect()->query("CALL procGetAllCategorias();");
+
+            while ($row = $query->fetch()) {
+                $item = new Categoria();
+                $item->id_categoria     = $row[0]; //id_categoria
+                $item->nombreCate       = $row[1]; //nombreCate
+                array_push($items, $item);
+            }
+            
+            return $items;
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
 
 }
 
