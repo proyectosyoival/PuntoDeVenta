@@ -14,7 +14,6 @@
     <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/functions.js"></script> 
     <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/dropzone.js"></script> 
     <!-- links o script de internet -->
     <!-- Cargamos la fuente de Google Raleway : visitar Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">

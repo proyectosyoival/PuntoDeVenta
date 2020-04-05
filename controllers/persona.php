@@ -28,16 +28,25 @@ class Persona extends Controller{
         $telefono = $_POST['telefono'];
         $usuario = $_POST['usuario'];
         $contrasena = $_POST['contrasena'];
-        $foto = $_POST['foto'];
-        $comprobante = $_POST['comprobante'];
+        $foto = $_FILES["foto"];
+        $comprobante = $_FILES["comprobante"];
         $id_rol = $_POST['id_rol'];
         $mensaje = "";
 
         $db=new Database();
-        $query = $db->connect()->prepare('SELECT TOP 1 * FROM PERSONA ORDER BY DESC');
+        $query = $db->connect()->prepare('SELECT * FROM PERSONA ORDER BY id_persona DESC LIMIT 1');
         $query->execute();
         foreach ($query as $row) {
-            
+            $id_ultimo=$row['id_persona']+1;
+        }
+        if ($id_rol==1) {
+            $num_empleado= 'ADM'.date('dmy').$id_ultimo;
+        }elseif ($id_rol==2) {
+            $num_empleado= 'ENC'.date('dmy').$id_ultimo;
+        }elseif ($id_rol==3) {
+            $num_empleado= 'CAJ'.date('dmy').$id_ultimo;
+        }elseif ($id_rol==4) {
+            $num_empleado= 'VEN'.date('dmy').$id_ultimo;
         }
 
         if($this->model->insert(['nombrePers' => $nombrePers, 'apellido' => $apellido, 'fecha_nac' => $fecha_nac, 'direccion' => $direccion, 'telefono' => $telefono, 'usuario' => $usuario, 'contrasena' => $contrasena, 'foto' => $foto, 'comprobante' => $comprobante, 'num_empleado' => $num_empleado, 'id_rol' => $id_rol,])){
