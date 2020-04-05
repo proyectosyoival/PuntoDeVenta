@@ -7,10 +7,17 @@ class Producto extends Controller{
 	
 	function __construct(){
 		parent::__construct();
-		$this->view->productos = [];
+		$this->view->productos 	= [];
+		$this->view->tipostela 	= [];
+		$this->view->categorias = [];
 	}
 
 	function nuevo(){
+		$tipostela = $this->model->getTipostelaForProduct();
+		$this->view->tipostela = $tipostela;
+		$categorias = $this->model->getCategoriesForProduct();
+		$this->view->categorias = $categorias;
+
 		$this->view->render('producto/nuevo');
 	}
 
@@ -25,7 +32,7 @@ class Producto extends Controller{
 		$nombreProd			= $_POST['nombreProd'];				//Se registra en la tabla producto
 		$descripcionProd	= $_POST['descripcionProd'];		//Se registra en la tabla producto
 		$talla				= $_POST['talla'];				//Se registra en la tabla producto
-		$tipoTela			= $_POST['tipotela'];			//Se registra en la tabla producto - se deberia de obtener de una tabla externa (tipo tela)
+		$idtipoTela			= $_POST['idtipotela'];			//Se registra en la tabla producto - se deberia de obtener de una tabla externa (tipo tela)
 		$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
 		$estadoProd			= $_POST['estadoProd'];				//Se registra en la tabla producto
 		$foto				= $_POST['foto'];				//Se registra en la tabla producto
@@ -45,7 +52,7 @@ class Producto extends Controller{
 
 		$mensaje = "";
 
-		if($this->model->insert(['nombreProd' => $nombreProd, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'tipotela' => $tipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $foto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor])){
+		if($this->model->insert(['nombreProd' => $nombreProd, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'idtipotela' => $idtipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $foto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor])){
 			$mensaje = "El producto se agreogo correctamente!";
 		}else{
 			$mensaje = "El producto ya existe!";

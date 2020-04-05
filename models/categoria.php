@@ -1,12 +1,12 @@
 <?php
 
-class categoria{
+class Categoria{
 
-public id_categoria;
-public nombreCate;
-public descripcionCate;
-public estadoCate;
-public fecha_alta;
+public $id_categoria;
+public $nombreCate;
+public $descripcionCate;
+public $estadoCate;
+public $fecha_alta;
 
 }
 
