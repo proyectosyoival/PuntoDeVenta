@@ -442,3 +442,6 @@ a.btn.btn-danger:visited{
 a.btn.btn-danger:linked{
 	color: #F4F7FA;
 }
+.file_upload{
+  border: 4px dashed #292929;
+  }
