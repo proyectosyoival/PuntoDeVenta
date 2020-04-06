@@ -23,7 +23,7 @@ if(isset($_SESSION['usuario'])){
     $user = new User();
     if($user->userExists($usuario, $contrasena)){
         // echo "Existe el usuario";
-        $userSession->setCurrentUser($usuario,$contrasena);
+        $userSession->setCurrentUser($usuario);
         $user->setUser($usuario);
 
          $app = new App();

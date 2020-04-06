@@ -63,7 +63,7 @@
                     <td><?php echo $personas->direccion;?></td>
                     <td><?php echo $personas->telefono;?></td>
                     <td><?php echo $personas->usuario;?></td>
-                    <td><?php echo $personas->contrasena;?></td>
+                    <td>********</td>
                     <?php 
                       if (empty($personas->foto)) { ?>
                           <td>SIN FOTO</td>

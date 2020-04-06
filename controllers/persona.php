@@ -27,7 +27,7 @@ class Persona extends Controller{
         $direccion = $_POST['direccion'];
         $telefono = $_POST['telefono'];
         $usuario = $_POST['usuario'];
-        $contrasena = $_POST['contrasena'];
+        $contrasena = password_hash($_POST['contrasena'], PASSWORD_BCRYPT);
         $foto = $_FILES["foto"];
         $comprobante = $_FILES["comprobante"];
         $id_rol = $_POST['id_rol'];

@@ -7,10 +7,14 @@ class User extends Database{
 
     public function userExists($usuario, $contrasena){
 
-        $query = $this->connect()->prepare('SELECT * FROM persona WHERE usuario= :usuario AND contrasena = :contrasena');
-        $query->execute(['usuario' => $usuario, 'contrasena' => $contrasena]);
+        $query = $this->connect()->prepare('SELECT * FROM persona WHERE usuario= :usuario');
+        $query->execute(['usuario' => $usuario]);
+
+        foreach ($query as $row) {
+            $password=$row['contrasena'];
+        }
     
-        if($query->rowCount()){
+        if(password_verify($contrasena, $password)){
             return true;
         }else{
             return false;
@@ -18,7 +22,6 @@ class User extends Database{
     }
 
     public function setUser($user){
-        // echo $user;
         $query = $this->connect()->prepare('SELECT * FROM persona WHERE usuario = :usuario');
         $query->execute(['usuario' => $user]);
     }

@@ -55,15 +55,14 @@ class PersonaModel extends Model{
             } else {
                 if (move_uploaded_file($arrayupfotos[$i]["tmp_name"], $target_file)) {
                     "The file ". basename($arrayupfotos[$i]["name"]). " has been uploaded.";
+                     //TERMINA SUBIR IMAGEN AL SERVIDOR
+                    $foto = basename( $datos['num_empleado']."-".$foto["name"]);
+                    $comprobante = basename( $datos['num_empleado']."-".$comprobante["name"]);
                 } else {
                     echo "Lo siento, hubo un error al subir el archivo.";
                 }
             }
         }
-
-        //TERMINA SUBIR IMAGEN AL SERVIDOR
-        $foto = basename( $datos['num_empleado']."-".$foto["name"]);
-        $comprobante = basename( $datos['num_empleado']."-".$comprobante["name"]);
 
             $query = $this->db->connect()->prepare('INSERT INTO persona (nombrePers, apellido, fecha_nac, direccion, telefono, usuario, contrasena, foto, comprobante, num_empleado, id_rol) VALUES(:nombrePers, :apellido, :fecha_nac, :direccion, :telefono, :usuario, :contrasena, :foto, :comprobante, :num_empleado, :id_rol)');
             $query->execute(['nombrePers' => $datos['nombrePers'], 'apellido' => $datos['apellido'], 'fecha_nac' => $datos['fecha_nac'], 'direccion' => $datos['direccion'], 'telefono' => $datos['telefono'], 'usuario' => $datos['usuario'], 'contrasena' => $datos['contrasena'], 'foto' => $foto, 'comprobante' => $comprobante, 'num_empleado' => $datos['num_empleado'], 'id_rol' => $datos['id_rol']]);
