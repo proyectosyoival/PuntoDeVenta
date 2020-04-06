@@ -12,47 +12,54 @@
     <div class="center"><?php echo $this->mensaje; ?></div>
     <h1 id="h1-form">Editar Empleado</h1>
     <hr>
-    <form action="<?php echo constant('URL'); ?>persona/registrarPersona" method="POST" id="form-persona" enctype="multipart/form-data">
+    <form action="<?php echo constant('URL'); ?>persona/actualizarPersona" method="POST" id="form-persona" enctype="multipart/form-data">
       <!-- div nombre y apellido y fecha denacimiento -->
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for="nombrePers">Nombre:</label>
-          <input type="text" name="nombrePers" id="nombrePers" class="form-control" placeholder="Ingresa el nombre" autocomplete="off" onkeyup="PasarValor();">
+          <input type="text" name="nombrePers" id="nombrePers" class="form-control" placeholder="Ingresa el nombre" autocomplete="off" onkeyup="PasarValor();" value="<?php echo $this->persona->nombrePers;?>">
         </div>
         <div class="form-group col-md-3">
           <label for="apellido">Apellido:</label>
-          <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Ingresa el apellido" autocomplete="off" onkeyup="PasarValor();">
+          <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Ingresa el apellido" autocomplete="off" onkeyup="PasarValor();" value="<?php echo $this->persona->apellido;?>">
         </div>
         <div class="form-group col-md-2">
           <label for="fecha_nac">Fecha de Naciemiento:</label>
-          <?php $fecha=date('Y-m-d');?>
-          <input type="date" name="fecha_nac" id="fecha_nac" class="form-control" autocomplete="off">
+          <input type="date" name="fecha_nac" id="fecha_nac" class="form-control" autocomplete="off" value="<?php echo $this->persona->fecha_nac;?>">
         </div>
       </div>
       <!-- div para direccion y telefono-->
       <div class="form-row">
         <div class="form-group col-md-5">
           <label for="direccion">Dirección:</label>
-          <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ingresa la dirección" autocomplete="off">
+          <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ingresa la dirección" autocomplete="off" value="<?php echo $this->persona->direccion;?>">
         </div>
         <div class="form-group col-md-3">
           <label for="telefono">Núm. de Teléfono o Celular:</label>
-          <input type="tel" name="telefono" id="telefono" class="form-control" placeholder="Ingresa el núm. de teléfono o celular" autocomplete="off" maxlength="10" minlength="7">
+          <input type="tel" name="telefono" id="telefono" class="form-control" placeholder="Ingresa el núm. de teléfono o celular" autocomplete="off" maxlength="10" minlength="7" value="<?php echo $this->persona->telefono;?>">
         </div>
       </div>
       <!-- div para usuario y rol-->
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="usuario">Usuario:</label>
-         <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Ingresa el usuario: Ej. raul.perez" autocomplete="off" readonly> 
+         <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Ingresa el usuario: Ej. raul.perez" autocomplete="off" readonly value="<?php echo $this->persona->usuario;?>"> 
       </div>
+      <?php
+        $id_rol=$this->persona->id_rol;
+        //sacar los nombres de la tabla de roles
+        $db= new Database();
+        $query = $db->connect()->prepare('SELECT * FROM rol WHERE id_rol=:id_rol');
+        $query->execute(['id_rol' => $id_rol]);
+          foreach ($query as $row) {
+                  $nombreRol=$row['nombreRol'];           
+          } ?>
       <div class="form-group col-md-4">
           <label for="id_rol">Rol del empleado:</label>
           <select name="id_rol" id="id_rol" class="form-control">
-            <option value="">Selecciona un rol</option>
+            <option value="<?php echo $id_rol;?>" hidden><?php echo $nombreRol;?></option>
             <?php
             //sacar los nombres de la tabla de roles
-            $db= new Database();
             $query = $db->connect()->prepare('SELECT * FROM rol');
             $query->execute();
             foreach ($query as $row) { ?>
@@ -74,18 +81,38 @@
       </div>
       <!-- div para foto y comprobante-->
       <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="foto">Foto del Empleado:</label>
-          <input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*">
+        <div class="form-group col-md-4 text-center">
+          <label for="foto">Foto del Empleado:</label><br>
+          <?php 
+          $foto=$this->persona->foto;
+          if (empty($foto)) { ?>
+              <input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*">
+         <?php }else{ ?>
+            <input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*" hidden="true">
+            <img src="<?php echo constant('URL'); ?>img/empleados/<?php echo $this->persona->foto;?>" class="img-edit" id="imgfoto">
+            <button type="button" class="close" aria-label="Close" onclick="cambiarfoto();" id="btnfoto">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        <?php } ?>
         </div>
-        <div class="form-group col-md-4">
-          <label for="comprobante">Comprobante de domicilio del empleado:</label>
-          <input type="file" name="comprobante" id="comprobante" class="form-control" autocomplete="off" accept="image/*">
+        <div class="form-group col-md-4 text-center">
+          <label for="comprobante">Comprobante de domicilio del empleado:</label><br>
+          <?php 
+          $comprobante=$this->persona->comprobante;
+          if (empty($comprobante)) { ?>
+              <input type="file" name="comprobante" id="comprobante" class="form-control" autocomplete="off" accept="image/*">
+         <?php }else{ ?>
+              <input type="file" name="comprobante" id="comprobante" class="form-control" autocomplete="off" accept="image/*" hidden="true">
+              <img src="<?php echo constant('URL'); ?>img/empleados/<?php echo $this->persona->comprobante;?>" class="img-edit" id="imgcomprobante">
+              <button type="button" class="close" aria-label="Close" onclick="cambiarcomprobante();" id="btncomprobante">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          <?php } ?>
         </div>
       </div>
       <!-- botones -->
       <div>
-        <a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>rol">Regresar</a>
+        <a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>persona">Regresar</a>
         <button type="submit" class="btn" id="btn-registrar">Registrar</button>
       </div>
     </form>
@@ -93,6 +120,19 @@
   
   <?php require 'views/footer.php'; ?>
 </body>
+<!-- SCRIPT PARA Ocultar imagen -->
+<script language="javascript" type="text/javascript">
+function cambiarfoto(){
+  document.getElementById('imgfoto').hidden=true;
+  document.getElementById('btnfoto').hidden=true;
+  document.getElementById('foto').hidden=false;
+}
+function cambiarcomprobante(){
+  document.getElementById('imgcomprobante').hidden=true;
+  document.getElementById('btncomprobante').hidden=true;
+  document.getElementById('comprobante').hidden=false;
+}
+</script> 
 <!-- pasar valor de nombre y contrasena a usuario -->
 <script type="text/javascript">
   function PasarValor()
@@ -144,11 +184,9 @@ $(function validar() {
                     required:true,
                   },
                   contrasena:{
-                    required:true,
                     minlength: 8
                   },
                   contrasena2:{
-                    required:true,
                     minlength: 8,
                     equalTo: "#contrasena"
                   },

@@ -28,41 +28,51 @@ class PersonaModel extends Model{
                     echo "El archivo es una imagen - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
-                    echo "El archivo no es una imagen.";
+                    // echo "El archivo no es una imagen.";
                     $uploadOk = 0;
                 }
             }
             // Check if file already exists
             if (file_exists($target_file)) {
-                echo "Lo siento, el archivo ya existe.";
+                // echo "Lo siento, el archivo ya existe.";
                 $uploadOk = 0;
             }
             // Check file size
             if ($arrayupfotos[$i]["size"] > 2000000) {
-                echo "Lo siento, el archivo es muy grande.";
+                // echo "Lo siento, el archivo es muy grande.";
                 $uploadOk = 0;
             }
             // Allow certain file formats
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif" ) {
-                echo "Lo siento, solo los archivos JPG, JPEG, PNG & GIF guardados.";
+                // echo "Lo siento, solo los archivos JPG, JPEG, PNG & GIF guardados.";
                 $uploadOk = 0;
             }
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
-                echo "Lo siento, tu archivo no se pudo guardar.";
+                // echo "Lo siento, tu archivo no se pudo guardarx2.";
             // if everything is ok, try to upload file
             } else {
                 if (move_uploaded_file($arrayupfotos[$i]["tmp_name"], $target_file)) {
                     "The file ". basename($arrayupfotos[$i]["name"]). " has been uploaded.";
                      //TERMINA SUBIR IMAGEN AL SERVIDOR
-                    $foto = basename( $datos['num_empleado']."-".$foto["name"]);
-                    $comprobante = basename( $datos['num_empleado']."-".$comprobante["name"]);
                 } else {
-                    echo "Lo siento, hubo un error al subir el archivo.";
+                    // echo "Lo siento, hubo un error al subir el archivo.";
                 }
             }
         }
+        if ($foto['name']=="") {
+            $foto="";
+        }else{
+             $foto = basename( $datos['num_empleado']."-".$foto["name"]);
+        }
+        
+        if ($comprobante['name']=="") {
+            $comprobante="";
+        }else{
+            $comprobante = basename( $datos['num_empleado']."-".$comprobante["name"]);
+        }
+        
 
             $query = $this->db->connect()->prepare('INSERT INTO persona (nombrePers, apellido, fecha_nac, direccion, telefono, usuario, contrasena, foto, comprobante, num_empleado, id_rol) VALUES(:nombrePers, :apellido, :fecha_nac, :direccion, :telefono, :usuario, :contrasena, :foto, :comprobante, :num_empleado, :id_rol)');
             $query->execute(['nombrePers' => $datos['nombrePers'], 'apellido' => $datos['apellido'], 'fecha_nac' => $datos['fecha_nac'], 'direccion' => $datos['direccion'], 'telefono' => $datos['telefono'], 'usuario' => $datos['usuario'], 'contrasena' => $datos['contrasena'], 'foto' => $foto, 'comprobante' => $comprobante, 'num_empleado' => $datos['num_empleado'], 'id_rol' => $datos['id_rol']]);

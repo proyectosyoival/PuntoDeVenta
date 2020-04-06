@@ -39,7 +39,7 @@
                   <th>Dirección</th>
                   <th>Teléfono</th>
                   <th>Usuario</th>
-                  <th>Contrasena</th>
+                  <!-- <th>Contrasena</th> -->
                   <th>Foto</th>
                   <th>Comprobante</th>
                   <th>Rol</th>
@@ -63,7 +63,7 @@
                     <td><?php echo $personas->direccion;?></td>
                     <td><?php echo $personas->telefono;?></td>
                     <td><?php echo $personas->usuario;?></td>
-                    <td>********</td>
+                    <!-- <td>********</td> -->
                     <?php 
                       if (empty($personas->foto)) { ?>
                           <td>SIN FOTO</td>

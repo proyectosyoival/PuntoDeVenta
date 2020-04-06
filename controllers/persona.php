@@ -63,7 +63,7 @@ class Persona extends Controller{
         $persona = $this->model->getById($id_persona);
 
         // session_start();
-        $_SESSION['id_persona'] = $rol->id_persona;
+        $_SESSION['id_persona'] = $persona->id_persona;
         $this->view->persona = $persona;
         $this->view->mensaje = "";
         $this->view->render('persona/edit');

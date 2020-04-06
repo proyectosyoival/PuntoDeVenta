@@ -85,7 +85,7 @@
       </div>
       <!-- botones -->
 			<div>
-				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>rol">Regresar</a>
+				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>persona">Regresar</a>
 				<button type="submit" class="btn" id="btn-registrar">Registrar</button>
 			</div>
 		</form>
