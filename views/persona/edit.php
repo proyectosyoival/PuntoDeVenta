@@ -13,6 +13,7 @@
     <h1 id="h1-form">Editar Empleado</h1>
     <hr>
     <form action="<?php echo constant('URL'); ?>persona/actualizarPersona" method="POST" id="form-persona" enctype="multipart/form-data">
+      <input type="text" name="id_persona" hidden="true" value="<?php echo $this->persona->id_persona; ?>">
       <!-- div nombre y apellido y fecha denacimiento -->
       <div class="form-row">
         <div class="form-group col-md-3">
@@ -106,14 +107,13 @@
               <img src="<?php echo constant('URL'); ?>img/empleados/<?php echo $this->persona->comprobante;?>" class="img-edit" id="imgcomprobante">
               <button type="button" class="close" aria-label="Close" onclick="cambiarcomprobante();" id="btncomprobante">
                 <span aria-hidden="true">&times;</span>
-              </button>
           <?php } ?>
         </div>
       </div>
       <!-- botones -->
       <div>
         <a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>persona">Regresar</a>
-        <button type="submit" class="btn" id="btn-registrar">Registrar</button>
+        <button type="submit" class="btn" id="btn-registrar">Actualizar</button>
       </div>
     </form>
   </div>
@@ -147,7 +147,6 @@ function cambiarcomprobante(){
       document.getElementById("usuario").value =arraynombre[0]+"."+arrayapellido[0];
   }
 }
-</script>
 </script>
 <!-- SCRIPT PARA VALIDACION DEL FORMULARIO DE LOGIN-->
 <script type="text/javascript">
@@ -217,11 +216,9 @@ $(function validar() {
                     required: "&#x1f5d9; Ingresa el nombre y el apellido para que se llene este campo"
                   },
                   contrasena:{
-                    required: "&#x1f5d9; Ingresa la contrasena del usuario",
                     minlength: "&#x1f5d9; Ingresa al menos 8 caracteres"
                   },
                   contrasena2:{
-                    required: "&#x1f5d9; Repite la contraseña anterior",
                     equalTo: "&#x1f5d9; La contraseña no coincide a la anterior",
                     minlength: "&#x1f5d9; Ingresa al menos 8 caracteres"
                   },
