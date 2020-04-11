@@ -17,7 +17,7 @@ class Persona extends Controller{
         $personas = $this->model->get();
         $this->view->personas = $personas;
 
-        $this->view->render('persona/index');
+        $this->view->render('persona/index2');
     }
 
     function registrarPersona(){

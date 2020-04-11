@@ -13,7 +13,11 @@ class User extends Database{
         foreach ($query as $row) {
             $password=$row['contrasena'];
         }
-    
+        
+        if (empty($password)) {
+            $password="";
+        }
+
         if(password_verify($contrasena, $password)){
             return true;
         }else{

@@ -156,16 +156,18 @@ jQuery.validator.setDefaults({
    errorClass: "my-error-class"
 });
 jQuery.validator.addMethod("letterandnumbers", function(value, element) {
-       return this.optional(element) || /^[a-z0-9\s\.]+$/i.test(value);
+       return this.optional(element) || /^[a-z0-9\s\.\ñ]+$/i.test(value);
     }, "Solo letras y numeros");
 $(function validar() {
    $("#form-persona" ).validate({//#debe tener el nombre del id que le pongan en la etiiqueta form de su formulario
            rules: {//validaciones que va hacer
                    nombrePers: {//este es el name del input a validar
                     required:true,
+                    letterandnumbers:true
                    },
                    apellido: {
                     required:true,
+                    letterandnumbers:true
                   },
                   fecha_nac: {
                     required:true,
@@ -196,9 +198,11 @@ $(function validar() {
            messages: {//mensaje si no se cumplen las validaciones
                    nombrePers: {
                         required: "&#x1f5d9; Ingresa el nombre",
+                        letterandnumbers: "&#x1f5d9; Ingresa el nombre sin acentos u otro caracter especial"
                    },
                    apellido: {
                         required:"&#x1f5d9; Ingresa el apellido",
+                        letterandnumbers: "&#x1f5d9; Ingresa el apellido sin acentos u otro caracter esspecial"
                    },
                    fecha_nac: {
                     required: "&#x1f5d9; Ingresa la fecha de nacimiento",
