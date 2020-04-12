@@ -194,13 +194,13 @@ ul, li{
 	font-weight: bold;
 }
 
-p{
+/*p{
 	font-size: 1.5em;
 	opacity: 0.82;
 	line-height: 1.2em;
 	margin-bottom: 60px;
 	color: rgba(0,0,0,0.3);
-}
+}*/
 
 #content a{
 	font-size: 0.8em;
@@ -451,4 +451,69 @@ a.btn.btn-danger:linked{
 .img-edit{
 	width: 200px;
  	height: 200px;
+}
+.card{
+	border-color:  #6F7E95;
+	border: 1px 1px solid;
+	height: 100%;
+	width: 300px;
+}
+#cards{
+	margin-top: 20px;
+}
+
+#card-header{
+	background: #6F7E95;
+	color: #F4F7FA;
+	border-color:  #6F7E95;
+	border: 1px 1px solid;
+	cursor: pointer;
+}
+
+#card-header:hover{
+	color: #7A95C3;
+}
+
+.card-text{
+	color: #6C6C6D;
+	font-size: 16px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.col{
+	max-height: 100%;
+}
+
+#col2{
+	margin-right: 10px;
+}
+
+#btn-ira{
+	color: #FFF;
+    background-color: #7A95C3;
+    border-color: #7A95C3;
+}
+
+#btn-ira:hover{
+	color: #FFF;
+    background-color: #7A95C3;
+    border-color: #7A95C3;
+    opacity: 0.9;
+}
+.card-img-top{
+	width: 150px;
+	height: 150px;
+	border-radius: 5px;
+}
+#card-header2{
+	background: #6F7E95;
+	color: #F4F7FA;
+	border-color:  #6F7E95;
+	border: 1px 1px solid;
+	cursor: pointer;
+}
+.label-card{
+	font-weight: bold;
 }
