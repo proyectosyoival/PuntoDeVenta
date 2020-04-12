@@ -80,11 +80,11 @@ class PersonaModel extends Model{
         }
         
 
-            $query = $this->db->connect()->prepare('INSERT INTO persona (nombrePers, apellido, fecha_nac, direccion, telefono, usuario, contrasena, foto, comprobante, id_rol) VALUES(:nombrePers, :apellido, :fecha_nac, :direccion, :telefono, :usuario, :contrasena, :foto, :comprobante, :num_empleado, :id_rol)');
+            $query = $this->db->connect()->prepare('INSERT INTO persona (nombrePers, apellido, fecha_nac, direccion, telefono, usuario, contrasena, foto, comprobante, num_empleado, id_rol) VALUES(:nombrePers, :apellido, :fecha_nac, :direccion, :telefono, :usuario, :contrasena, :foto, :comprobante, :num_empleado, :id_rol)');
             $query->execute(['nombrePers' => $datos['nombrePers'], 'apellido' => $datos['apellido'], 'fecha_nac' => $datos['fecha_nac'], 'direccion' => $datos['direccion'], 'telefono' => $datos['telefono'], 'usuario' => $datos['usuario'], 'contrasena' => $datos['contrasena'], 'foto' => $foto, 'comprobante' => $comprobante, 'num_empleado' => $datos['num_empleado'], 'id_rol' => $datos['id_rol']]);
             return true;
         }catch(PDOException $e){
-            //echo $e->getMessage();
+            // echo $e->getMessage();
             // echo "Ya existe esa matrícula";
             return false;
         }
@@ -193,6 +193,7 @@ class PersonaModel extends Model{
             return true;
         }catch(PDOException $e){
             return false;
+            // echo $e->getMessage();
         }
     }
 }

@@ -23,41 +23,59 @@
     </div> -->
     <div class="text-left" id="respuesta"></div>
 		<h1 class="text-left" id="h1-tab-titulo">EMPLEADOS</h1>
-    <div>
-      <a type="button" class="btn" id="btn-table" href="<?php echo constant('URL'); ?>persona/nuevo"><span class="icon-plus"></span> Nuevo</a>
-    </div>
+
+		<div>
+			<a type="button" class="btn" id="btn-table" href="<?php echo constant('URL'); ?>persona/nuevo"><span class="icon-plus"></span> Nuevo</a>
+		</div>
         <hr>
-		<!-- inicio de carvies -->
-    <div class="row" id="cards">
-        <div class="row row-cols-1 row-cols-md-3">
-          <?php
+		<table class="table table-hover text-center table-responsive"><!-- agregar a la clase table-responsive si tabla es muy larga en columnas o el contenido de las filas e smuy larga -->
+            <thead class="thead-tabla">
+                <tr>
+                	<!-- <th>Id</th> -->
+                  <th>Núm. empleado</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Fecha de nacimiento</th>
+                  <th>Dirección</th>
+                  <th>Teléfono</th>
+                  <th>Usuario</th>
+                  <!-- <th>Contrasena</th> -->
+                  <th>Foto</th>
+                  <th>Comprobante</th>
+                  <th>Rol</th>
+                  <th>Editar</th>
+                  <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-general">
+                <?php
                     include_once 'models/persona.php';
                     foreach($this->personas as $row){
                         $personas = new Personas();
                         $personas = $row; 
-           ?>
-            <div class="col mb-4">
-                <div class="card h-100">
-                    <div class="card-header text-center" id="card-header2">
+                ?>
+                <tr id="fila-<?php echo $personas->id_persona; ?>">
+                    <!-- <td><?php echo $persona->id_persona; ?></td> -->
+                    <td><?php echo $personas->num_empleado;?></td>
+                    <td><?php echo $personas->nombrePers;?></td>
+                    <td><?php echo $personas->apellido;?></td>
+                    <td><?php $fecha=$personas->fecha_nac; $date = date("d/m/Y", strtotime($fecha)); echo $date;?></td>
+                    <td><?php echo $personas->direccion;?></td>
+                    <td><?php echo $personas->telefono;?></td>
+                    <td><?php echo $personas->usuario;?></td>
+                    <!-- <td>********</td> -->
                     <?php 
                       if (empty($personas->foto)) { ?>
-                         <a href="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->foto?>"><img src="<?php echo constant('URL'); ?>public/img/userlogin2.png" class="card-img-top text-center" title="SIN FOTO"></a>
+                          <td>SIN FOTO</td>
                       <?php }else{ ?>
-                          <a href="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->foto?>"><img src="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->foto?>" class="card-img-top text-center" title="<?php echo $personas->nombrePers;?>"></a>
-                     <?php } ?>
-                     <h5 class="text-center"><?php echo $personas->nombrePers." ".$personas->apellido;?></h5>
-                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse<?php echo $personas->num_empleado;?>" aria-expanded="false" aria-controls="collapse<?php echo $personas->num_empleado;?>">
-                    Ver más...
-                    </button>
-                   </div>
-                    <div class="collapse" id="collapse<?php echo $personas->num_empleado;?>">
-                      <div class="card-body">
-                          <p class="text-justify"><span class="label-card">Núm. empleado:</span><?php echo " ".$personas->num_empleado;?></p>
-                          <p class="text-justify"><span class="label-card">Fecha de nacimiento:</span><?php $fecha=$personas->fecha_nac; $date = date("d/m/Y", strtotime($fecha)); echo " ".$date;?></p>
-                          <p class="text-justify"><span class="label-card">Dirección:</span><?php echo " ".$personas->direccion;?></p>
-                          <p class="text-justify"><span class="label-card">Teléfono:</span><?php echo " ".$personas->telefono;?></p>
-                          <p class="text-justify"><span class="label-card">Usuario:</span><?php echo " ".$personas->usuario;?></p>
-                          <?php
+                          <td><a href="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->foto?>"><img src="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->foto?>" class="img-td" title="<?php echo $personas->nombrePers;?>"></a></td>
+                     <?php } 
+                      if (empty($personas->comprobante)) { ?>
+                          <td>SIN FOTO</td>
+                      <?php }else{ ?>
+                            <td><a href="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->comprobante;?>"><img src="<?php echo constant('URL'); ?>img/empleados/<?php echo $personas->comprobante;?>" class="img-td" title="<?php echo $personas->direccion;?>"></a></td>
+                     <?php } ?>                    
+                    <?php
                     $id_rol=$personas->id_rol;
                     //sacar los nombres de la tabla de roles
                     $db= new Database();
@@ -66,17 +84,13 @@
                     foreach ($query as $row) {
                       $nombreRol=$row['nombreRol'];           
                     } ?>
-                    <p class="text-justify"><span class="label-card">Rol:</span><?php echo " ".$nombreRol;?></p>
-                    <p class="text-center"><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'persona/verPersona/' . $personas->id_persona; ?>"><span class="icon-pencil2"></span></a>
-                      <a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $personas->id_persona;?>" data-function="persona/eliminarPersona"><span class="icon-bin"></span></a></p>
-                    </div>
-                    </div>
-                </div>
-            </div>
-          <?php } ?>
-        </div>
-        <!-- fin cards -->
-    </div>
+                    <td><?php echo $nombreRol;?></td>
+                    <td><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'persona/verPersona/' . $personas->id_persona; ?>"><span class="icon-pencil2"></span></a></td>
+                    <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $personas->id_persona;?>" data-function="persona/eliminarPersona"><span class="icon-bin"></span></a></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
 	</div>
     <!-- Modal -->
     <!-- <div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

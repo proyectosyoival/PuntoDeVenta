@@ -455,8 +455,11 @@ a.btn.btn-danger:linked{
 .card{
 	border-color:  #6F7E95;
 	border: 1px 1px solid;
-	height: 100%;
 	width: 300px;
+	max-height: 100%;
+	-webkit-box-shadow: 4px 5px 9px -4px rgba(0,0,0,0.75);
+	-moz-box-shadow: 4px 5px 9px -4px rgba(0,0,0,0.75);
+	box-shadow: 4px 5px 9px -4px rgba(0,0,0,0.75);
 }
 #cards{
 	margin-top: 20px;
@@ -516,4 +519,17 @@ a.btn.btn-danger:linked{
 }
 .label-card{
 	font-weight: bold;
+}
+#btn-vermas{
+	color: #FFF;
+    background-color: #51596C;
+    border-color: #51596C;
+    font-size: 14px;
+}
+
+#btn-vermas:hover{
+    opacity: 0.9;
+}
+#card-body{
+	background: #F4F7FA;
 }
