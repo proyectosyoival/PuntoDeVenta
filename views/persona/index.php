@@ -29,14 +29,14 @@
         <hr>
 		<!-- inicio de carvies -->
     <div class="row" id="cards">
-        <div class="row row-cols-1 row-cols-md-3">
+        <div class="row row-cols-1 row-cols-md-3" id="card-general">
           <?php
                     include_once 'models/persona.php';
                     foreach($this->personas as $row){
                         $personas = new Personas();
                         $personas = $row; 
            ?>
-            <div class="col mb-4">
+            <div class="col mb-4" id="fila-<?php echo $personas->id_persona;?>">
                 <div class="card">
                     <div class="card-header text-center" id="card-header2">
                     <?php 
@@ -100,6 +100,6 @@
     </div> -->
     <!-- fin modal -->
     <?php require 'views/footer.php'; ?>
-    <script src="<?php echo constant('URL'); ?>public/js/main.js"></script>
+    <script src="<?php echo constant('URL'); ?>public/js/card-main.js"></script>
   </body>
   </html>

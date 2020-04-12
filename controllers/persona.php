@@ -233,7 +233,7 @@ class Persona extends Controller{
         }
         // $this->render();
         
-        // echo $mensaje;
+        echo $mensaje;
     }
 }
 
