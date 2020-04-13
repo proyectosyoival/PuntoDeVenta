@@ -36,7 +36,7 @@
 						 <td><?php echo $departamento->nombreDepa; ?></td>
 						 <td><?php echo $departamento->estadoDepa; ?></td>
 						 <td><?php echo $departamento->fecha_alta; ?></td>
-						 <td><a type="button" class="btn" id="btn-table" href="#"><span class="icon-pencil2"></span></a></td>
+					   <td><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'departamento/verDepto/' . $departamento->id_departamento; ?>"><span class="icon-pencil2"></span></a></td>
 						 <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $departamento->id_departamento;?>" data-function="departamento/deletDepto"><span class="icon-bin"></span></a></td>
 				 </tr>
 				 <?php } ?>

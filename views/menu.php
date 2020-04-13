@@ -1,11 +1,11 @@
-<?php 
+<?php
     $rol=$_SESSION['rol'];
     $nombre_rol="";
     // consulta para sacar el nombre del rol
     $db= new Database();
     $query = $db->connect()->prepare('SELECT * FROM rol WHERE id_rol = :id_rol');
         $query->execute(['id_rol' => $rol]);
-        
+
         foreach ($query as $currentUser) {
             $query->nombre = $currentUser['nombreRol'];
         }
@@ -13,7 +13,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<body> 
+<body>
     <div id="wrapper">
         <section>
             <header>
@@ -23,11 +23,11 @@
                         <span></span>
                         <span></span>
                      </a>
-                    <span id="span-sesion"><?php echo $_SESSION['nombre']/*." ".$_SESSION['apellido']*/."-".$nombre_rol;?></span>  
+                    <span id="span-sesion"><?php echo $_SESSION['nombre']/*." ".$_SESSION['apellido']*/."-".$nombre_rol;?></span>
                     <!-- boton de modal para salir -->
                     <button type="button" class="btn" data-toggle="modal" data-target="#modalsalir" id="exit">
                         <span class="icon-switch"></span>
-                    </button> 
+                    </button>
                 </div>
             </header>
             <nav>
@@ -43,8 +43,8 @@
                     <li><a href="#"><span class="icon-barcode"></span> Codigos de barras</a></li>
                     <li><a href="#"><span class="icon-search"></span> Tipos de venta</a></li>
                     <li><a href="#"><span class="icon-search"></span> Inventarios</a></li>
-                    <li><a href="#"><span class="icon-man-woman"></span> Empleados</a></li>
-                    <li><a href="#"><span class="icon-coin-dollar"></span> Precios</a></li>
+                    <li><a href="<?php echo constant('URL'); ?>departamento"><span class="icon-office"></span> Departamento</a></li>
+                    <li><a href="<?php echo constant('URL'); ?>categoria"><span class="icon-coin-dollar"></span> Categorias</a></li>
                     <li><a href="<?php echo constant('URL'); ?>iva"><span class="icon-coin-dollar"></span> IVA</a></li>
                     <li><a href="#"><span class="icon-barcode"></span> Codigos de barras</a></li>
                     <li><a href="#"><span class="icon-search"></span> Tipos de venta</a></li>

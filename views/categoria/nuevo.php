@@ -23,6 +23,11 @@
         <textarea name="descripcionCate" id="descripcionCate" class="form-control col-md-4" placeholder="Ingresa una descripción acerca de la categoria" rows="3" autocomplete="off"></textarea>
       </div>
 			<div>
+				<label for="estado">Estado:</label><br>
+				<input type="radio" name="estadoCate" id="estadoCate" value="1"> Activo <br>
+				<input type="radio" name="estadoCate" id="estadoCate" value="0"> Inactivo
+			</div>
+			<div>
 				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>categoria">Regresar</a>
 				<button type="submit" class="btn" id="btn-registrar">Registrar</button>
 			</div>

@@ -36,7 +36,7 @@
 						 <td><?php echo $categorias->nombreCate; ?></td>
              <td><?php echo $categorias->descripcionCate; ?></td>
 						 <td><?php echo $categorias->estadoCate; ?></td>
-						 <td><a type="button" class="btn" id="btn-table" href="#"><span class="icon-pencil2"></span></a></td>
+						 <td><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'categoria/verCategoria/' . $categorias->id_categoria; ?>"><span class="icon-pencil2"></span></a></td>
 						 <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $categorias->id_categoria;?>" data-function="categoria/eliminarCate"><span class="icon-bin"></span></a></td>
 				 </tr>
 				 <?php } ?>

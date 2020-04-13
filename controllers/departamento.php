@@ -1,6 +1,6 @@
 <?php
 
-class departamento extends Controller{
+class Departamento extends Controller{
 
   function _construct(){
     parent::_construct();

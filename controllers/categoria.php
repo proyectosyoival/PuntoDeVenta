@@ -37,9 +37,9 @@ class Categoria extends Controller{
 
 	function verCategoria($param = null){
 		$id_categoria = $param[0];
-		$rol = $this->model->getById($id_categoria);
+		$categorias = $this->model->getById($id_categoria);
 
-		$_SESSION['id_categoria'] = $categorias;
+		$_SESSION['id_categoria'] = $categorias->id_categoria;
 		$this->view->categorias = $categorias;
 		$this->view->mensaje = "";
 		$this->view->render('categoria/edit');
