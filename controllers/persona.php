@@ -17,7 +17,7 @@ class Persona extends Controller{
         $personas = $this->model->get();
         $this->view->personas = $personas;
 
-        $this->view->render('persona/index2');
+        $this->view->render('persona/index');
     }
 
     function registrarPersona(){
@@ -50,11 +50,11 @@ class Persona extends Controller{
         }
 
         if($this->model->insert(['nombrePers' => $nombrePers, 'apellido' => $apellido, 'fecha_nac' => $fecha_nac, 'direccion' => $direccion, 'telefono' => $telefono, 'usuario' => $usuario, 'contrasena' => $contrasena, 'foto' => $foto, 'comprobante' => $comprobante, 'num_empleado' => $num_empleado, 'id_rol' => $id_rol,])){
-            // $mensaje = "IVA creado";
+           // echo $mensaje = "IVA creado";
         }else{
-            // $mensaje = "La matrícula ya existe";
+           // echo $mensaje = "La matrícula ya existe";
         }
-            $this->view->mensaje = $mensaje;
+            // $this->view->mensaje = $mensaje;
             $this->render();
     }
 
