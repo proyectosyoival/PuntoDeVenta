@@ -12,7 +12,7 @@
 
 		<h1 id="h1-form">Nuevo Producto</h1>
 		<hr>
-		<form action="<?php echo constant('URL'); ?>producto/registrarProducto" method="POST" autocomplete="off">
+		<form action="<?php echo constant('URL'); ?>producto/registrarProducto" method="POST" enctype="multipart/form-data" autocomplete="off">
 			<div class="form-row">
 				<div class="form-group col-md-8">
 					<label for="nombre">Nombre:</label>
@@ -68,14 +68,12 @@
 					<label for="proveedor">Proveedor:</label>
 					<input type="text" name="proveedor" id="proveedor" class="form-control" placeholder="Nombre de proveedor" required>
 				</div>
-
 			</div>
-
 
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<label for="foto">Foto:</label>
-					<input type="file" name="foto" id="foto" class="form-control" required>
+					<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*">
 				</div>
 
 				<div class="form-group col-md-4">

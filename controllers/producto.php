@@ -35,7 +35,7 @@ class Producto extends Controller{
 		$idtipoTela			= $_POST['idtipotela'];			//Se registra en la tabla producto - se deberia de obtener de una tabla externa (tipo tela)
 		$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
 		$estadoProd			= $_POST['estadoProd'];				//Se registra en la tabla producto
-		$foto				= $_POST['foto'];				//Se registra en la tabla producto
+		$foto				= $_FILES["foto"];				//Se registra en la tabla producto
 		//$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)
 		
 		//Recuperamos la session de la persona que esta logeada.
