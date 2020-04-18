@@ -60,10 +60,10 @@ $(function validar() {
            },
            messages: {//mensaje si no se cumplen las validaciones
                    nombreCate: {
-                           required: "&#x1f5d9; Ingresa el nombre del rol",//poner el mensaje que quieres que se muestre si no se cumple la validacion, el &#x1f5d9 es el simbolo de equis que se va mostrar si no se cumple la validacon
+                           required: "&#x1f5d9; Ingresa el nombre de la categoria",//poner el mensaje que quieres que se muestre si no se cumple la validacion, el &#x1f5d9 es el simbolo de equis que se va mostrar si no se cumple la validacon
                    },
                    descripcionCate: {
-                        required:"&#x1f5d9; Ingresa la descripción del rol",
+                        required:"&#x1f5d9; Ingresa la descripción de la categoria",
                    } //debes agregar el mensaje por cada input que pusiste en rules
            }
    });

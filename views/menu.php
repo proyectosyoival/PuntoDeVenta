@@ -43,12 +43,12 @@
                     <li><a href="#"><span class="icon-barcode"></span> Codigos de barras</a></li>
                     <li><a href="#"><span class="icon-search"></span> Tipos de venta</a></li>
                     <li><a href="#"><span class="icon-search"></span> Inventarios</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>departamento"><span class="icon-office"></span> Departamento</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>categoria"><span class="icon-coin-dollar"></span> Categorias</a></li>
+                    <li><a href="<?php echo constant('URL'); ?>departamento"><span class="icon-woman"></span> Departamento</a></li>
+                    <li><a href="<?php echo constant('URL'); ?>categoria"><span class="icon-user-tie"></span> Categorias</a></li>
                     <li><a href="<?php echo constant('URL'); ?>iva"><span class="icon-coin-dollar"></span> IVA</a></li>
                     <li><a href="#"><span class="icon-barcode"></span> Codigos de barras</a></li>
                     <li><a href="#"><span class="icon-search"></span> Tipos de venta</a></li>
-                    <li><a href="#"><span class="icon-credit-card"></span> Tipos de pago</a></li>
+                    <li><a href="<?php echo constant('URL'); ?>tipoPago"><span class="icon-credit-card"></span> Tipos de pago</a></li>
                     <li><a href="#"><span class="icon-stats-dots"></span> Reportes</a></li>
                 </ul>
             </nav>

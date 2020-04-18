@@ -75,8 +75,8 @@
                 <div class="card h-100">
                     <div class="card-header text-center" id="card-header"><h5 class="text-center"><span class="icon-credit-card"></span> Tipos de pago</h5></div>
                     <div class="card-body">
-                        <p class="card-text text-left">Apartado para registrar las ventas realizadas durante el día.</p>
-                        <div class="text-center"><a type="button" class="btn" id="btn-ira">Ir a caja</a></div>
+                        <p class="card-text text-left">Apartado para registrar los tipos de pagos disponibles.</p>
+                        <div class="text-center"><a type="button" class="btn" id="btn-ira" href="<?php echo constant('URL'); ?>tipoPago">Ir a tipos de pagos</a></div>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
         <!-- fin cards -->
     </div>
 </div>
-    <?php require 'views/footer.php'; ?> 
+    <?php require 'views/footer.php'; ?>
 
 </body>
 </html>
