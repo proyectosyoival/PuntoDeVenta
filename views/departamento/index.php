@@ -19,10 +19,9 @@
 		<hr>
 		<table  class ="table table-hover text-center">
 			<thead class="thead-dark" id="thead_table">
-				<th scope="col">#id</th>
 				<th scope="col">Departamento</th>
 				<th scope="col">Estado</th>
-				<th scope="col">Fecha alta</th>
+				<th scope="col">Fecha de registro</th>
 				<th scope="col">Editar</th>
 				<th scope="col">Borrar</th>
 			</thead>
@@ -34,12 +33,11 @@
 						$departamento = $row;
 				 ?>
 				 <tr id="fila-<?php echo $departamento->id_departamento; ?>">
-						 <td><?php echo $departamento->id_departamento; ?></td>
 						 <td><?php echo $departamento->nombreDepa; ?></td>
 						 <td><?php echo $departamento->estadoDepa; ?></td>
-						 <td><?php echo $departamento->fecha_alta;?></tb>
-						 <td><a type="button" class="btn" id="btn-table" href="#"><span class="icon-pencil2"></span></a></td>
-						 <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $iva->id_iva;?>" data-function="iva/eliminarIva"><span class="icon-bin"></span></a></td>
+						 <td><?php echo $departamento->fecha_alta; ?></td>
+					   <td><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'departamento/verDepto/' . $departamento->id_departamento; ?>"><span class="icon-pencil2"></span></a></td>
+						 <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $departamento->id_departamento;?>" data-function="departamento/deletDepto"><span class="icon-bin"></span></a></td>
 				 </tr>
 				 <?php } ?>
 			</tbody>

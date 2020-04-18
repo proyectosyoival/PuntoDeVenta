@@ -14,6 +14,71 @@ class ProductoModel extends Model{
 
 	public function insert($datos){
 		try {
+            //Procedimiento para subir la imagen del producto.
+            
+            $foto = $datos['foto'];
+            //Checar validacion
+            if (empty($foto)) {
+                echo "vacia";
+                echo $foto;
+            }
+
+            $arrayupfotos=array();
+            array_push($arrayupfotos, $foto);
+            for ($i = 0; $i < count($arrayupfotos) ; $i++) { 
+                 //INICIA SUBIR IMAGEN AL SERVIDOR
+                $target_dir = "img/productos/";
+                $target_file = $target_dir . basename($arrayupfotos[$i]["name"]);
+                $uploadOk = 1;
+                $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+                // Check if image file is a actual image or fake image
+                if(isset($_POST["submit"])) {
+                    $check = getimagesize($arrayupfotos[$i]["tmp_name"]);
+                    if($check !== false) {
+                        echo "El archivo es una imagen - " . $check["mime"] . ".";
+                        $uploadOk = 1;
+                    } else {
+                        // echo "El archivo no es una imagen.";
+                        $uploadOk = 0;
+                    }
+                }
+                // Check if file already exists
+                if (file_exists($target_file)) {
+                    // echo "Lo siento, el archivo ya existe.";
+                    $uploadOk = 0;
+                }
+                // Check file size
+                if ($arrayupfotos[$i]["size"] > 2000000) {
+                    // echo "Lo siento, el archivo es muy grande.";
+                    $uploadOk = 0;
+                }
+                // Allow certain file formats
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) {
+                    // echo "Lo siento, solo los archivos JPG, JPEG, PNG & GIF guardados.";
+                    $uploadOk = 0;
+                }
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    // echo "Lo siento, tu archivo no se pudo guardarx2.";
+                // if everything is ok, try to upload file
+                } else {
+                    if (move_uploaded_file($arrayupfotos[$i]["tmp_name"], $target_file)) {
+                        "The file ". basename($arrayupfotos[$i]["name"]). " has been uploaded.";
+                         //TERMINA SUBIR IMAGEN AL SERVIDOR
+                    } else {
+                        // echo "Lo siento, hubo un error al subir el archivo.";
+                    }
+                }
+            }
+            //COMPROBAR EL NOMBRE DE FOTO Y COMPROBANTE SI VIENE VACIO
+            if ($foto['name']=="") {
+                $foto="";
+            }else{
+                 $foto = basename($foto["name"]);
+            }            
+
+            //Insercion de los datos a la bd.
 			$query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			$query->bindParam(1, $datos['nombreProd']); 
             $query->bindParam(2, $datos['descripcionProd']);
@@ -21,7 +86,7 @@ class ProductoModel extends Model{
             $query->bindParam(4, $datos['idtipotela']);
             $query->bindParam(5, $datos['descuento']);
             $query->bindParam(6, $datos['estadoProd']);
-            $query->bindParam(7, $datos['foto']);
+            $query->bindParam(7, $foto);
             $query->bindParam(8, $datos['idPersona']);
             $query->bindParam(9, $datos['codigointerno']);
             $query->bindParam(10, $datos['codigoexterno']);
