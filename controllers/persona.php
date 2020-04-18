@@ -39,6 +39,11 @@ class Persona extends Controller{
         foreach ($query as $row) {
             $id_ultimo=$row['id_persona']+1;
         }
+        
+        if ($id_ultimo<10) {
+          $id_ultimo="0".$id_ultimo;  
+        }
+
         if ($id_rol==1) {
             $num_empleado= 'ADM'.date('dmy').$id_ultimo;
         }elseif ($id_rol==2) {
