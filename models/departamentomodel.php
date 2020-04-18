@@ -1,4 +1,5 @@
 <?php
+
 include_once 'models/departamento.php';
 
 class departamentoModel extends Model{
@@ -7,17 +8,18 @@ class departamentoModel extends Model{
     parent::__construct();
   }
 
-  public function insert($data){
+  public function insert($datos){
+
     try{
-      $query = $this->db->connect()->prepare('INSERT INTO departamento(nombreDepa, estadoDepa, fecha_alta) VALUES(:nombreDepa, :estadoDepa, :fecha_alta)');
-      $query->execute(['nombreDepa'=> $datos['nombreDepa'], 'estadoDepa'=>$datos['estadoDepa'], 'fecha_alta' => $datos['fecha_alta']]);
+      $query = $this->db->connect()->prepare('INSERT INTO departamento (nombreDepa, estadoDepa) VALUES( :nombreDepa, :estadoDepa)');
+      $query->execute(['nombreDepa' => $datos['nombreDepa'], 'estadoDepa' => $datos['estadoDepa']]);
       return true;
 
     }catch (PDOException $e){
       return false;
     }
   }
-  public function getDepartamento(){
+  public function getDepto(){
     $items =[];
 
     try {
@@ -38,20 +40,49 @@ class departamentoModel extends Model{
 
   }
 
-  public function Update($data){
-    $query = $this->db->connect()->prepare("UPDATE departamento SET nombreDepa = :nombreDepa, estadoDepa = :estadoDepa, fecha_alta = :fecha_alta
-    WHERE id_departamento = :id_departamento");
+  public function getById($id_departamento){
+      $item = new Depto();
+
+      $query = $this->db->connect()->prepare("SELECT * FROM departamento WHERE id_departamento = :id_departamento");
+      try{
+          $query->execute(['id_departamento' => $id_departamento]);
+
+          while($row = $query->fetch()){
+              $item->id_departamento = $row['id_departamento'];
+              $item->nombreDepa = $row['nombreDepa'];
+              $item->estadoDepa = $row['estadoDepa'];
+              $item->fecha_alta = $row['fecha_alta'];
+          }
+
+          return $item;
+      }catch(PDOException $e){
+          return null;
+      }
+  }
+
+  public function update($item){
+    $query = $this->db->connect()->prepare("UPDATE departamento SET nombreDepa = :nombreDepa, estadoDepa = :estadoDepa WHERE id_departamento = :id_departamento");
     try {
       $query->execute([
         'id_departamento'=> $item['id_departamento'],
         'nombreDepa'=> $item['nombreDepa'],
-        'estadoDepa' => $item['estadoDepa'],
-        'fecha_alta' => $item['fecha_alta']
+        'estadoDepa' => $item['estadoDepa']
       ]);
       return true;
     } catch (PDOException $e) {
       return false;
     }
+  }
+  public function delete($id){
+      $query = $this->db->connect()->prepare("DELETE FROM departamento WHERE id_departamento = :id_departamento");
+      try{
+          $query->execute([
+              'id_departamento'=> $id,
+          ]);
+          return true;
+      }catch(PDOException $e){
+          return false;
+      }
   }
 }
  ?>
