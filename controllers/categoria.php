@@ -1,13 +1,16 @@
 <?php
 
-/**
- *
- */
 class Categoria extends Controller{
 
 	function __construct(){
 		parent::__construct();
 		$this->view->categorias = [];
+
+
+	}
+
+	function nuevo(){
+		$this->view->render('categoria/nuevo');
 	}
 
 	function render(){
@@ -17,10 +20,6 @@ class Categoria extends Controller{
 		$this->view->render('categoria/index');
 	}
 
-	function nuevo(){
-		$this->view->render('categoria/nuevo');
-	}
-
 	function registrarCategoria(){
 		$nombreCate = $_POST['nombreCate'];
 		$descripcionCate = $_POST['descripcionCate'];
@@ -28,6 +27,7 @@ class Categoria extends Controller{
 		$mensaje = "";
 
 		if ($this->model->insert(['nombreCate'=>$nombreCate, 'descripcionCate' => $descripcionCate, 'estadoCate' => $estadoCate])) {
+
 		}else{
 
 		}
@@ -48,15 +48,16 @@ class Categoria extends Controller{
 	function actualizarCate(){
 		$id_categoria = $_SESSION['id_categoria'];
 		$nombreCate = $_POST['nombreCate'];
+		// echo $nombreCate;
 		$descripcionCate = $_POST['descripcionCate'];
 		$estadoCate =  $_POST['estadoCate'];
 
-		if ($this->model->update(['id_categoria' => $id_categoria, 'descripcionCate' => $descripcionCate, 'estadoCate' => $estadoCate])) {
+		if ($this->model->update(['id_categoria' => $id_categoria, 'nombreCate' => $nombreCate, 'descripcionCate' => $descripcionCate, 'estadoCate' => $estadoCate])) {
 			$categorias = new Cate();
 			$categorias->id_categoria = $id_categoria;
 			$categorias->nombreCate = $nombreCate;
 			$categorias->descripcionCate = $descripcionCate;
-			$estadoCate->estadoCate = $estadoCate;
+			$categorias->estadoCate = $estadoCate;
 
 			$this->view->categorias = $categorias;
 			$this->view->mensaje = "Categoria actualizada correctamente";

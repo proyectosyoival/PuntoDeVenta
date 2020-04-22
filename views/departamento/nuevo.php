@@ -14,8 +14,8 @@
 
 		<form action="<?php echo constant('URL'); ?>departamento/registrarDepto" method="POST" id="form-departamento">
 			<div class="form-group">
-				<label for="nombre">Nombre:</label>
-				<input type="text" name="nombreDepa" id="nombreDepa" class="form-control col-md-12" placeholder="Nombre del departamento" required>
+				<label for="nombreDepa">Nombre:</label>
+				<input type="text" name="nombreDepa" id="nombreDepa" class="form-control col-md-12" placeholder="Nombre del departamento">
 			</div>
 			<div>
 				<label for="estado">Estado:</label><br>

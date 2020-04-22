@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Categoria</title>
+  <title>Departamento</title>
 </head>
 <body>
   <?php require 'views/header.php'; ?>
@@ -12,7 +12,7 @@
     <div class="center"><?php echo $this->mensaje; ?></div>
     <h1 id="h1-form">Editar Departamento</h1>
     <hr>
-    <form action="<?php echo constant('URL');?>departamento/actualizardepartamento" method="POST" id="form-departamento">
+    <form action="<?php echo constant('URL');?>departamento/actualizarDepto" method="POST" id="form-departamento">
       <input type="text" name="id_departamento" hidden="true" value="<?php echo $this->departamento->id_departamento; ?>">
       <div class="form-group">
         <label for="nombreDepa">Nombre del Departamento:</label>
@@ -20,9 +20,9 @@
         <!-- el uso de la clase col-md-4 es para darle el tamaño, el tamaño maximoes 12 que ocuparia toda la pantalla -->
       </div>
       <div>
-        <label for="estado">Estado:</label><br>
-        <input type="radio" name="estadoDepa" id="estadoDepa" value="1"> Activo <br>
-        <input type="radio" name="estadoDepa" id="estadoDepa" value="0"> Inactivo
+        <label for="estadoDepa">Estado:</label><br>
+        <input type="radio" name="estadoDepa" id="estadoDepa" value="1" <?php if ($this->departamento->estadoDepa == 1) echo 'checked ="checked"' ;?>> Activo <br>
+        <input type="radio" name="estadoDepa" id="estadoDepa" value="0" <?php if ($this->departamento->estadoDepa == 0) echo 'checked ="checked"'; ?> > Inactivo
       </div>
       <div>
         <a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>departamento">Regresar</a>

@@ -2,9 +2,12 @@
 
 class Departamento extends Controller{
 
-  function _construct(){
+  public function _construct(){
     parent::_construct();
     $this->view->departamento =[];
+  }
+  function nuevo(){
+    $this->view->render('departamento/nuevo');
   }
 
   function render(){
@@ -12,16 +15,14 @@ class Departamento extends Controller{
     $this->view->departamento = $departamento;
     $this->view->render('departamento/index');
   }
-  function nuevo(){
-    $this->view->render('departamento/nuevo');
-  }
+
   function registrarDepto(){
     $nombreDepa = $_POST['nombreDepa'];
     $estadoDepa = $_POST['estadoDepa'];
     $mensaje = "";
 
     if ($this->model->insert(['nombreDepa' =>$nombreDepa, 'estadoDepa' => $estadoDepa])) {
-      echo "Departamento creado exitosamente";
+      // echo "Departamento creado exitosamente";
     }else{
       $mensaje ="El departamento ya existe";
     }
@@ -29,11 +30,11 @@ class Departamento extends Controller{
     $this-> render();
   }
 
-  function verDepto($param = null){
+  function verDepartamento($param = null){
     $id_departamento = $param[0];
-    $departamento = $this ->model->getById($id_departamento);
+    $departamento = $this->model->getById($id_departamento);
 
-    $_SESSION['id_departamento'] = $departamento->$id_departamento;
+    $_SESSION['id_departamento'] = $departamento->id_departamento;
     $this->view->departamento = $departamento;
     $this->view->mensaje = "";
     $this->view->render('departamento/edit');
@@ -49,7 +50,7 @@ class Departamento extends Controller{
 
       $departamento = new Depto();
       $departamento->id_departamento = $id_departamento;
-      $departamento->nombreDepa = $nombreRol;
+      $departamento->nombreDepa = $nombreDepa;
       $departamento->estadoDepa = $estadoDepa;
 
       $this->view->departamento = $departamento;
