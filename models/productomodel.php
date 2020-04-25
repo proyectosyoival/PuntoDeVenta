@@ -4,10 +4,10 @@ include_once 'models/producto.php';
 include_once 'models/categoria.php';
 include_once 'models/tipotela.php';
 /**
- * 
+ *
  */
 class ProductoModel extends Model{
-	
+
 	function __construct(){
 		parent::__construct();
 	}
@@ -15,7 +15,7 @@ class ProductoModel extends Model{
 	public function insert($datos){
 		try {
             //Procedimiento para subir la imagen del producto.
-            
+
             $foto = $datos['foto'];
             //Checar validacion
             if (empty($foto)) {
@@ -25,7 +25,7 @@ class ProductoModel extends Model{
 
             $arrayupfotos=array();
             array_push($arrayupfotos, $foto);
-            for ($i = 0; $i < count($arrayupfotos) ; $i++) { 
+            for ($i = 0; $i < count($arrayupfotos) ; $i++) {
                  //INICIA SUBIR IMAGEN AL SERVIDOR
                 $target_dir = "img/productos/";
                 $target_file = $target_dir . basename($arrayupfotos[$i]["name"]);
@@ -76,11 +76,11 @@ class ProductoModel extends Model{
                 $foto="";
             }else{
                  $foto = basename($foto["name"]);
-            }            
+            }
 
             //Insercion de los datos a la bd.
 			$query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-			$query->bindParam(1, $datos['nombreProd']); 
+			$query->bindParam(1, $datos['nombreProd']);
             $query->bindParam(2, $datos['descripcionProd']);
             $query->bindParam(3, $datos['talla']);
             $query->bindParam(4, $datos['idtipotela']);
@@ -144,17 +144,17 @@ class ProductoModel extends Model{
             $query = $this->db->connect()->query("CALL procGetAllTipostela();");
 
             while ($row = $query->fetch()) {
-                $item = new Categoria();
+                $item = new Cate();
                 $item->id_tipo_tela     = $row[0]; //id_categoria
                 $item->nombreTipoTela   = $row[1]; //nombreCate
                 array_push($items, $item);
             }
-            
+
             return $items;
         } catch (PDOException $e) {
             return [];
         }
-    }   
+    }
 
     public function getCategoriesForProduct(){
         $items = [];
@@ -164,12 +164,12 @@ class ProductoModel extends Model{
             $query = $this->db->connect()->query("CALL procGetAllCategorias();");
 
             while ($row = $query->fetch()) {
-                $item = new Categoria();
+                $item = new Cate();
                 $item->id_categoria     = $row[0]; //id_categoria
                 $item->nombreCate       = $row[1]; //nombreCate
                 array_push($items, $item);
             }
-            
+
             return $items;
         } catch (PDOException $e) {
             return [];
@@ -218,7 +218,7 @@ class ProductoModel extends Model{
         //Insercion de los datos a la bd.
         try{
             $query = $this->db->connect()->prepare("CALL procUpdateProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            $query->bindParam(1, $datos['nombreProd']); 
+            $query->bindParam(1, $datos['nombreProd']);
             $query->bindParam(2, $datos['descripcionProd']);
             $query->bindParam(3, $datos['talla']);
             $query->bindParam(4, $datos['idtipotela']);

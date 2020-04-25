@@ -37,7 +37,7 @@
 				</div>
 
 				<!-- Se trae el dato para mostrarlo en el select de Tipo De Tela -->
-				<?php 
+				<?php
 				$tipoTela =	$this->productoSelected->tipo_tela;
 				//sacar los nombres de la tabla de tipo de tela
 				$db= new Database();
@@ -45,7 +45,7 @@
 				$query->execute(['tipoTela' => $tipoTela]);
 				foreach ($query as $row) {
 					$idTipoDeTela 	= $row['id_tipo_tela'];
-					$tipoDeTela   	= $row['nombreTipoTela'];           
+					$tipoDeTela   	= $row['nombreTipoTela'];
 				}
 				?>
 				<div class="form-group  col-md-4">
@@ -65,7 +65,7 @@
 			</div>
 
 			<!-- Se trae el dato para mostrarlo en el select de Categoría -->
-			<?php 
+			<?php
 			$categoria = $this->productoSelected->nombreCate;
 			//sacar los nombres de la tabla de Categoría
 			$db= new Database();
@@ -73,7 +73,7 @@
 			$query->execute(['categoria' => $categoria]);
 			foreach ($query as $row) {
 				$idCategoria 	= $row['id_categoria'];
-				$nombreCate   	= $row['nombreCate'];           
+				$nombreCate   	= $row['nombreCate'];
 			}
 			?>
 			<div class="form-row">
@@ -84,11 +84,11 @@
 						<?php
 						include_once 'models/categoria.php';
 						foreach ($this->categorias as $row) {
-							$categoria = new Categoria();
+							$categoria = new Cate();
 							$categoria = $row;
 							?>
 							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
-						<?php } ?>					
+						<?php } ?>
 					</select>
 				</div>
 
@@ -101,9 +101,9 @@
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<label for="foto">Foto:</label>
-					<?php 
+					<?php
 					$foto = $this->productoSelected->foto;
-					if(empty($foto)) { ?>				
+					if(empty($foto)) { ?>
 						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*">
 					<?php }else{ ?>
 						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*" hidden="true">
@@ -116,7 +116,7 @@
 				<div class="form-group col-md-4">
 					<label for="estado">Estado:</label>
 					<div class="form-control">
-						<?php 
+						<?php
 						$estado = $this->productoSelected->estadoProd;
 						if($estado == 1){
 							?>
@@ -130,7 +130,7 @@
 							<input type="radio" name="estadoProd" id="estado" class="col-md-2" value="0" checked> Inactivo
 							<?php
 						}
-						?>						
+						?>
 					</div>
 				</div>
 			</div>
@@ -186,5 +186,5 @@
 		document.getElementById('btncomprobante').hidden=true;
 		document.getElementById('comprobante').hidden=false;
 	}
-</script> 
+</script>
 </html>

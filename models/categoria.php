@@ -1,10 +1,6 @@
 <?php
 
-<<<<<<< HEAD
-class Category{
-=======
-class Categoria{
->>>>>>> develop
+class Cate{
 
 public $id_categoria;
 public $nombreCate;
