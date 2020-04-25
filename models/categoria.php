@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 class Category{
+=======
+class Categoria{
+>>>>>>> develop
 
 public $id_categoria;
 public $nombreCate;

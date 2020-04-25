@@ -4,3 +4,10 @@ $( document ).ready(function() {
     	$('body').toggleClass('visible_menu');
     })
 });
+
+function ShowModal(id){
+$('.modal#masInformacionProd')
+  .modal('show')
+;
+$('#modalContainer').load('http://localhost/PuntoDeVenta/producto/verProducto/'+id);
+}
