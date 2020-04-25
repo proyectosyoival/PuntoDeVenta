@@ -37,7 +37,7 @@
 				</div>
 
 				<!-- Se trae el dato para mostrarlo en el select de Tipo De Tela -->
-				<?php 
+				<?php
 				$tipoTela =	$this->productoSelected->tipo_tela;
 				//sacar los nombres de la tabla de tipo de tela
 				$db= new Database();

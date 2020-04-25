@@ -81,7 +81,7 @@ class Producto extends Controller{
 		$this->view->tipostela = $tipostela;
 		$categorias = $this->model->getCategoriesForProduct();
 		$this->view->categorias = $categorias;
-
+		$this->view->mensaje = "";
 		$this->view->render('producto/edit');
 	}
 
@@ -130,29 +130,63 @@ class Producto extends Controller{
              // array_push($arrayupfotos, $foto, $comprobante);
 			$this->subirfotos($foto);
 			$nfoto=basename( $foto["name"]);
-			@unlink('img/empleados/'.$fotoold);
+			@unlink('img/productos/'.$fotoold);
              // echo "<br>".$cfoto."-".$fotoold."-".$ccomprobante."-".$comprobanteold;
         // si una foto es diferente pero comprobante es igual
 		}
 
-
 		if($this->model->updateProd(['id_producto' => $id_producto, 'nombreProd' => $nombreProd, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'idtipotela' => $idtipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $nfoto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor, 'id_codigo_de_barras' => $idCodigoDeBarras, 'id_precio' => $idPrecio, 'id_stock' => $id_stock])){
 			//Actualizar el prodcuto con éxito
+			//Obtener el el valor del tipo con nombre
+			echo $id_producto . "<br>";
+			echo $nombreProd . "<br>";
+			echo $descripcionProd . "<br>";
+			echo $talla . "<br>";
+			echo $idtipoTela . "<br>";
+			echo $descuento . "<br>";
+			echo $estadoProd . "<br>";
+			echo $nfoto . "<br>";
+			echo $idPersona . "<br>";
+			echo $codigoInterno . "<br>";
+			echo $codigoExterno . "<br>";
+			echo $precio . "<br>";
+			echo $cantidad . "<br>";
+			echo $idcategoria . "<br>";
+			echo $proveedor . "<br>";
+			echo $idCodigoDeBarras . "<br>";
+			echo $idPrecio . "<br>";
+			echo $id_stock . "<br>";
+				
+				//sacar los nombres de la tabla de tipo de tela
+				$db= new Database();
+				$query = $db->connect()->prepare('SELECT nombreTipoTela FROM tipo_tela WHERE id_tipo_tela = :tipoTela');
+				$query->execute(['tipoTela' => $idtipoTela]);
+				foreach ($query as $row) {
+					$tipoDeTela   	= $row['nombreTipoTela'];           
+				}
+				//sacar los nombres de la tabla de categoria
+				$db= new Database();
+				$query = $db->connect()->prepare('SELECT nombreCate FROM categoria WHERE id_categoria = :idCategoria');
+				$query->execute(['idCategoria' => $idcategoria]);
+				foreach ($query as $row) {
+					$nombreCate   	= $row['nombreCate'];           
+				}
+
 			$productoSelected = new Producto();
 			$productoSelected->id_producto 			= $id_producto;
 			$productoSelected->nombreProd			= $nombreProd;	
 			$productoSelected->descripcionProd		= $descripcionProd;
 			$productoSelected->talla				= $talla;
-			$productoSelected->idtipotela 			= $idtipoTela;
+			$productoSelected->tipo_tela 			= $tipoDeTela;
 			$productoSelected->descuento			= $descuento;
 			$productoSelected->estadoProd			= $estadoProd;
 			$productoSelected->foto 				= $nfoto;
 			$productoSelected->idPersona 			= $idPersona;
-			$productoSelected->codigointerno 		= $codigoInterno;
-			$productoSelected->codigoexterno 		= $codigoExterno;
-			$productoSelected->precio 				= $precio;
+			$productoSelected->codigo_interno 		= $codigoInterno;
+			$productoSelected->codigo_externo 		= $codigoExterno;
+			$productoSelected->general 				= $precio;
 			$productoSelected->cantidad 			= $cantidad;
-			$productoSelected->idcategoria 			= $idcategoria;
+			$productoSelected->nombreCate 			= $nombreCate;
 			$productoSelected->proveedor 			= $proveedor;
 			$productoSelected->id_codigo_de_barras 	= $idCodigoDeBarras;
 			$productoSelected->id_precio	 		= $idPrecio;
@@ -162,6 +196,10 @@ class Producto extends Controller{
 		}else{
 			$this->view->mensaje = "El producto NO se actualizo!";
 		}
+		$tipostela = $this->model->getTipostelaForProduct();
+		$this->view->tipostela = $tipostela;
+		$categorias = $this->model->getCategoriesForProduct();
+		$this->view->categorias = $categorias;
 		$this->view->render('producto/edit');
 	}
 

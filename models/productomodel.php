@@ -15,7 +15,7 @@ class ProductoModel extends Model{
 	public function insert($datos){
 		try {
             //Procedimiento para subir la imagen del producto.
-            
+
             $foto = $datos['foto'];
             //Checar validacion
             if (empty($foto)) {
@@ -54,62 +54,62 @@ class ProductoModel extends Model{
                 }
                 // Allow certain file formats
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                && $imageFileType != "gif" ) {
+                    && $imageFileType != "gif" ) {
                     // echo "Lo siento, solo los archivos JPG, JPEG, PNG & GIF guardados.";
                     $uploadOk = 0;
-                }
+            }
                 // Check if $uploadOk is set to 0 by an error
-                if ($uploadOk == 0) {
+            if ($uploadOk == 0) {
                     // echo "Lo siento, tu archivo no se pudo guardarx2.";
                 // if everything is ok, try to upload file
-                } else {
-                    if (move_uploaded_file($arrayupfotos[$i]["tmp_name"], $target_file)) {
-                        "The file ". basename($arrayupfotos[$i]["name"]). " has been uploaded.";
+            } else {
+                if (move_uploaded_file($arrayupfotos[$i]["tmp_name"], $target_file)) {
+                    "The file ". basename($arrayupfotos[$i]["name"]). " has been uploaded.";
                          //TERMINA SUBIR IMAGEN AL SERVIDOR
-                    } else {
+                } else {
                         // echo "Lo siento, hubo un error al subir el archivo.";
-                    }
                 }
             }
+        }
             //COMPROBAR EL NOMBRE DE FOTO Y COMPROBANTE SI VIENE VACIO
-            if ($foto['name']=="") {
-                $foto="";
-            }else{
-                 $foto = basename($foto["name"]);
-            }            
+        if ($foto['name']=="") {
+            $foto="";
+        }else{
+           $foto = basename($foto["name"]);
+       }            
 
             //Insercion de los datos a la bd.
-			$query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-			$query->bindParam(1, $datos['nombreProd']); 
-            $query->bindParam(2, $datos['descripcionProd']);
-            $query->bindParam(3, $datos['talla']);
-            $query->bindParam(4, $datos['idtipotela']);
-            $query->bindParam(5, $datos['descuento']);
-            $query->bindParam(6, $datos['estadoProd']);
-            $query->bindParam(7, $foto);
-            $query->bindParam(8, $datos['idPersona']);
-            $query->bindParam(9, $datos['codigointerno']);
-            $query->bindParam(10, $datos['codigoexterno']);
-            $query->bindParam(11, $datos['precio']);
-            $query->bindParam(12, $datos['cantidad']);
-            $query->bindParam(13, $datos['idcategoria']);
-            $query->bindParam(14, $datos['proveedor']);
-            $query->execute();
-			return true;
-		} catch (PDOException $e) {
-			return false;
-		}
-	}
+       $query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+       $query->bindParam(1, $datos['nombreProd']); 
+       $query->bindParam(2, $datos['descripcionProd']);
+       $query->bindParam(3, $datos['talla']);
+       $query->bindParam(4, $datos['idtipotela']);
+       $query->bindParam(5, $datos['descuento']);
+       $query->bindParam(6, $datos['estadoProd']);
+       $query->bindParam(7, $foto);
+       $query->bindParam(8, $datos['idPersona']);
+       $query->bindParam(9, $datos['codigointerno']);
+       $query->bindParam(10, $datos['codigoexterno']);
+       $query->bindParam(11, $datos['precio']);
+       $query->bindParam(12, $datos['cantidad']);
+       $query->bindParam(13, $datos['idcategoria']);
+       $query->bindParam(14, $datos['proveedor']);
+       $query->execute();
+       return true;
+   } catch (PDOException $e) {
+     return false;
+ }
+}
 
-	public function getProducts(){
-		$items = [];
+public function getProducts(){
+  $items = [];
 
-        try{
+  try{
 
-            $query = $this->db->connect()->query("CALL procGetAllProductos();");
+    $query = $this->db->connect()->query("CALL procGetAllProductos();");
 
-            while($row = $query->fetch()){
-                $item = new Producto();
+    while($row = $query->fetch()){
+        $item = new Producto();
                 $item->id_producto 			= $row[0];	//id_producto
                 $item->nombreProd  			= $row[1];	//nombre
                 $item->descripcionProd 		= $row[2];	//descripcion
@@ -134,7 +134,7 @@ class ProductoModel extends Model{
         }catch(PDOException $e){
             return [];
         }
-	}
+    }
 
     public function getTipostelaForProduct(){
         $items = [];
@@ -179,13 +179,13 @@ class ProductoModel extends Model{
     public function getProductById($id_producto){
       $item = new Producto();
 
-        $query = $this->db->connect()->prepare("CALL procGetSelectedProduct(?);");
-        $query->bindParam(1, $id_producto);
-        $query->execute();
+      $query = $this->db->connect()->prepare("CALL procGetSelectedProduct(?);");
+      $query->bindParam(1, $id_producto);
+      $query->execute();
 
-        try{
+      try{
 
-            while($row = $query->fetch()){
+        while($row = $query->fetch()){
                 $item->id_producto          = $row[0];  //id_producto
                 $item->nombreProd           = $row[1];  //nombre
                 $item->descripcionProd      = $row[2];  //descripcion
@@ -218,24 +218,26 @@ class ProductoModel extends Model{
         //Insercion de los datos a la bd.
         try{
             $query = $this->db->connect()->prepare("CALL procUpdateProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            $query->bindParam(1, $datos['nombreProd']); 
-            $query->bindParam(2, $datos['descripcionProd']);
-            $query->bindParam(3, $datos['talla']);
-            $query->bindParam(4, $datos['idtipotela']);
-            $query->bindParam(5, $datos['descuento']);
-            $query->bindParam(6, $datos['estadoProd']);
-            $query->bindParam(7, $datos['foto']);
-            $query->bindParam(8, $datos['idPersona']);
-            $query->bindParam(9, $datos['codigointerno']);
-            $query->bindParam(10, $datos['codigoexterno']);
-            $query->bindParam(11, $datos['precio']);
-            $query->bindParam(12, $datos['cantidad']);
-            $query->bindParam(13, $datos['idcategoria']);
-            $query->bindParam(14, $datos['proveedor']);
-            $query->bindParam(15, $datos['id_producto']);
-            $query->bindParam(16, $datos['id_codigo_de_barras']);
-            $query->bindParam(17, $datos['id_precio']);
-            $query->bindParam(18, $datos['id_stock']);
+            $query->bindParam(1, $datos['id_producto']);
+            $query->bindParam(2, $datos['nombreProd']); 
+            $query->bindParam(3, $datos['descripcionProd']);
+            $query->bindParam(4, $datos['talla']);
+            $query->bindParam(5, $datos['idtipotela']);
+            $query->bindParam(6, $datos['descuento']);
+            $query->bindParam(7, $datos['estadoProd']);
+            $query->bindParam(8, $datos['foto']);
+            $query->bindParam(9, $datos['idPersona']);
+            $query->bindParam(10, $datos['id_codigo_de_barras']);
+            $query->bindParam(11, $datos['codigointerno']);
+            $query->bindParam(12, $datos['codigoexterno']);
+            $query->bindParam(13, $datos['id_precio']);
+            $query->bindParam(14, $datos['precio']);
+            $query->bindParam(15, $datos['id_stock']);
+            $query->bindParam(16, $datos['cantidad']);
+            $query->bindParam(17, $datos['idcategoria']);
+            $query->bindParam(18, $datos['proveedor']);            
+            
+
             $query->execute();
 
             return true;
