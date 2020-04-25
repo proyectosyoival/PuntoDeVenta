@@ -252,6 +252,17 @@ class Producto extends Controller{
 		}
 	}
 
+	function eliminarProducto($param = null){
+		$id_producto = $param[0];
+
+		if ($this->model->deleteProduct($id_producto)) {
+			$mensaje = 1;			
+		}else{
+			$mensaje = 0;
+		}
+		echo $mensaje;
+	}
+
 }
 
 ?>

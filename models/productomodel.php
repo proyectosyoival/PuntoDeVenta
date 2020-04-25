@@ -75,30 +75,30 @@ class ProductoModel extends Model{
         if ($foto['name']=="") {
             $foto="";
         }else{
-           $foto = basename($foto["name"]);
-       }            
+         $foto = basename($foto["name"]);
+     }            
 
             //Insercion de los datos a la bd.
-       $query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-       $query->bindParam(1, $datos['nombreProd']); 
-       $query->bindParam(2, $datos['descripcionProd']);
-       $query->bindParam(3, $datos['talla']);
-       $query->bindParam(4, $datos['idtipotela']);
-       $query->bindParam(5, $datos['descuento']);
-       $query->bindParam(6, $datos['estadoProd']);
-       $query->bindParam(7, $foto);
-       $query->bindParam(8, $datos['idPersona']);
-       $query->bindParam(9, $datos['codigointerno']);
-       $query->bindParam(10, $datos['codigoexterno']);
-       $query->bindParam(11, $datos['precio']);
-       $query->bindParam(12, $datos['cantidad']);
-       $query->bindParam(13, $datos['idcategoria']);
-       $query->bindParam(14, $datos['proveedor']);
-       $query->execute();
-       return true;
-   } catch (PDOException $e) {
-     return false;
- }
+     $query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+     $query->bindParam(1, $datos['nombreProd']); 
+     $query->bindParam(2, $datos['descripcionProd']);
+     $query->bindParam(3, $datos['talla']);
+     $query->bindParam(4, $datos['idtipotela']);
+     $query->bindParam(5, $datos['descuento']);
+     $query->bindParam(6, $datos['estadoProd']);
+     $query->bindParam(7, $foto);
+     $query->bindParam(8, $datos['idPersona']);
+     $query->bindParam(9, $datos['codigointerno']);
+     $query->bindParam(10, $datos['codigoexterno']);
+     $query->bindParam(11, $datos['precio']);
+     $query->bindParam(12, $datos['cantidad']);
+     $query->bindParam(13, $datos['idcategoria']);
+     $query->bindParam(14, $datos['proveedor']);
+     $query->execute();
+     return true;
+ } catch (PDOException $e) {
+   return false;
+}
 }
 
 public function getProducts(){
@@ -129,7 +129,6 @@ public function getProducts(){
                 $item->proveedor 	 		= $row[16];	//proveedor
                 array_push($items, $item);
             }
-
             return $items;
         }catch(PDOException $e){
             return [];
@@ -236,8 +235,6 @@ public function getProducts(){
             $query->bindParam(16, $datos['cantidad']);
             $query->bindParam(17, $datos['idcategoria']);
             $query->bindParam(18, $datos['proveedor']);            
-            
-
             $query->execute();
 
             return true;
@@ -246,6 +243,34 @@ public function getProducts(){
         }
 
 
+    }
+
+    public function deleteProduct($idProducto){
+        #Traemos el dato para poder eliminar la foto del producto
+        $db = new Database();
+        $query = $db->connect()->prepare('SELECT foto, id_codigo_de_barras, id_precio FROM producto WHERE id_producto= :id_producto');
+        $query->execute(['id_producto' => $idProducto]);
+        foreach ($query as $row) {
+            $foto                   = $row['foto'];
+            $id_codigo_de_barras    = $row['id_codigo_de_barras'];
+            $id_precio              = $row['id_precio'];
+        }
+        #Llamamos el StoreProcedure para eliminar el producto y sus dependientes.
+        $query = $this->db->connect()->prepare("CALL procDeleteProducto(?,?,?)");
+        try {
+            $query->bindParam(1, $idProducto);
+            $query->bindParam(2, $id_codigo_de_barras);
+            $query->bindParam(3, $id_precio);
+            $query->execute();
+
+            #Si se eliminaron todos los datos correctamente entonces si borramos la imagen.
+             @unlink('img/productos/'.$foto);
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+        
     }
 
 }

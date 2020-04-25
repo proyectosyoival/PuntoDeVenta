@@ -49,14 +49,13 @@
           ?>
           <tr id="fila-<?php echo $producto->id_producto; ?>">
             <td><div onclick="ShowModal(<?php echo $producto->id_producto; ?>)" ><?php echo $producto->id_producto; ?></div></td>
-            <!--<td><?php echo $producto->nombreProd; ?></td>-->
             <td><div align="left"><?php echo $producto->descripcionProd; ?></div></td>
             <td><div align="right">$<?php echo $producto->general; ?></div></td>
             <td><div><?php echo $producto->cantidad; ?></div></td>
             <td><div><?php echo $producto->proveedor; ?></div></td>
             <td><div><img src="<?php echo constant('URL'); ?>img/productos/<?php echo $producto->foto; ?>" class="img-responsive" width="50"  title="<?php echo $producto->descripcionProd; ?>"></div></td>
             <td><div><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'producto/editProduct/' . $producto->id_producto; ?>"><span class="icon-pencil2"></span></a></div></td>
-            <td><div><a type="button" class="btn btn-danger bEliminar" href="#"><span class="icon-bin"></span></a></div></td>
+            <td><div><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $producto->id_producto;?>" data-function="producto/eliminarProducto"><span class="icon-bin" title="Eliminar"></span></a></div></td>
           </tr>
         <?php } ?>
       </tbody>
@@ -77,8 +76,7 @@
       <div class="modal-body text-center">
         <!--Inicia contenedor del modal -->
         <div id="modalContainer">
-
-
+          <!-- EN ESTE DIV SE MUESTRA EL CONTENIDO DE LA PAG getViewProduct.php -->
         </div>
         <!--Termina contenedor del modal -->
 
