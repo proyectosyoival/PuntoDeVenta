@@ -1,6 +1,6 @@
 <?php
 
-class Cate{
+class Category{
 
 public $id_categoria;
 public $nombreCate;

@@ -22,7 +22,7 @@
 				<?php
 					include_once 'models/categoria.php';
 					foreach($this->categorias as $row) {
-						$categorias = new Cate();
+						$categorias = new Category();
 						$categorias = $row;
 				 ?>
 				 <div class="col mb-4" id="fila-<?php echo $categorias->id_categoria;?>">
