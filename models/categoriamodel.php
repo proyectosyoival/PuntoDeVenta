@@ -29,7 +29,7 @@ class CategoriaModel extends Model{
 					$query = $this->db->connect()->query("SELECT*FROM categoria");
 
 					while($row = $query->fetch()){
-							$item = new Category();
+							$item = new Categoria();
 							$item->id_categoria = $row['id_categoria'];
 							$item->nombreCate = $row['nombreCate'];
 							$item->descripcionCate = $row['descripcionCate'];
@@ -46,7 +46,7 @@ class CategoriaModel extends Model{
 	}
 
 	public function getById($id_categoria){
-			$item = new Category();
+			$item = new Categoria();
 
 			$query = $this->db->connect()->prepare("SELECT * FROM categoria WHERE id_categoria = :id_categoria");
 			try{

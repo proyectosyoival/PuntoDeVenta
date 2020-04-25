@@ -53,7 +53,7 @@ class Categoria extends Controller{
 		$estadoCate =  $_POST['estadoCate'];
 
 		if ($this->model->update(['id_categoria' => $id_categoria, 'nombreCate' => $nombreCate, 'descripcionCate' => $descripcionCate, 'estadoCate' => $estadoCate])) {
-			$categorias = new Category();
+			$categorias = new Categoria();
 			$categorias->id_categoria = $id_categoria;
 			$categorias->nombreCate = $nombreCate;
 			$categorias->descripcionCate = $descripcionCate;
