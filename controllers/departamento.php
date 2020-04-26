@@ -55,6 +55,7 @@ class Departamento extends Controller{
       $departamento->nombreDepa = $nombreDepa;
       $departamento->estadoDepa = $estadoDepa;
       $departamento->nomenclaturaDep = $nomenclaturaDep;
+      
       $this->view->departamento = $departamento;
       $this->view->mensaje = "Registro actualizado correctamente";
     }else {

@@ -11,8 +11,8 @@ class departamentoModel extends Model{
   public function insert($datos){
 
     try{
-      $query = $this->db->connect()->prepare('INSERT INTO departamento (nombreDepa, estadoDepa) VALUES( :nombreDepa, :estadoDepa)');
-      $query->execute(['nombreDepa' => $datos['nombreDepa'], 'estadoDepa' => $datos['estadoDepa']]);
+      $query = $this->db->connect()->prepare('INSERT INTO departamento (nombreDepa, estadoDepa, nomenclaturaDep) VALUES( :nombreDepa, :estadoDepa, :nomenclaturaDep)');
+      $query->execute(['nombreDepa' => $datos['nombreDepa'], 'estadoDepa' => $datos['estadoDepa'], 'nomenclaturaDep' => $datos['nomenclaturaDep']]);
       return true;
 
     }catch (PDOException $e){
@@ -63,12 +63,13 @@ class departamentoModel extends Model{
   }
 
   public function update($item){
-    $query = $this->db->connect()->prepare("UPDATE departamento SET nombreDepa = :nombreDepa, estadoDepa = :estadoDepa WHERE id_departamento = :id_departamento");
+    $query = $this->db->connect()->prepare("UPDATE departamento SET nombreDepa = :nombreDepa, estadoDepa = :estadoDepa, nomenclaturaDep = :nomenclaturaDep WHERE id_departamento = :id_departamento");
     try {
       $query->execute([
         'id_departamento'=> $item['id_departamento'],
         'nombreDepa'=> $item['nombreDepa'],
-        'estadoDepa' => $item['estadoDepa']
+        'estadoDepa' => $item['estadoDepa'],
+        'nomenclaturaDep' => $item['nomenclaturaDep']
       ]);
       return true;
     } catch (PDOException $e) {
