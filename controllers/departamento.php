@@ -19,9 +19,10 @@ class Departamento extends Controller{
   function registrarDepto(){
     $nombreDepa = $_POST['nombreDepa'];
     $estadoDepa = $_POST['estadoDepa'];
+    $nomenclaturaDep = $_POST['nomenclaturaDep'];
     $mensaje = "";
 
-    if ($this->model->insert(['nombreDepa' =>$nombreDepa, 'estadoDepa' => $estadoDepa])) {
+    if ($this->model->insert(['nombreDepa' =>$nombreDepa, 'estadoDepa' => $estadoDepa, 'nomenclaturaDep' => $nomenclaturaDep])) {
       // echo "Departamento creado exitosamente";
     }else{
       $mensaje ="El departamento ya existe";
@@ -45,14 +46,15 @@ class Departamento extends Controller{
 
     $nombreDepa = $_POST['nombreDepa'];
     $estadoDepa = $_POST['estadoDepa'];
+    $nomenclaturaDep = $_POST['nomenclaturaDep'];
 
-    if ($this->model->update(['id_departamento'=>$id_departamento, 'nombreDepa'=> $nombreDepa, 'estadoDepa' => $estadoDepa ])) {
+    if ($this->model->update(['id_departamento'=>$id_departamento, 'nombreDepa'=> $nombreDepa, 'estadoDepa' => $estadoDepa, 'nomenclaturaDep' => $nomenclaturaDep ])) {
 
       $departamento = new Depto();
       $departamento->id_departamento = $id_departamento;
       $departamento->nombreDepa = $nombreDepa;
       $departamento->estadoDepa = $estadoDepa;
-
+      $departamento->nomenclaturaDep = $nomenclaturaDep;
       $this->view->departamento = $departamento;
       $this->view->mensaje = "Registro actualizado correctamente";
     }else {

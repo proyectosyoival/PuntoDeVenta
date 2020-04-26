@@ -21,6 +21,7 @@
 			<thead class="thead-dark" id="thead_table">
 				<th scope="col">Departamento</th>
 				<th scope="col">Estado</th>
+				<th scope="col">Nomenclatura</th>
 				<th scope="col">Fecha de registro</th>
 				<th scope="col">Editar</th>
 				<th scope="col">Borrar</th>
@@ -39,6 +40,7 @@
 						 } else{
 							 echo "Inactivo";
 						 }  ?></td>
+						 <td><?php echo $departamento->nomenclaturaDep;?></td>
 						 <td><?php echo $departamento->fecha_alta; ?></td>
 					   <td><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'departamento/verDepartamento/' . $departamento->id_departamento; ?>"><span class="icon-pencil2"></span></a></td>
 						 <td><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $departamento->id_departamento;?>" data-function="departamento/deletDepto"><span class="icon-bin"></span></a></td>

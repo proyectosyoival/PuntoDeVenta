@@ -23,6 +23,10 @@
 				<input type="radio" name="estadoDepa" id="estadoDepa" value="0"> Inactivo
 			</div>
 			<div>
+				<label for="nomenclaturaDep">Nomenclatura del departamento</label><br>
+				<input type="text" name="nomenclaturaDep" id="nomenclaturaDep" placeholder="Ejemplo: C ">
+			</div><br>
+			<div>
 				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>departamento">Regresar</a>
 				<button type="submit" class="btn" id="btn-registrar">Registrar</button>
 			</div>

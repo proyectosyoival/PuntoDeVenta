@@ -25,6 +25,10 @@
         <input type="radio" name="estadoDepa" id="estadoDepa" value="0" <?php if ($this->departamento->estadoDepa == 0) echo 'checked ="checked"'; ?> > Inactivo
       </div>
       <div>
+        <label for="nomenclaturaDep">Nomenclatura del departamento</label><br>
+        <input type="text" readonly name="nomenclaturaDep" id="nomenclaturaDep" value ="<?php echo $this->departamento->nomenclaturaDep; ?>">
+      </div><br>
+      <div>
         <a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>departamento">Regresar</a>
         <button type="submit" class="btn" id="btn-registrar">Actualizar</button>
       </div>
