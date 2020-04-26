@@ -1,4 +1,4 @@
-class Cash{
+<?php class Cash{
 	public $id_persona;
     public $nombrePers;
     public $apellido;
@@ -12,3 +12,4 @@ class Cash{
     public $num_empleado;
     public $id_rol;
 }
+?>

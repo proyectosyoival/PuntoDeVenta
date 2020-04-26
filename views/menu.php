@@ -50,6 +50,7 @@
                     <li><a href="#"><span class="icon-search"></span> Tipos de venta</a></li>
                     <li><a href="<?php echo constant('URL'); ?>tipoPago"><span class="icon-credit-card"></span> Tipos de pago</a></li>
                     <li><a href="#"><span class="icon-stats-dots"></span> Reportes</a></li>
+                    <li><a href="<?php echo constant('URL'); ?>tipomovcaja"><span class="icon-enlarge"></span> Tipos de movimiento de cajas</a></li>
                 </ul>
             </nav>
         </section>
