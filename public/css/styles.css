@@ -452,6 +452,9 @@ a.btn.btn-danger:linked{
 	width: 200px;
  	height: 200px;
 }
+.img-editProd{
+	width: 200px;
+}
 .card{
 	border-color:  #6F7E95;
 	border: 1px 1px solid;
@@ -533,8 +536,18 @@ a.btn.btn-danger:linked{
 #card-body{
 	background: #F4F7FA;
 }
-
 #caja{
 	background: #6F7E95;
 	height: 100%;
+}
+#modalContainer{
+    margin: 0px;
+    width: 100%;
+}
+#imgProdModal{
+float: left;
+  width: 200px;
+}
+#datosProdModal{
+    margin-left: 200px; 
 }

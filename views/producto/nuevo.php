@@ -30,7 +30,7 @@
 				<div class="form-group  col-md-4">
 					<label for="talla">Talla:</label>
 					<input type="text" name="talla" id="talla" class="form-control" placeholder="Talla del producto" required>
-				</div>			
+				</div>
 
 				<div class="form-group  col-md-4">
 					<label>Tipo de Tela:</label>
@@ -56,11 +56,11 @@
 						<?php
 						include_once 'models/categoria.php';
 						foreach ($this->categorias as $row) {
-							$categoria = new Categoria();
+							$categoria = new Cate();
 							$categoria = $row;
 							?>
 							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
-						<?php } ?>					
+						<?php } ?>
 					</select>
 				</div>
 
