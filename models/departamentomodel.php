@@ -29,6 +29,7 @@ class departamentoModel extends Model{
         $item->id_departamento = $row['id_departamento'];
         $item->nombreDepa = $row['nombreDepa'];
         $item->estadoDepa = $row['estadoDepa'];
+        $item->nomenclaturaDep = $row['nomenclaturaDep'];
         $item->fecha_alta = $row ['fecha_alta'];
         array_push($items, $item);
       }
@@ -51,6 +52,7 @@ class departamentoModel extends Model{
               $item->id_departamento = $row['id_departamento'];
               $item->nombreDepa = $row['nombreDepa'];
               $item->estadoDepa = $row['estadoDepa'];
+              $item->nomenclaturaDep =$row['nomenclaturaDep'];
               $item->fecha_alta = $row['fecha_alta'];
           }
 

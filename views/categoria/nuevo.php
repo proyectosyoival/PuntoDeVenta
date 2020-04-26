@@ -12,7 +12,7 @@
 
 		<h1 id="h1-form">Nueva Categoria</h1>
 		<hr>
-		<form action="<?php echo constant('URL'); ?>categoria/registrarCate" method="POST" id="form-categoria">
+		<form action="<?php echo constant('URL'); ?>categoria/registrarCategoria" method="POST" id="form-categoria">
 			<div class="form-group">
 				<label for="nombreCate">Nombre de la Categoria:</label>
         <input type="text" name="nombreCate" id="nombreCate" class="form-control col-md-4" placeholder="Ingresa el nombre de la categoria" autocomplete="off">

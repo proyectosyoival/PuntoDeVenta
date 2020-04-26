@@ -45,7 +45,11 @@
 				$query->execute(['tipoTela' => $tipoTela]);
 				foreach ($query as $row) {
 					$idTipoDeTela 	= $row['id_tipo_tela'];
+<<<<<<< HEAD
 					$tipoDeTela   	= $row['nombreTipoTela'];           
+=======
+					$tipoDeTela   	= $row['nombreTipoTela'];
+>>>>>>> Ivonne
 				}
 				?>
 				<div class="form-group  col-md-4">
@@ -65,7 +69,11 @@
 			</div>
 
 			<!-- Se trae el dato para mostrarlo en el select de Categoría -->
+<<<<<<< HEAD
 			<?php 
+=======
+			<?php
+>>>>>>> Ivonne
 			$categoria = $this->productoSelected->nombreCate;
 			//sacar los nombres de la tabla de Categoría
 			$db= new Database();
@@ -73,7 +81,11 @@
 			$query->execute(['categoria' => $categoria]);
 			foreach ($query as $row) {
 				$idCategoria 	= $row['id_categoria'];
+<<<<<<< HEAD
 				$nombreCate   	= $row['nombreCate'];           
+=======
+				$nombreCate   	= $row['nombreCate'];
+>>>>>>> Ivonne
 			}
 			?>
 			<div class="form-row">
@@ -84,11 +96,19 @@
 						<?php
 						include_once 'models/categoria.php';
 						foreach ($this->categorias as $row) {
+<<<<<<< HEAD
 							$categoria = new Categoria();
 							$categoria = $row;
 							?>
 							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
 						<?php } ?>					
+=======
+							$categoria = new Cate();
+							$categoria = $row;
+							?>
+							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
+						<?php } ?>
+>>>>>>> Ivonne
 					</select>
 				</div>
 
@@ -101,9 +121,15 @@
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<label for="foto">Foto:</label>
+<<<<<<< HEAD
 					<?php 
 					$foto = $this->productoSelected->foto;
 					if(empty($foto)) { ?>				
+=======
+					<?php
+					$foto = $this->productoSelected->foto;
+					if(empty($foto)) { ?>
+>>>>>>> Ivonne
 						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*">
 					<?php }else{ ?>
 						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*" hidden="true">
@@ -116,7 +142,11 @@
 				<div class="form-group col-md-4">
 					<label for="estado">Estado:</label>
 					<div class="form-control">
+<<<<<<< HEAD
 						<?php 
+=======
+						<?php
+>>>>>>> Ivonne
 						$estado = $this->productoSelected->estadoProd;
 						if($estado == 1){
 							?>
@@ -130,7 +160,11 @@
 							<input type="radio" name="estadoProd" id="estado" class="col-md-2" value="0" checked> Inactivo
 							<?php
 						}
+<<<<<<< HEAD
 						?>						
+=======
+						?>
+>>>>>>> Ivonne
 					</div>
 				</div>
 			</div>
@@ -186,5 +220,10 @@
 		document.getElementById('btncomprobante').hidden=true;
 		document.getElementById('comprobante').hidden=false;
 	}
+<<<<<<< HEAD
 </script> 
 </html>
+=======
+</script>
+</html>
+>>>>>>> Ivonne
