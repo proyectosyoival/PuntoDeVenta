@@ -13,7 +13,7 @@
     <h1 id="h1-form">Editar Categoria</h1>
     <hr>
     <form action="<?php echo constant('URL'); ?>categoria/actualizarCate" method="POST" id="form-categoria">
-      <input type="text" name="id_categoria" hidden="true" value="<?php echo $this->categoria->id_categoria; ?>">
+      <input type="text" name="id_categoria" hidden="true" value="<?php echo $this->categorias->id_categoria; ?>">
       <div class="form-group">
         <label for="nombreCate">Nombre de la Categoria:</label>
         <input type="text" name="nombreCate" id="nombreCate" class="form-control col-md-4" placeholder="Ingresa el nombre de la categoria" autocomplete="off" value="<?php echo $this->categorias->nombreCate; ?>">
@@ -25,8 +25,8 @@
       </div>
       <div>
 				<label for="estado">Estado:</label><br>
-				<input type="radio" name="estadoCate" id="estadoCate" value="1"> Activo <br>
-				<input type="radio" name="estadoCate" id="estadoCate" value="0"> Inactivo
+				<input type="radio" name="estadoCate" id="estadoCate" value="1" <?php if($this->categorias->estadoCate == 1) echo 'checked = "checked"'?>> Activo <br>
+				<input type="radio" name="estadoCate" id="estadoCate" value="0" <?php if($this->categorias->estadoCate == 0) echo 'checked = "checked"'?>> Inactivo
 			</div>
       <div>
         <a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>categoria">Regresar</a>

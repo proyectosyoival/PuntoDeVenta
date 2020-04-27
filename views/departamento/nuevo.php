@@ -14,14 +14,18 @@
 
 		<form action="<?php echo constant('URL'); ?>departamento/registrarDepto" method="POST" id="form-departamento">
 			<div class="form-group">
-				<label for="nombre">Nombre:</label>
-				<input type="text" name="nombreDepa" id="nombreDepa" class="form-control col-md-12" placeholder="Nombre del departamento" required>
+				<label for="nombreDepa">Nombre:</label>
+				<input type="text" name="nombreDepa" id="nombreDepa" class="form-control col-md-12" placeholder="Nombre del departamento">
 			</div>
 			<div>
 				<label for="estado">Estado:</label><br>
 				<input type="radio" name="estadoDepa" id="estadoDepa" value="1"> Activo <br>
 				<input type="radio" name="estadoDepa" id="estadoDepa" value="0"> Inactivo
 			</div>
+			<div>
+				<label for="nomenclaturaDep">Nomenclatura del departamento</label><br>
+				<input type="text" name="nomenclaturaDep" id="nomenclaturaDep" placeholder="Ejemplo: C ">
+			</div><br>
 			<div>
 				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>departamento">Regresar</a>
 				<button type="submit" class="btn" id="btn-registrar">Registrar</button>

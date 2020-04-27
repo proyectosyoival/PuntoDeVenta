@@ -32,7 +32,11 @@
 								 </div>
 						 <div class="card-body" id="card-body">
 							 <p class="card-text text-left"><span class="label-card">Descripion: </span><?php echo $categorias->descripcionCate; ?></p>
-							 <p class ="card-text text-left"><span class="label-card">Estado: </span><?php echo $categorias->estadoCate; ?></p>
+							 <p class ="card-text text-left"><span class="label-card">Estado: </span> <?php if ($categorias->estadoCate == 1) {
+								 echo "Activo";
+							 } else{
+								 echo "Inactivo";
+							 }  ?></p>
 							 <p class= "text-center"><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'categoria/verCategoria/' . $categorias->id_categoria; ?>"><span class="icon-pencil2"></span></a>
 								 <a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $categorias->id_categoria;?>" data-function="categoria/eliminarCate"><span class="icon-bin"></span></a></p>
 							 </div>

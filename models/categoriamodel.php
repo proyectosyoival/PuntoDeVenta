@@ -6,13 +6,12 @@ include_once 'models/categoria.php';
  */
 class CategoriaModel extends Model{
 
-	function __construct(){
+	public function __construct(){
 		parent::__construct();
 	}
 	public function insert($datos){
 
 		try {
-
 			$query = $this->db->connect()->prepare('INSERT INTO categoria (nombreCate, descripcionCate, estadoCate) VALUES (:nombreCate, :descripcionCate, :estadoCate)');
 			$query->execute(['nombreCate' => $datos['nombreCate'], 'descripcionCate' => $datos['descripcionCate'], 'estadoCate' =>$datos['estadoCate']]);
 			return true;
@@ -72,9 +71,9 @@ class CategoriaModel extends Model{
 			try{
 					$query->execute([
 							'id_categoria'=> $item['id_categoria'],
-							'nombreCate'=> $item['nombreCate'],
+							'nombreCate' => $item['nombreCate'],
 							'descripcionCate'=> $item['descripcionCate'],
-							'estadoCate' => $item['estadoCate'],
+							'estadoCate' => $item['estadoCate']
 					]);
 					return true;
 			}catch(PDOException $e){
@@ -91,8 +90,8 @@ class CategoriaModel extends Model{
 					return true;
 			}catch(PDOException $e){
 					return false;
+				}
 			}
 		}
-	}
 
 ?>

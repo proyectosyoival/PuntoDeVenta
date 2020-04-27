@@ -45,7 +45,7 @@
         include_once 'models/producto.php';
         foreach($this->productos as $row){
           $producto = new Producto();
-          $producto = $row; 
+          $producto = $row;
           ?>
           <tr id="fila-<?php echo $producto->id_producto; ?>">
             <td><div onclick="ShowModal(<?php echo $producto->id_producto; ?>)" ><?php echo $producto->id_producto; ?></div></td>
