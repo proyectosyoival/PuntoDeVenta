@@ -27,7 +27,7 @@ class CategoriaModel extends Model{
 
 			try{
 
-					$query = $this->db->connect()->query("SELECT*FROM categoria");
+					$query = $this->db->connect()->query("SELECT * FROM categoria");
 
 					while($row = $query->fetch()){
 							$item = new Cate();

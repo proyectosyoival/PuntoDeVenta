@@ -6,5 +6,7 @@ class Depto{
   public $nombreDepa;
   public $estadoDepa;
   public $fecha_alta;
+
 }
+
  ?>
