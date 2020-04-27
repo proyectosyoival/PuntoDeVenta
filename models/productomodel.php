@@ -188,7 +188,7 @@ public function getProducts(){
             $query = $this->db->connect()->query("CALL procGetAllTipostela();");
 
             while ($row = $query->fetch()) {
-                $item = new Categoria();
+                $item = new Cate();
                 $item->id_tipo_tela     = $row[0]; //id_categoria
                 $item->nombreTipoTela   = $row[1]; //nombreCate
                 array_push($items, $item);
@@ -208,7 +208,7 @@ public function getProducts(){
             $query = $this->db->connect()->query("CALL procGetAllCategorias();");
 
             while ($row = $query->fetch()) {
-                $item = new Categoria();
+                $item = new Cate();
                 $item->id_categoria     = $row[0]; //id_categoria
                 $item->nombreCate       = $row[1]; //nombreCate
                 array_push($items, $item);

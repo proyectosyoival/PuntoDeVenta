@@ -65,7 +65,7 @@
 						<?php
 						include_once 'models/categoria.php';
 						foreach ($this->categorias as $row) {
-							$categoria = new Categoria();
+							$categoria = new Cate();
 							$categoria = $row;
 							?>
 							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>

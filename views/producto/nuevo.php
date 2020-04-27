@@ -53,7 +53,7 @@
 						<?php
 						include_once 'models/categoria.php';
 						foreach ($this->categorias as $row) {
-							$categoria = new Categoria();
+							$categoria = new Cate();
 							$categoria = $row;
 							?>
 							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
@@ -112,7 +112,7 @@
 			<div class="form-row">
 				<div class="form-group  col-md-3">
 					<label for="codigointerno">Codigo Interno:</label>
-					<input type="text" name="codigointerno" id="codigointerno" class="form-control" placeholder="Codigo Interno" readonly>
+					<input type="text" name="codigointerno" id="codigointerno" class="form-control" placeholder="Codigo Interno" requiredS>
 				</div>
 
 				<div class="form-group  col-md-1">
