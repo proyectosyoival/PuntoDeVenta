@@ -7,5 +7,7 @@ class Depto{
   public $estadoDepa;
   public $nomenclaturaDep;
   public $fecha_alta;
+
 }
+
  ?>
