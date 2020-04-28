@@ -79,6 +79,7 @@
 			<input type="text" name="idcodigodebarras" hidden="true" value="<?php echo $this->productoSelected->id_codigo_de_barras; ?>">
 			<input type="text" name="idprecio" hidden="true" value="<?php echo $this->productoSelected->id_precio; ?>">
 			<input type="text" name="idstock" hidden="true" value="<?php echo $this->productoSelected->id_stock; ?>">
+			<input type="text" name="id_producto" hidden="true" value="<?php echo $this->productoSelected->id_producto; ?>">
 
 			<div class="form-row">
 

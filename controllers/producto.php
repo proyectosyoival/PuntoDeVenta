@@ -126,10 +126,9 @@ class Producto extends Controller{
 		$id_producto 		= $_SESSION['id_producto'];		//Se envia el id del producto seleccionado
 		$id_stock			= $_POST['idstock'];
 
-
 		//mandar variable correcta de foto
 		$db = new Database();
-		$query = $db->connect()->prepare('SELECT * FROM producto WHERE id_producto=:id_producto');
+		$query = $db->connect()->prepare('SELECT foto FROM producto WHERE id_producto=:id_producto');
 		$query->execute(['id_producto' => $id_producto]);
 		foreach ($query as $row) {
 			$fotoold = $row['foto'];
