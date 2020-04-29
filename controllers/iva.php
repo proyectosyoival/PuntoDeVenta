@@ -5,7 +5,7 @@ class Iva extends Controller{
     function __construct(){
         parent::__construct();
         $this->view->ivas = [];
-        
+        $this->view->menus = [];
         //echo "<p>Nuevo controlador Main</p>";
     }
 
@@ -16,7 +16,6 @@ class Iva extends Controller{
     function render(){
         $ivas = $this->model->get();
         $this->view->ivas = $ivas;
-
         $this->view->render('iva/index');
     }
 

@@ -15,83 +15,24 @@
     	</div>
     <!-- inicio de carvies -->
     <div class="row justify-content-center" id="cards">
+        <?php
+                    include_once 'models/main.php';
+                    foreach($this->menus as $row){
+                        $menus = new Menu();
+                        $menus = $row; 
+        ?>
         <div class="row row-cols-1 row-cols-md-3">
             <div class="col mb-4" id="col2">
                 <div class="card h-100">
-                    <div class="card-header text-center" id="card-header"><h5 class="text-center"><span class="icon-cart"></span> Caja</h5></div>
+                    <div class="card-header text-center" id="card-header"><h5 class="text-center"><?php echo $menus->iconoMenu." ".$menus->nombreMenu;?></h5></div>
                     <div class="card-body">
-                        <p class="card-text text-left">Apartado para registrar las ventas realizadas durante el día.</p>
-                        <div class="text-center"><a type="button" class="btn" id="btn-ira">Ir a caja</a></div>
+                        <p class="card-text text-left"><?php echo $menus->descripcionMenu;?></p>
+                        <div class="text-center"><a type="button" class="btn" id="btn-ira" href="<?php echo constant('URL'); ?>caja">Ir a <?php echo $menus->nombreMenu;?></a></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-3">
-            <div class="col mb-4" id="col2">
-                <div class="card h-100">
-                    <div class="card-header text-center" id="card-header"><h5 class="text-center"><span class="icon-man-woman"></span> Empleados</h5></div>
-                    <div class="card-body">
-                        <p class="card-text text-left">Apartado para registrar las ventas realizadas durante el día.</p>
-                        <div class="text-center"><a type="button" class="btn" id="btn-ira" href="<?php echo constant('URL'); ?>persona">Ir a empleados</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row row-cols-1 row-cols-md-3">
-            <div class="col mb-4" id="col2">
-                <div class="card h-100">
-                    <div class="card-header text-center" id="card-header"><h5 class="text-center"><span class="icon-coin-dollar"></span> Precios</h5></div>
-                    <div class="card-body">
-                        <p class="card-text text-left">Apartado para registrar las ventas realizadas durante el día.</p>
-                        <div class="text-center"><a type="button" class="btn" id="btn-ira">Ir a caja</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row row-cols-1 row-cols-md-3">
-            <div class="col mb-4" id="col2">
-                <div class="card h-100">
-                    <div class="card-header text-center" id="card-header"><h5 class="text-center"><span class="icon-barcode"></span> Codigos de barras</h5></div>
-                    <div class="card-body">
-                        <p class="card-text text-left">Apartado para registrar las ventas realizadas durante el día.</p>
-                        <div class="text-center"><a type="button" class="btn" id="btn-ira">Ir a caja</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row row-cols-1 row-cols-md-3">
-            <div class="col mb-4" id="col2">
-                <div class="card h-100">
-                    <div class="card-header text-center" id="card-header"><h5 class="text-center"><span class="icon-search"></span> Tipos de venta</h5></div>
-                    <div class="card-body">
-                        <p class="card-text text-left">Apartado para registrar las ventas realizadas durante el día.</p>
-                        <div class="text-center"><a type="button" class="btn" id="btn-ira">Ir a caja</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row row-cols-1 row-cols-md-3">
-            <div class="col mb-4" id="col2">
-                <div class="card h-100">
-                    <div class="card-header text-center" id="card-header"><h5 class="text-center"><span class="icon-credit-card"></span> Tipos de pago</h5></div>
-                    <div class="card-body">
-                        <p class="card-text text-left">Apartado para registrar los tipos de pagos disponibles.</p>
-                        <div class="text-center"><a type="button" class="btn" id="btn-ira" href="<?php echo constant('URL'); ?>tipoPago">Ir a tipos de pagos</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row row-cols-1 row-cols-md-3">
-            <div class="col mb-4" id="col2">
-                <div class="card h-100">
-                    <div class="card-header text-center" id="card-header"><h5 class="text-center"><span class="icon-stats-dots"></span> Reportes</h5></div>
-                    <div class="card-body">
-                        <p class="card-text text-left">Apartado para registrar las ventas realizadas durante el día.</p>
-                        <div class="text-center"><a type="button" class="btn" id="btn-ira">Ir a caja</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php } ?>
         <!-- fin cards -->
     </div>
 </div>

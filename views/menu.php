@@ -33,24 +33,21 @@
             <nav>
                 <ul>
                     <li><a href="<?php echo constant('URL'); ?>main"><span class="icon-home"></span> Home</a></li>
-                    <li><a href="#"><span class="icon-cart"></span> Caja</a></li>
-                    <li><a href="#"><span class="icon-search"></span> Consultar precios</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>rol"><span class="icon-users"></span> Roles</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>producto"><span class="icon-price-tag"></span> Productos</a></li>
-                    <li><a href="#"><span class="icon-search"></span> Inventarios</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>persona"><span class="icon-man-woman"></span> Empleados</a></li>
-                    <li><a href="#"><span class="icon-coin-dollar"></span> Precios</a></li>
-                    <li><a href="#"><span class="icon-barcode"></span> Codigos de barras</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>tipoVenta"><span class="icon-price-tags"></span> Tipos de venta</a></li>
-                    <li><a href="#"><span class="icon-search"></span> Inventarios</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>departamento"><span class="icon-woman"></span> Departamento</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>categoria"><span class="icon-user-tie"></span> Categorias</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>iva"><span class="icon-coin-dollar"></span> IVA</a></li>
-                    <li><a href="#"><span class="icon-barcode"></span> Codigos de barras</a></li>
-                    <li><a href="#"><span class="icon-search"></span> Tipos de venta</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>tipoPago"><span class="icon-credit-card"></span> Tipos de pago</a></li>
-                    <li><a href="#"><span class="icon-stats-dots"></span> Reportes</a></li>
-                    <li><a href="<?php echo constant('URL'); ?>tipomovcaja"><span class="icon-enlarge"></span> Tipos de movimiento de cajas</a></li>
+                    <?php
+                    // include_once 'models/main.php';
+                    // foreach($this->menus as $row){
+                    //     $menus = new Menu();
+                    //     $menus = $row; 
+                    $query = $db->connect()->prepare('SELECT * FROM menu ORDER BY nombreMenu');
+                    $query->execute();
+
+                    foreach ($query as $currentUser) {
+                        $query->nombreMenu = $currentUser['nombreMenu'];
+                        $query->iconoMenu = $currentUser['iconoMenu'];
+                        $query->controlerMenu = $currentUser['controlerMenu'];
+                    ?>
+                    <li><a href="<?php echo constant('URL').$query->controlerMenu?>"><?php echo $query->iconoMenu." ".$query->nombreMenu;?></a></li>
+                    <?php } ?>
                 </ul>
             </nav>
         </section>

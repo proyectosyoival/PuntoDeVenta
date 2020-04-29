@@ -7,11 +7,6 @@
 <div id="datosProdModal">
 
   <div class="row col-md-12" align="left">              
-    <div class="col-md-4"><span class="label-card">Departamento:</span></div>
-    <div class="col-md-4"><?php echo $this->productoSelected->nombreDepa; ?></div>
-  </div>
-
-  <div class="row col-md-12" align="left">              
     <div class="col-md-4"><span class="label-card">Talla(s):</span></div>
     <div class="col-md-4"><?php echo $this->productoSelected->talla; ?></div>
   </div>
@@ -29,6 +24,11 @@
   <div class="row col-md-12" align="left">
     <div class="col-md-4"><span class="label-card">Precio: </span></div>
     <div class="col-md-4">$<?php echo $this->productoSelected->general; ?></div>
+  </div>
+
+  <div class="row col-md-12" align="left">
+    <div class="col-md-4"><span class="label-card">Proveedor: </span></div>
+    <div class="col-md-4"><?php echo $this->productoSelected->proveedor; ?></div>
   </div>
 
   <div class="row col-md-12" align="left">

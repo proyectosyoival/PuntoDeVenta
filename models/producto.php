@@ -6,6 +6,7 @@
 class Product{
 	
 	public $id_producto;
+	public $nombreProd;
 	public $descripcionProd;
 	public $estadoProd;
 	public $talla;
@@ -18,8 +19,6 @@ class Product{
 	public $id_codigo_de_barras;
 	public $id_precio;
 	public $id_categoria;
-	public $id_cat_tipo_prod;
-	public $id_departamento;
 
 	//Campos extraidos por medio de las id de foraneos
 	public $nombre_persona;
@@ -29,8 +28,6 @@ class Product{
 	public $codigo_externo;
 	public $general;
 	public $nombre_categoria;	
-	public $nombreDepa;
-	public $nombreTipoProd;
 }
 
 ?>
