@@ -34,6 +34,7 @@
                 <ul>
                     <li><a href="<?php echo constant('URL'); ?>main"><span class="icon-home"></span> Home</a></li>
                     <?php
+
                     // include_once 'models/main.php';
                     // foreach($this->menus as $row){
                     //     $menus = new Menu();
