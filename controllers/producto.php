@@ -1,29 +1,20 @@
 <?php
 
 /**
- * 
+ *
  */
 class Producto extends Controller{
-	
+
 	function __construct(){
 		parent::__construct();
-		$this->view->productos 		= [];
-		$this->view->tiposProd  	= [];
-		$this->view->departamentos	= [];
-		$this->view->categorias 	= [];
-		$this->view->tipostela 		= [];		
+		$this->view->productos 	= [];
+		$this->view->tipostela 	= [];
+		$this->view->categorias = [];
 	}
 
 	function nuevo(){
-		$tiposProd = $this->model->getTiposProdForProduct();
-		$this->view->tiposProd = $tiposProd;
-
-		$departamentos = $this->model->getDepartamentForProduct();
-		$this->view->departamentos = $departamentos;
-
 		$tipostela = $this->model->getTipostelaForProduct();
 		$this->view->tipostela = $tipostela;
-
 		$categorias = $this->model->getCategoriesForProduct();
 		$this->view->categorias = $categorias;
 
@@ -38,18 +29,17 @@ class Producto extends Controller{
 	}
 
 	function registrarProducto(){
-		$idTipoProd			= $_POST['idtipoprod'];			//Se registra en la tabla producto
-		$idDepartamento		= $_POST['iddepartamento'];		//Se registra en la tabla producto
-		$descripcionProd	= $_POST['descripcionProd'];	//Se registra en la tabla producto
+		$nombreProd			= $_POST['nombreProd'];				//Se registra en la tabla producto
+		$descripcionProd	= $_POST['descripcionProd'];		//Se registra en la tabla producto
 		$talla				= $_POST['talla'];				//Se registra en la tabla producto
 		$idtipoTela			= $_POST['idtipotela'];			//Se registra en la tabla producto - se deberia de obtener de una tabla externa (tipo tela)
 		$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
-		$estadoProd			= $_POST['estadoProd'];			//Se registra en la tabla producto
+		$estadoProd			= $_POST['estadoProd'];				//Se registra en la tabla producto
 		$foto				= $_FILES["foto"];				//Se registra en la tabla producto
-		//$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)		
+		//$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)
 		//Recuperamos la session de la persona que esta logeada.
 		$idPersona			= $_SESSION['idPersona'];		//Se obtiene de la session activa (automatco)
-		
+
 		//$idCodigoDeBarras	= $_POST['idcodigodebarras'];	//Se obtiene de la tabla de codigos de barras
 		$codigoInterno		= $_POST['codigointerno'];
 		$codigoExterno		= $_POST['codigoexterno'];
@@ -61,7 +51,7 @@ class Producto extends Controller{
 
 		$mensaje = "";
 
-		if($this->model->insert(['idTipoProd' => $idTipoProd, 'idDepartamento' => $idDepartamento, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'idtipotela' => $idtipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $foto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor])){
+		if($this->model->insert(['nombreProd' => $nombreProd, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'idtipotela' => $idtipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $foto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor])){
 			$mensaje = "El producto se agreogo correctamente!";
 		}else{
 			$mensaje = "El producto ya existe!";
@@ -87,15 +77,8 @@ class Producto extends Controller{
 		$_SESSION['id_producto'] = $productoSelected->id_producto;
 		$this->view->productoSelected = $productoSelected;
 
-		$tiposProd = $this->model->getTiposProdForProduct();
-		$this->view->tiposProd = $tiposProd;
-
-		$departamentos = $this->model->getDepartamentForProduct();
-		$this->view->departamentos = $departamentos;
-
 		$tipostela = $this->model->getTipostelaForProduct();
 		$this->view->tipostela = $tipostela;
-
 		$categorias = $this->model->getCategoriesForProduct();
 		$this->view->categorias = $categorias;
 		$this->view->mensaje = "";
@@ -104,17 +87,16 @@ class Producto extends Controller{
 
 	function actualizarProducto(){
 		//Traemos el valor del producto desde la session ya que en edit product se asignó.
-		$idTipoProd			= $_POST['idtipoprod'];			//Se registra en la tabla producto
-		$idDepartamento		= $_POST['iddepartamento'];		//Se registra en la tabla producto
-		$descripcionProd	= $_POST['descripcionProd'];	//Se registra en la tabla producto
+		$nombreProd			= $_POST['nombreProd'];				//Se registra en la tabla producto
+		$descripcionProd	= $_POST['descripcionProd'];		//Se registra en la tabla producto
 		$talla				= $_POST['talla'];				//Se registra en la tabla producto
 		$idtipoTela			= $_POST['idtipotela'];			//Se registra en la tabla producto - se deberia de obtener de una tabla externa (tipo tela)
 		$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
-		$estadoProd			= $_POST['estadoProd'];			//Se registra en la tabla producto
+		$estadoProd			= $_POST['estadoProd'];				//Se registra en la tabla producto
 		$foto				= $_FILES["foto"];				//Se registra en la tabla producto
-		//$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)		
+		//$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)
 		//Recuperamos la session de la persona que esta logeada.
-		$idPersona			= $_SESSION['idPersona'];		//Se obtiene de la session activa (automatco)		
+		$idPersona			= $_SESSION['idPersona'];		//Se obtiene de la session activa (automatco)
 		$idCodigoDeBarras	= $_POST['idcodigodebarras'];	//Se obtiene de la tabla de codigos de barras
 		$codigoInterno		= $_POST['codigointerno'];
 		$codigoExterno		= $_POST['codigoexterno'];
@@ -139,7 +121,7 @@ class Producto extends Controller{
         // si sube fotos con el mismo nombre
 		if ($cfoto==$fotoold) {
 			$nfoto=$fotoold;
-        //si no sube fotos          
+        //si no sube fotos
 		}elseif ($foto["name"]=="") {
 			$nfoto=$fotoold;
         // si sube foto diferente a la foto diferente a la guardada
@@ -152,41 +134,46 @@ class Producto extends Controller{
         // si una foto es diferente pero comprobante es igual
 		}
 
-		if($this->model->updateProd(['id_producto' => $id_producto, 'idTipoProd' => $idTipoProd, 'idDepartamento' => $idDepartamento, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'idtipotela' => $idtipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $nfoto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor, 'id_codigo_de_barras' => $idCodigoDeBarras, 'id_precio' => $idPrecio, 'id_stock' => $id_stock])){
+		if($this->model->updateProd(['id_producto' => $id_producto, 'nombreProd' => $nombreProd, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'idtipotela' => $idtipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $nfoto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor, 'id_codigo_de_barras' => $idCodigoDeBarras, 'id_precio' => $idPrecio, 'id_stock' => $id_stock])){
 			//Actualizar el prodcuto con éxito
 			//Obtener el el valor del tipo con nombre
-			
-				//sacar los nombres de la tabla de cat tipo prod
-				$db= new Database();
-				$query = $db->connect()->prepare('SELECT nombreTipoProd FROM cat_tipo_prod WHERE id_cat_tipo_prod = :idTipoProd');
-				$query->execute(['idTipoProd' => $idTipoProd]);
-				foreach ($query as $row) {
-					$nombreTipoProd   	= $row['nombreTipoProd'];           
-				}
-				//sacar los nombres de la tabla de departamento
-				$db= new Database();
-				$query = $db->connect()->prepare('SELECT nombreDepa FROM departamento WHERE id_departamento = :id_departamento');
-				$query->execute(['id_departamento' => $idDepartamento]);
-				foreach ($query as $row) {
-					$nombreDepa   	= $row['nombreDepa'];           
-				}
+			echo $id_producto . "<br>";
+			echo $nombreProd . "<br>";
+			echo $descripcionProd . "<br>";
+			echo $talla . "<br>";
+			echo $idtipoTela . "<br>";
+			echo $descuento . "<br>";
+			echo $estadoProd . "<br>";
+			echo $nfoto . "<br>";
+			echo $idPersona . "<br>";
+			echo $codigoInterno . "<br>";
+			echo $codigoExterno . "<br>";
+			echo $precio . "<br>";
+			echo $cantidad . "<br>";
+			echo $idcategoria . "<br>";
+			echo $proveedor . "<br>";
+			echo $idCodigoDeBarras . "<br>";
+			echo $idPrecio . "<br>";
+			echo $id_stock . "<br>";
+
 				//sacar los nombres de la tabla de tipo de tela
 				$db= new Database();
 				$query = $db->connect()->prepare('SELECT nombreTipoTela FROM tipo_tela WHERE id_tipo_tela = :tipoTela');
 				$query->execute(['tipoTela' => $idtipoTela]);
 				foreach ($query as $row) {
-					$tipoDeTela   	= $row['nombreTipoTela'];           
+					$tipoDeTela   	= $row['nombreTipoTela'];
 				}
 				//sacar los nombres de la tabla de categoria
 				$db= new Database();
 				$query = $db->connect()->prepare('SELECT nombreCate FROM categoria WHERE id_categoria = :idCategoria');
 				$query->execute(['idCategoria' => $idcategoria]);
 				foreach ($query as $row) {
-					$nombreCate   	= $row['nombreCate'];           
+					$nombreCate   	= $row['nombreCate'];
 				}
 
-			$productoSelected = new Product();
+			$productoSelected = new Producto();
 			$productoSelected->id_producto 			= $id_producto;
+			$productoSelected->nombreProd			= $nombreProd;
 			$productoSelected->descripcionProd		= $descripcionProd;
 			$productoSelected->talla				= $talla;
 			$productoSelected->tipo_tela 			= $tipoDeTela;
@@ -203,34 +190,21 @@ class Producto extends Controller{
 			$productoSelected->id_codigo_de_barras 	= $idCodigoDeBarras;
 			$productoSelected->id_precio	 		= $idPrecio;
 			$productoSelected->id_stock 			= $id_stock;
-			$productoSelected->id_cat_tipo_prod		= $idTipoProd;
-			$productoSelected->nombreTipoProd		= $nombreTipoProd;
-			$productoSelected->id_departamento		= $idDepartamento;
-			$productoSelected->nombreDepa			= $nombreDepa;			
 			$this->view->productoSelected = $productoSelected;
 			$this->view->mensaje = "El producto se actualizo correctamente!";
 		}else{
 			$this->view->mensaje = "El producto NO se actualizo!";
 		}
-
-		$tiposProd = $this->model->getTiposProdForProduct();
-		$this->view->tiposProd = $tiposProd;
-
-		$departamentos = $this->model->getDepartamentForProduct();
-		$this->view->departamentos = $departamentos;
-
 		$tipostela = $this->model->getTipostelaForProduct();
 		$this->view->tipostela = $tipostela;
-
 		$categorias = $this->model->getCategoriesForProduct();
 		$this->view->categorias = $categorias;
-
 		$this->view->render('producto/edit');
 	}
 
 	public function subirfotos($foto){
 		$arrayupfotos=array($foto);
-		for ($i=0; $i <count($arrayupfotos) ; $i++) { 
+		for ($i=0; $i <count($arrayupfotos) ; $i++) {
                   //INICIA SUBIR IMAGEN AL SERVIDOR
 			$target_dir = "img/productos/";
 			$target_file = $target_dir . basename($arrayupfotos[$i]["name"]);
@@ -281,7 +255,7 @@ class Producto extends Controller{
 		$id_producto = $param[0];
 
 		if ($this->model->deleteProduct($id_producto)) {
-			$mensaje = 1;			
+			$mensaje = 1;
 		}else{
 			$mensaje = 0;
 		}
