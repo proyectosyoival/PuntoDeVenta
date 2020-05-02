@@ -28,7 +28,7 @@
         <!-- el uso de la clase col-md-4 es para darle el tamaño, el tamaño maximoes 12 que ocuparia toda la pantalla -->
       </div>
 			<div>
-				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>promocion">Regresar</a>
+				<a type="button" class="btn" id="btn-regresar" href="<?php echo constant('URL'); ?>promociones">Regresar</a>
 				<button type="submit" class="btn" id="btn-registrar">Registrar</button>
 			</div>
 		</form>
