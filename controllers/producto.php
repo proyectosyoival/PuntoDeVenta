@@ -41,6 +41,15 @@ class Producto extends Controller{
 		$this->view->render('producto/index');
 	}
 
+	#Uso de AJAX al momento de cargar el tipo de Talla
+	function obtenerTallas(){
+		$tipoTalla = $_POST['tipoTalla'];
+		$tallas = $this->model->getTallas($tipoTalla);
+		$this->view->tallas = $tallas;
+		
+		$this->view->render('producto/tallas');
+	}
+
 	function registrarProducto(){
 		$idTipoProd			= $_POST['idtipoprod'];			//Se registra en la tabla producto
 		$idDepartamento		= $_POST['iddepartamento'];		//Se registra en la tabla producto

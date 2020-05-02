@@ -89,12 +89,28 @@
 
 			<div class="form-row">				
 
-				<div class="form-group  col-md-3">
-					<label for="talla">Talla:</label>
-					<input type="text" name="talla" id="talla" class="form-control" placeholder="Talla del producto" required>
+				<div class="form-group col-md-2">
+					<label for="tipoTalla">Tipo de Numeración:</label>
+					<select class="form-control" name="tipoTalla" id="tipoTalla" required>
+						<option value="">-----</option>
+						<?php
+						include_once 'models/talla.php';
+						$db = new Database();
+						$query = $db->connect()->prepare('SELECT distinct(tipoTalla) FROM talla ORDER BY tipoTalla ASC');
+						$query->execute();
+						foreach ($query as $row) {
+							$tipoTalla 	= $row['tipoTalla'];
+							?>
+						<option value="<?php echo $tipoTalla; ?>"><?php echo $tipoTalla; ?></option>
+						<?php } ?>
+					</select>
 				</div>
 
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-2" id="selectTallas">
+					
+				</div>
+
+				<div class="form-group col-md-2">
 					<label for="estado">Estado:</label>
 					<div class="form-control">
 						<input type="radio" name="estadoProd" id="estado" class="col-md-2" value="1" required > Activo
@@ -171,3 +187,24 @@
 	<?php require 'views/footer.php'; ?>
 </body>
 </html>
+<script type="text/javascript">
+	$(document).ready(function(){
+	recargarLista();
+
+	$('#tipoTalla').change(function(){
+		recargarLista();
+	});
+})
+</script>
+<script type="text/javascript">
+function recargarLista(){
+	$.ajax({
+			url: "obtenerTallas",
+			type: "POST",
+			data: "tipoTalla=" + $('#tipoTalla').val(),
+			success:function(r){
+				$('#selectTallas').html(r);
+			}
+	});
+}
+</script>

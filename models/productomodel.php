@@ -5,6 +5,7 @@ include_once 'models/categoria.php';
 include_once 'models/tipotela.php';
 include_once 'models/tipoProducto.php';
 include_once 'models/departamento.php';
+include_once 'models/talla.php';
 /**
  * 
  */
@@ -135,6 +136,27 @@ public function getProducts(){
             }
             return $items;
         }catch(PDOException $e){
+            return [];
+        }
+    }
+
+    public function getTallas($tipoTalla){
+    #Traemos los datos de los tipos de Tallas
+        $items = [];
+        try {
+
+            $db = new Database();               
+            $query = $db->connect()->prepare('SELECT id_talla, nombreTalla FROM talla WHERE tipoTalla LIKE :tipoTalla');
+            $query->execute(['tipoTalla' => $tipoTalla]);
+            
+            while ($row = $query->fetch()) {
+                $item = new Size();
+                $item->id_talla       = $row[0];
+                $item->nombreTalla    = $row[1];
+                array_push($items, $item);
+            }
+            return $items;
+        } catch (PDOException $e) {
             return [];
         }
     }
