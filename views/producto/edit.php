@@ -13,9 +13,9 @@
 		<h1 id="h1-form">Editar Producto</h1>
 		<hr>
 		<form action="<?php echo constant('URL'); ?>producto/actualizarProducto" method="POST" enctype="multipart/form-data" autocomplete="off">
-			
+
 			<div class="form-row">
-				
+
 				<div class="form-group col-md-3">
 					<label>Producto:</label>
 					<select class="form-control" name="idtipoprod" required>
@@ -27,7 +27,7 @@
 							$tipoProducto = $row;
 							?>
 							<option value="<?php echo $tipoProducto->id_cat_tipo_prod; ?>"><?php echo $tipoProducto->nombreTipoProd; ?></option>
-						<?php } ?>					
+						<?php } ?>
 					</select>
 				</div>
 
@@ -42,12 +42,12 @@
 							$departamento = $row;
 							?>
 							<option value="<?php echo $departamento->id_departamento; ?>"><?php echo $departamento->nombreDepa; ?></option>
-						<?php } ?>						
+						<?php } ?>
 					</select>
 				</div>
 
 				<!-- Se trae el dato para mostrarlo en el select de Categoría -->
-				<?php 
+				<?php
 				$categoria = $this->productoSelected->nombreCate;
 			//sacar los nombres de la tabla de Categoría
 				$db= new Database();
@@ -55,7 +55,7 @@
 				$query->execute(['categoria' => $categoria]);
 				foreach ($query as $row) {
 					$idCategoria 	= $row['id_categoria'];
-					$nombreCate   	= $row['nombreCate'];           
+					$nombreCate   	= $row['nombreCate'];
 				}
 				?>
 				<div class="form-group col-md-3">
@@ -65,11 +65,11 @@
 						<?php
 						include_once 'models/categoria.php';
 						foreach ($this->categorias as $row) {
-							$categoria = new Categoria();
+							$categoria = new Cate();
 							$categoria = $row;
 							?>
 							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
-						<?php } ?>					
+						<?php } ?>
 					</select>
 				</div>
 
@@ -79,6 +79,7 @@
 			<input type="text" name="idcodigodebarras" hidden="true" value="<?php echo $this->productoSelected->id_codigo_de_barras; ?>">
 			<input type="text" name="idprecio" hidden="true" value="<?php echo $this->productoSelected->id_precio; ?>">
 			<input type="text" name="idstock" hidden="true" value="<?php echo $this->productoSelected->id_stock; ?>">
+			<input type="text" name="id_producto" hidden="true" value="<?php echo $this->productoSelected->id_producto; ?>">
 
 			<div class="form-row">
 
@@ -96,11 +97,7 @@
 				$query->execute(['tipoTela' => $tipoTela]);
 				foreach ($query as $row) {
 					$idTipoDeTela 	= $row['id_tipo_tela'];
-<<<<<<< HEAD
-					$tipoDeTela   	= $row['nombreTipoTela'];           
-=======
 					$tipoDeTela   	= $row['nombreTipoTela'];
->>>>>>> Ivonne
 				}
 				?>
 				<div class="form-group  col-md-3">
@@ -120,13 +117,7 @@
 
 			</div>
 
-<<<<<<< HEAD
-			<!-- Se trae el dato para mostrarlo en el select de Categoría -->
-<<<<<<< HEAD
-			<?php 
-=======
 			<?php
->>>>>>> Ivonne
 			$categoria = $this->productoSelected->nombreCate;
 			//sacar los nombres de la tabla de Categoría
 			$db= new Database();
@@ -134,11 +125,7 @@
 			$query->execute(['categoria' => $categoria]);
 			foreach ($query as $row) {
 				$idCategoria 	= $row['id_categoria'];
-<<<<<<< HEAD
-				$nombreCate   	= $row['nombreCate'];           
-=======
 				$nombreCate   	= $row['nombreCate'];
->>>>>>> Ivonne
 			}
 			?>
 			<div class="form-row">
@@ -149,43 +136,28 @@
 						<?php
 						include_once 'models/categoria.php';
 						foreach ($this->categorias as $row) {
-<<<<<<< HEAD
-							$categoria = new Categoria();
-							$categoria = $row;
-							?>
-							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
-						<?php } ?>					
-=======
 							$categoria = new Cate();
 							$categoria = $row;
 							?>
 							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
 						<?php } ?>
->>>>>>> Ivonne
 					</select>
 				</div>
 =======
 			<div class="form-row">
 >>>>>>> AlexRuval
+=======
+			<div class="form-row">
+>>>>>>> 3b549cdcdbd5533d32064ee9829873be0f6e8272
 
 				<div class="form-group  col-md-3">
 					<label for="talla">Talla:</label>
 					<input type="text" name="talla" id="talla" class="form-control" value="<?php echo $this->productoSelected->talla;?>" placeholder="Talla del producto" required>
 				</div>
 
-<<<<<<< HEAD
-			<div class="form-row">
-				<div class="form-group col-md-4">
-					<label for="foto">Foto:</label>
-<<<<<<< HEAD
-					<?php 
-					$foto = $this->productoSelected->foto;
-					if(empty($foto)) { ?>				
-=======
 					<?php
 					$foto = $this->productoSelected->foto;
 					if(empty($foto)) { ?>
->>>>>>> Ivonne
 						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*">
 					<?php }else{ ?>
 						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*" hidden="true">
@@ -199,13 +171,12 @@
 =======
 				<div class="form-group col-md-3">
 >>>>>>> AlexRuval
+=======
+				<div class="form-group col-md-3">
+>>>>>>> 3b549cdcdbd5533d32064ee9829873be0f6e8272
 					<label for="estado">Estado:</label>
 					<div class="form-control">
-<<<<<<< HEAD
-						<?php 
-=======
 						<?php
->>>>>>> Ivonne
 						$estado = $this->productoSelected->estadoProd;
 						if($estado == 1){
 							?>
@@ -219,11 +190,7 @@
 							<input type="radio" name="estadoProd" id="estado" class="col-md-2" value="0" checked> Inactivo
 							<?php
 						}
-<<<<<<< HEAD
-						?>						
-=======
 						?>
->>>>>>> Ivonne
 					</div>
 				</div>
 
@@ -283,9 +250,9 @@
 
 				<div class="form-group col-md-4">
 					<label for="foto">Foto:</label>
-					<?php 
+					<?php
 					$foto = $this->productoSelected->foto;
-					if(empty($foto)) { ?>				
+					if(empty($foto)) { ?>
 						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*">
 					<?php }else{ ?>
 						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*" hidden="true">
@@ -315,18 +282,7 @@
 		document.getElementById('btnfoto').hidden=true;
 		document.getElementById('foto').hidden=false;
 	}
-<<<<<<< HEAD
-	function cambiarcomprobante(){
-		document.getElementById('imgcomprobante').hidden=true;
-		document.getElementById('btncomprobante').hidden=true;
-		document.getElementById('comprobante').hidden=false;
-	}
-<<<<<<< HEAD
 =======
->>>>>>> AlexRuval
-</script> 
-</html>
-=======
+>>>>>>> 3b549cdcdbd5533d32064ee9829873be0f6e8272
 </script>
 </html>
->>>>>>> Ivonne

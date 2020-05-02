@@ -16,6 +16,20 @@
 
 			<div class="form-row">
 
+				<div class="form-group col-md-3">
+					<label>Producto:</label>
+					<select class="form-control" name="idtipoprod" required>
+						<option value="" hidden>Seleccione una opción..</option>
+						<?php
+						include_once 'models/tipoProducto.php';
+						foreach ($this->tiposProd as $row) {
+							$tipoProducto = new TipoProduct();
+							$tipoProducto = $row;
+							?>
+							<option value="<?php echo $tipoProducto->id_cat_tipo_prod; ?>"><?php echo $tipoProducto->nombreTipoProd; ?></option>
+						<?php } ?>
+					</select>
+				</div>
 
 				<div class="form-group col-md-3">
 					<label>Departamento:</label>
@@ -28,7 +42,7 @@
 							$departamento = $row;
 							?>
 							<option value="<?php echo $departamento->id_departamento; ?>"><?php echo $departamento->nombreDepa; ?></option>
-						<?php } ?>						
+						<?php } ?>
 					</select>
 				</div>
 
@@ -73,7 +87,7 @@
 
 			</div>
 
-			<div class="form-row">				
+			<div class="form-row">
 
 				<div class="form-group  col-md-3">
 					<label for="talla">Talla:</label>
@@ -91,14 +105,14 @@
 				<div class="form-group col-md-3">
 					<label for="proveedor">Proveedor:</label>
 					<input type="text" name="proveedor" id="proveedor" class="form-control" placeholder="Nombre de proveedor" required>
-				</div>		
+				</div>
 
 			</div>
 
 			<div class="form-row">
 				<div class="form-group  col-md-3">
 					<label for="codigointerno">Codigo Interno:</label>
-					<input type="text" name="codigointerno" id="codigointerno" class="form-control" placeholder="Codigo Interno" readonly>
+					<input type="text" name="codigointerno" id="codigointerno" class="form-control" placeholder="Codigo Interno" requiredS>
 				</div>
 
 				<div class="form-group  col-md-1">
@@ -143,7 +157,7 @@
 					<label for="foto">Foto:</label>
 					<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*">
 				</div>
-				
+
 			</div>
 
 			<div>

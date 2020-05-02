@@ -10,18 +10,18 @@ include_once 'models/departamento.php';
  */
 class ProductoModel extends Model{
 
-	function __construct(){
-		parent::__construct();
-	}
+    function __construct(){
+        parent::__construct();
+    }
 
-	public function insert($datos){
-		try {
+    public function insert($datos){
+        try {
             //Procedimiento para subir la imagen del producto.
 
             $foto = $datos['foto'];
             //Checar validacion
                 if (empty($foto)) {
-                    echo "vacia";
+                    //echo "vacia";
                     echo $foto;
                 }
 
@@ -81,7 +81,22 @@ class ProductoModel extends Model{
      }
 
             //Insercion de los datos a la bd.
-
+     $query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+     $query->bindParam(1, $datos['descripcionProd']);
+     $query->bindParam(2, $datos['talla']);
+     $query->bindParam(3, $datos['idtipotela']);
+     $query->bindParam(4, $datos['descuento']);
+     $query->bindParam(5, $datos['estadoProd']);
+     $query->bindParam(6, $foto);
+     $query->bindParam(7, $datos['idPersona']);
+     $query->bindParam(8, $datos['codigointerno']);
+     $query->bindParam(9, $datos['codigoexterno']);
+     $query->bindParam(10, $datos['precio']);
+     $query->bindParam(11, $datos['cantidad']);
+     $query->bindParam(12, $datos['idcategoria']);
+     $query->bindParam(13, $datos['proveedor']);
+     $query->bindParam(14, $datos['idTipoProd']);
+     $query->bindParam(15, $datos['idDepartamento']);
      $query->execute();
      return true;
  } catch (PDOException $e) {
@@ -98,22 +113,22 @@ public function getProducts(){
 
     while($row = $query->fetch()){
         $item = new Producto();
-                $item->id_producto 			= $row[0];	//id_producto
-                $item->descripcionProd 		= $row[1];	//descripcion
-                $item->estadoProd			= $row[2];	//estado
-                $item->talla  				= $row[3];	//talla
-                $item->tipo_tela  			= $row[4];	//id_tipo_tela
-                $item->foto       			= $row[5];	//foto
-                $item->descuento 			= $row[6];	//descuento
-                $item->fecha_reg  			= $row[7];	//fecha_reg
-                $item->nombrePers			= $row[8];	//nombre persona quien registra
-                $item->apellido				= $row[9];	//apellido persona quien registra
-                $item->codigo_interno  		= $row[10];	//codigo de barras interno
-                $item->codigo_externo  		= $row[11];	//codigo de barras externo
-                $item->general  			= $row[12]; //precio
+                $item->id_producto          = $row[0];  //id_producto
+                $item->descripcionProd      = $row[1];  //descripcion
+                $item->estadoProd           = $row[2];  //estado
+                $item->talla                = $row[3];  //talla
+                $item->tipo_tela            = $row[4];  //id_tipo_tela
+                $item->foto                 = $row[5];  //foto
+                $item->descuento            = $row[6];  //descuento
+                $item->fecha_reg            = $row[7];  //fecha_reg
+                $item->nombrePers           = $row[8];  //nombre persona quien registra
+                $item->apellido             = $row[9];  //apellido persona quien registra
+                $item->codigo_interno       = $row[10]; //codigo de barras interno
+                $item->codigo_externo       = $row[11]; //codigo de barras externo
+                $item->general              = $row[12]; //precio
                 $item->cantidad             = $row[13]; //cantidad
-                $item->nombreCate	  		= $row[14]; //categoria
-                $item->proveedor 	 		= $row[15];	//proveedor
+                $item->nombreCate           = $row[14]; //categoria
+                $item->proveedor            = $row[15]; //proveedor
                 $item->nombreTipoProd       = $row[16]; //trae el nombre del tipo de producto
                 $item->nombreDepa           = $row[17]; //trae el nombre del departamento
                 array_push($items, $item);
@@ -138,7 +153,7 @@ public function getProducts(){
                 $item->nomenclaturaTipoProd = $row[2]; //nomenclatura del tipo de producto 001 etc.
                 array_push($items, $item);
             }
-            
+
             return $items;
         } catch (PDOException $e) {
             return [];
@@ -250,7 +265,26 @@ public function getProducts(){
 
         //Insercion de los datos a la bd.
         try{
-
+            $query = $this->db->connect()->prepare("CALL procUpdateProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $query->bindParam(1,  $datos['id_producto']);
+            $query->bindParam(2,  $datos['descripcionProd']);
+            $query->bindParam(3,  $datos['talla']);
+            $query->bindParam(4,  $datos['idtipotela']);
+            $query->bindParam(5,  $datos['descuento']);
+            $query->bindParam(6,  $datos['estadoProd']);
+            $query->bindParam(7,  $datos['foto']);
+            $query->bindParam(8,  $datos['idPersona']);
+            $query->bindParam(9,  $datos['id_codigo_de_barras']);
+            $query->bindParam(10, $datos['codigointerno']);
+            $query->bindParam(11, $datos['codigoexterno']);
+            $query->bindParam(12, $datos['id_precio']);
+            $query->bindParam(13, $datos['precio']);
+            $query->bindParam(14, $datos['id_stock']);
+            $query->bindParam(15, $datos['cantidad']);
+            $query->bindParam(16, $datos['idcategoria']);
+            $query->bindParam(17, $datos['proveedor']);
+            $query->bindParam(18, $datos['idTipoProd']);
+            $query->bindParam(19, $datos['idDepartamento']);
             $query->execute();
 
             return true;

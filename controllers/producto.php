@@ -1,7 +1,11 @@
 <?php
 
 /**
- *
+ * NOTAS:
+ * EN EDITAR FALTA VALIDAR QUE AL MOMENTO DE ACTUALIZAR EL PROD,
+ * SI LA IMAGEN NO EXISTE EN EL DIRECTORIO DE LA APLICACION
+ * NO SUBE LA FOTO YA QUE SE TRUNCA AL NO ENCONTRAR NADA QUE
+ * BORRAR, SIN EMBARGO SI ALMACENA EL NOMBRE EN LA BASE DE DATOS.
  */
 class Producto extends Controller{
 
@@ -11,7 +15,7 @@ class Producto extends Controller{
 		$this->view->tiposProd  	= [];
 		$this->view->departamentos	= [];
 		$this->view->categorias 	= [];
-		$this->view->tipostela 		= [];		
+		$this->view->tipostela 		= [];
 	}
 
 	function nuevo(){
@@ -126,10 +130,9 @@ class Producto extends Controller{
 		$id_producto 		= $_SESSION['id_producto'];		//Se envia el id del producto seleccionado
 		$id_stock			= $_POST['idstock'];
 
-
 		//mandar variable correcta de foto
 		$db = new Database();
-		$query = $db->connect()->prepare('SELECT * FROM producto WHERE id_producto=:id_producto');
+		$query = $db->connect()->prepare('SELECT foto FROM producto WHERE id_producto=:id_producto');
 		$query->execute(['id_producto' => $id_producto]);
 		foreach ($query as $row) {
 			$fotoold = $row['foto'];
@@ -157,6 +160,20 @@ class Producto extends Controller{
 			//Actualizar el prodcuto con éxito
 			//Obtener el el valor del tipo con nombre
 
+				//sacar los nombres de la tabla de cat tipo prod
+				$db= new Database();
+				$query = $db->connect()->prepare('SELECT nombreTipoProd FROM cat_tipo_prod WHERE id_cat_tipo_prod = :idTipoProd');
+				$query->execute(['idTipoProd' => $idTipoProd]);
+				foreach ($query as $row) {
+					$nombreTipoProd   	= $row['nombreTipoProd'];
+				}
+				//sacar los nombres de la tabla de departamento
+				$db= new Database();
+				$query = $db->connect()->prepare('SELECT nombreDepa FROM departamento WHERE id_departamento = :id_departamento');
+				$query->execute(['id_departamento' => $idDepartamento]);
+				foreach ($query as $row) {
+					$nombreDepa   	= $row['nombreDepa'];
+				}
 				//sacar los nombres de la tabla de tipo de tela
 				$db= new Database();
 				$query = $db->connect()->prepare('SELECT nombreTipoTela FROM tipo_tela WHERE id_tipo_tela = :tipoTela');
@@ -174,7 +191,6 @@ class Producto extends Controller{
 
 			$productoSelected = new Product();
 			$productoSelected->id_producto 			= $id_producto;
-
 			$productoSelected->descripcionProd		= $descripcionProd;
 			$productoSelected->talla				= $talla;
 			$productoSelected->tipo_tela 			= $tipoDeTela;
@@ -194,7 +210,7 @@ class Producto extends Controller{
 			$productoSelected->id_cat_tipo_prod		= $idTipoProd;
 			$productoSelected->nombreTipoProd		= $nombreTipoProd;
 			$productoSelected->id_departamento		= $idDepartamento;
-			$productoSelected->nombreDepa			= $nombreDepa;			
+			$productoSelected->nombreDepa			= $nombreDepa;
 			$this->view->productoSelected = $productoSelected;
 			$this->view->mensaje = "El producto se actualizo correctamente!";
 		}else{
