@@ -7,10 +7,10 @@ include_once 'models/tipoProducto.php';
 include_once 'models/departamento.php';
 include_once 'models/talla.php';
 /**
- * 
+ *
  */
 class ProductoModel extends Model{
-    
+
     function __construct(){
         parent::__construct();
     }
@@ -28,7 +28,7 @@ class ProductoModel extends Model{
 
             $arrayupfotos=array();
             array_push($arrayupfotos, $foto);
-            for ($i = 0; $i < count($arrayupfotos) ; $i++) { 
+            for ($i = 0; $i < count($arrayupfotos) ; $i++) {
                  //INICIA SUBIR IMAGEN AL SERVIDOR
                 $target_dir = "img/productos/";
                 $target_file = $target_dir . basename($arrayupfotos[$i]["name"]);
@@ -79,7 +79,7 @@ class ProductoModel extends Model{
             $foto="";
         }else{
          $foto = basename($foto["name"]);
-     }            
+     }
 
             //Insercion de los datos a la bd.
      $query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -175,7 +175,7 @@ public function getProducts(){
                 $item->nomenclaturaTipoProd = $row[2]; //nomenclatura del tipo de producto 001 etc.
                 array_push($items, $item);
             }
-            
+
             return $items;
         } catch (PDOException $e) {
             return [];
@@ -215,12 +215,12 @@ public function getProducts(){
                 $item->nombreTipoTela   = $row[1]; //nombreCate
                 array_push($items, $item);
             }
-            
+
             return $items;
         } catch (PDOException $e) {
             return [];
         }
-    }   
+    }
 
     public function getCategoriesForProduct(){
         $items = [];
@@ -235,7 +235,7 @@ public function getProducts(){
                 $item->nombreCate       = $row[1]; //nombreCate
                 array_push($items, $item);
             }
-            
+
             return $items;
         } catch (PDOException $e) {
             return [];
@@ -306,7 +306,7 @@ public function getProducts(){
             $query->bindParam(16, $datos['idcategoria']);
             $query->bindParam(17, $datos['proveedor']);
             $query->bindParam(18, $datos['idTipoProd']);
-            $query->bindParam(19, $datos['idDepartamento']);           
+            $query->bindParam(19, $datos['idDepartamento']);
             $query->execute();
 
             return true;
@@ -344,7 +344,7 @@ public function getProducts(){
         } catch (PDOException $e) {
             return false;
         }
-        
+
     }
 
 }

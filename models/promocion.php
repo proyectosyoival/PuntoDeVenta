@@ -1,15 +1,11 @@
-<?php 
+<?php
 
-/**
- * 
- */
-class Promocion
-{
-	
-	public id_promocion;
-	public nombre;
-	public descripcion;
-	public fecha_vigencia;
+class Promo{
+
+  public $id_promocion;
+  public $nombrePromo;
+  public $descripcionPromo;
+  public $fecha_vigencia;
 
 }
 
