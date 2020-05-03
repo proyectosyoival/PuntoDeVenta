@@ -25,6 +25,7 @@
           <option value="<?php echo $this->talla->tipoTalla; ?>" hidden="true"><?php echo $this->talla->tipoTalla;?></option>
           <option value="Alfabético">Alfabético</option>
           <option value="Númerico">Númerico</option>
+          <option value="Alfanúmerico">Alfanúmerico</option>
         </select>
       </div>
       <div>
@@ -33,7 +34,7 @@
       </div>
     </form>
   </div>
-  
+
   <?php require 'views/footer.php'; ?>
 </body>
 <!-- SCRIPT PARA VALIDACION DEL FORMULARIO DE LOGIN-->
