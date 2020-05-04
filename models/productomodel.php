@@ -105,15 +105,55 @@ class ProductoModel extends Model{
 }
 }
 
+#Buscador dinámico envia toda la lista de productos existentes al index.
 public function getProducts(){
   $items = [];
 
   try{
 
+
     $query = $this->db->connect()->query("CALL procGetAllProductos();");
 
     while($row = $query->fetch()){
         $item = new Producto();
+                $item->id_producto          = $row[0];  //id_producto
+                $item->descripcionProd      = $row[1];  //descripcion
+                $item->estadoProd           = $row[2];  //estado
+                $item->talla                = $row[3];  //talla
+                $item->tipo_tela            = $row[4];  //id_tipo_tela
+                $item->foto                 = $row[5];  //foto
+                $item->descuento            = $row[6];  //descuento
+                $item->fecha_reg            = $row[7];  //fecha_reg
+                $item->nombrePers           = $row[8];  //nombre persona quien registra
+                $item->apellido             = $row[9];  //apellido persona quien registra
+                $item->codigo_interno       = $row[10]; //codigo de barras interno
+                $item->codigo_externo       = $row[11]; //codigo de barras externo
+                $item->general              = $row[12]; //precio
+                $item->cantidad             = $row[13]; //cantidad
+                $item->nombreCate           = $row[14]; //categoria
+                $item->proveedor            = $row[15]; //proveedor
+                $item->nombreTipoProd       = $row[16]; //trae el nombre del tipo de producto
+                $item->nombreDepa           = $row[17]; //trae el nombre del departamento
+                array_push($items, $item);
+            }
+            return $items;
+        }catch(PDOException $e){
+            return [];
+        }
+    }
+
+    #Buscador dinámico envia los productos buscados en index.
+    public function getSearchProducts($searchProd){
+        $items = [];
+
+        try{
+
+           $query = $this->db->connect()->prepare("CALL procGetSearchProduct(?);");
+           $query->bindParam(1, $searchProd);
+           $query->execute();
+
+           while($row = $query->fetch()){
+            $item = new Producto();
                 $item->id_producto          = $row[0];  //id_producto
                 $item->descripcionProd      = $row[1];  //descripcion
                 $item->estadoProd           = $row[2];  //estado

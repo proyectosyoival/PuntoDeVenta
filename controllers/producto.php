@@ -35,10 +35,22 @@ class Producto extends Controller{
 	}
 
 	function render(){
+		#$productos = $this->model->getProducts();
+		#$this->view->productos = $productos;
+
+		$this->view->render('producto/index');
+	}
+
+	function searchProducts(){
 		$productos = $this->model->getProducts();
 		$this->view->productos = $productos;
 
-		$this->view->render('producto/index');
+		if(isset($_POST['consulta'])){
+			$productos = $this->model->getSearchProducts($_POST['consulta']);
+			$this->view->productos = $productos;
+		}
+
+		$this->view->render('producto/buscarProductos');
 	}
 
 	#Uso de AJAX al momento de cargar el tipo de Talla
@@ -136,7 +148,7 @@ class Producto extends Controller{
 		$cantidad			= $_POST['cantidad'];
 		$idcategoria 		= $_POST['idcategoria'];	//Se obtiene de la tabla de categoria
 		$proveedor			= $_POST['proveedor'];			//Se registra en la tabla producto
-		$id_producto 		= $_SESSION['id_producto'];		//Se envia el id del producto seleccionado
+		$id_producto 		= $_POST['id_producto'];		//Se envia el id del producto seleccionado
 		$id_stock			= $_POST['idstock'];
 
 		//mandar variable correcta de foto
