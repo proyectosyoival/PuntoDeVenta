@@ -187,7 +187,16 @@ class Producto extends Controller{
 			@unlink('img/productos/'.$fotoold);
              // echo "<br>".$cfoto."-".$fotoold."-".$ccomprobante."-".$comprobanteold;
         // si una foto es diferente pero comprobante es igual
-		}
+		}elseif ($foto["name"]=="") {
+            $nfoto=$fotoold; 
+            // si el comprobante es diferente pero la foto es igual
+         }elseif ($cfoto==$fotoold) {
+            $nfoto=$fotoold;
+         }elseif ($cfoto!=$fotoold) {
+            $this->subirfotos($foto);
+            @unlink('img/productos/'.$fotoold);
+            $nfoto=basename( $foto["name"]);            
+         }
 
 		if($this->model->updateProd(['id_producto' => $id_producto, 'idTipoProd' => $idTipoProd, 'idDepartamento' => $idDepartamento, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'idtipotela' => $idtipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $nfoto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor, 'id_codigo_de_barras' => $idCodigoDeBarras, 'id_precio' => $idPrecio, 'id_stock' => $id_stock])){
 			//Actualizar el prodcuto con éxito
