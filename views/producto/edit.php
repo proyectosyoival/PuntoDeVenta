@@ -13,9 +13,9 @@
 		<h1 id="h1-form">Editar Producto</h1>
 		<hr>
 		<form action="<?php echo constant('URL'); ?>producto/actualizarProducto" method="POST" enctype="multipart/form-data" autocomplete="off">
-
+			
 			<div class="form-row">
-
+				
 				<div class="form-group col-md-3">
 					<label>Producto:</label>
 					<select class="form-control" name="idtipoprod" required>
@@ -27,7 +27,7 @@
 							$tipoProducto = $row;
 							?>
 							<option value="<?php echo $tipoProducto->id_cat_tipo_prod; ?>"><?php echo $tipoProducto->nombreTipoProd; ?></option>
-						<?php } ?>
+						<?php } ?>					
 					</select>
 				</div>
 
@@ -42,12 +42,12 @@
 							$departamento = $row;
 							?>
 							<option value="<?php echo $departamento->id_departamento; ?>"><?php echo $departamento->nombreDepa; ?></option>
-						<?php } ?>
+						<?php } ?>						
 					</select>
 				</div>
 
 				<!-- Se trae el dato para mostrarlo en el select de Categoría -->
-				<?php
+				<?php 
 				$categoria = $this->productoSelected->nombreCate;
 			//sacar los nombres de la tabla de Categoría
 				$db= new Database();
@@ -55,7 +55,7 @@
 				$query->execute(['categoria' => $categoria]);
 				foreach ($query as $row) {
 					$idCategoria 	= $row['id_categoria'];
-					$nombreCate   	= $row['nombreCate'];
+					$nombreCate   	= $row['nombreCate'];           
 				}
 				?>
 				<div class="form-group col-md-3">
@@ -69,7 +69,7 @@
 							$categoria = $row;
 							?>
 							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
-						<?php } ?>
+						<?php } ?>					
 					</select>
 				</div>
 
@@ -97,7 +97,7 @@
 				$query->execute(['tipoTela' => $tipoTela]);
 				foreach ($query as $row) {
 					$idTipoDeTela 	= $row['id_tipo_tela'];
-					$tipoDeTela   	= $row['nombreTipoTela'];
+					$tipoDeTela   	= $row['nombreTipoTela'];           
 				}
 				?>
 				<div class="form-group  col-md-3">
@@ -117,66 +117,17 @@
 
 			</div>
 
-			<?php
-			$categoria = $this->productoSelected->nombreCate;
-			//sacar los nombres de la tabla de Categoría
-			$db= new Database();
-			$query = $db->connect()->prepare('SELECT * FROM categoria WHERE nombreCate LIKE :categoria');
-			$query->execute(['categoria' => $categoria]);
-			foreach ($query as $row) {
-				$idCategoria 	= $row['id_categoria'];
-				$nombreCate   	= $row['nombreCate'];
-			}
-			?>
 			<div class="form-row">
-				<div class="form-group col-md-4">
-					<label>Categoría:</label>
-					<select class="form-control" name="idcategoria" required>
-						<option value="<?php echo $idCategoria; ?>" hidden><?php echo $nombreCate; ?></option>
-						<?php
-						include_once 'models/categoria.php';
-						foreach ($this->categorias as $row) {
-							$categoria = new Cate();
-							$categoria = $row;
-							?>
-							<option value="<?php echo $categoria->id_categoria; ?>"><?php echo $categoria->nombreCate; ?></option>
-						<?php } ?>
-					</select>
-				</div>
-=======
-			<div class="form-row">
->>>>>>> AlexRuval
-=======
-			<div class="form-row">
->>>>>>> 3b549cdcdbd5533d32064ee9829873be0f6e8272
 
 				<div class="form-group  col-md-3">
 					<label for="talla">Talla:</label>
 					<input type="text" name="talla" id="talla" class="form-control" value="<?php echo $this->productoSelected->talla;?>" placeholder="Talla del producto" required>
 				</div>
 
-					<?php
-					$foto = $this->productoSelected->foto;
-					if(empty($foto)) { ?>
-						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*">
-					<?php }else{ ?>
-						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*" hidden="true">
-						<img src="<?php echo constant('URL'); ?>img/productos/<?php echo $this->productoSelected->foto;?>" class="img-editProd" id="imgfoto">
-						<button type="button" class="close" aria-label="Close" onclick="cambiarfoto();" id="btnfoto">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					<?php } ?>
-				</div>
-				<div class="form-group col-md-4">
-=======
 				<div class="form-group col-md-3">
->>>>>>> AlexRuval
-=======
-				<div class="form-group col-md-3">
->>>>>>> 3b549cdcdbd5533d32064ee9829873be0f6e8272
 					<label for="estado">Estado:</label>
 					<div class="form-control">
-						<?php
+						<?php 
 						$estado = $this->productoSelected->estadoProd;
 						if($estado == 1){
 							?>
@@ -190,7 +141,7 @@
 							<input type="radio" name="estadoProd" id="estado" class="col-md-2" value="0" checked> Inactivo
 							<?php
 						}
-						?>
+						?>						
 					</div>
 				</div>
 
@@ -250,9 +201,9 @@
 
 				<div class="form-group col-md-4">
 					<label for="foto">Foto:</label>
-					<?php
+					<?php 
 					$foto = $this->productoSelected->foto;
-					if(empty($foto)) { ?>
+					if(empty($foto)) { ?>				
 						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*">
 					<?php }else{ ?>
 						<input type="file" name="foto" id="foto" class="form-control" autocomplete="off" accept="image/*" hidden="true">
@@ -282,7 +233,5 @@
 		document.getElementById('btnfoto').hidden=true;
 		document.getElementById('foto').hidden=false;
 	}
-=======
->>>>>>> 3b549cdcdbd5533d32064ee9829873be0f6e8272
-</script>
+</script> 
 </html>

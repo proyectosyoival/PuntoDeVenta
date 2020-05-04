@@ -17,51 +17,18 @@
      <div class="col-md-7">
       <a type="button" class="btn" id="btn-table" href="<?php echo constant('URL'); ?>producto/nuevo"><span class="icon-plus"></span>Nuevo</a>
     </div>
-
     <div class="col-md-3">
       <label>Buscar:</label>
-      <input type="search" name="">
+      <input type="search" name="caja_busqueda" id="caja_busqueda"></input>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-10">
-      <hr>
-      <table class="table table-hover text-center">
-        <thead class="thead-tabla">
-          <tr>
-           <th><div>Código</div></th>
-           <!--<th>Prodcuto</th>-->
-           <th><div align="left">Descripcion</div></th>
-           <th><div>Precio</div></th>
-           <th><div>Existencia</div></th>
-           <th><div>Proveedor</div></th>
-           <th><div>Foto</div></th>
-           <th><div>Editar</div></th>
-           <th><div>Eliminar</div></th>
-         </tr>
-       </thead>
-       <tbody id="tbody-general">
-        <?php
-        include_once 'models/producto.php';
-        foreach($this->productos as $row){
-          $producto = new Producto();
-          $producto = $row;
-          ?>
-          <tr id="fila-<?php echo $producto->id_producto; ?>">
-            <td><div onclick="ShowModal(<?php echo $producto->id_producto; ?>)" ><?php echo $producto->id_producto; ?></div></td>
-            <td><div align="left"><?php echo $producto->descripcionProd; ?></div></td>
-            <td><div align="right">$<?php echo $producto->general; ?></div></td>
-            <td><div><?php echo $producto->cantidad; ?></div></td>
-            <td><div><?php echo $producto->proveedor; ?></div></td>
-            <td><div><img src="<?php echo constant('URL'); ?>img/productos/<?php echo $producto->foto; ?>" class="img-responsive" width="50"  title="<?php echo $producto->descripcionProd; ?>"></div></td>
-            <td><div><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'producto/editProduct/' . $producto->id_producto; ?>"><span class="icon-pencil2"></span></a></div></td>
-            <td><div><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $producto->id_producto;?>" data-function="producto/eliminarProducto"><span class="icon-bin" title="Eliminar"></span></a></div></td>
-          </tr>
-        <?php } ?>
-      </tbody>
-    </table>
+
+  <!--Inicia el contenedor de la busqueda dinámica -->
+  <div class="row" id="datos">
+    <!-- Aquí va la tabla de la busqueda dinámica -->
   </div>
-</div>
+  <!--Termina el contenedor de la busqueda dinámica -->
+
 </div>
 <!-- Modal -->
 <div class="modal fade" id="masInformacionProd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -74,6 +41,7 @@
         </button>
       </div>
       <div class="modal-body text-center">
+
         <!--Inicia contenedor del modal -->
         <div id="modalContainer">
           <!-- EN ESTE DIV SE MUESTRA EL CONTENIDO DE LA PAG getViewProduct.php -->
