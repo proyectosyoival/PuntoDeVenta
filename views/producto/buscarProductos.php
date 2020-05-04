@@ -1,4 +1,4 @@
-<?php 
+<?php
   include_once 'models/producto.php';
   if(!empty($this->productos)){
 ?>
@@ -41,7 +41,7 @@
 </table>
 </div>
 
-<?php 
+<?php
 }else{
 ?>
 <div class="col-md-10">
@@ -55,10 +55,11 @@
    <tbody id="tbody-general">
       <tr>
         <td><div>Intente con algúna otra palabra!</div></td>
-      </tr>    
+      </tr>
   </tbody>
 </table>
 </div>
-<?php 
+<?php
 }
 ?>
+<script src="<?php echo constant('URL'); ?>public/js/main.js"></script>

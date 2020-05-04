@@ -17,9 +17,11 @@
      <div class="col-md-7">
       <a type="button" class="btn" id="btn-table" href="<?php echo constant('URL'); ?>producto/nuevo"><span class="icon-plus"></span>Nuevo</a>
     </div>
-    <div class="col-md-3">
-      <label>Buscar:</label>
-      <input type="search" name="caja_busqueda" id="caja_busqueda"></input>
+    <div class="form-group row">
+      <label class="col-md-3">Buscar:</label>
+      <div class="col-md-9">
+        <input type="search" name="caja_busqueda" id="caja_busqueda" class="form-control"></input>
+      </div>
     </div>
   </div>
 
@@ -54,6 +56,6 @@
 </div>
 <!-- fin modal -->
 <?php require 'views/footer.php'; ?>
-<script src="<?php echo constant('URL'); ?>public/js/main.js"></script>
+<!-- <script src="<?php echo constant('URL'); ?>public/js/main.js"></script> -->
 </body>
 </html>

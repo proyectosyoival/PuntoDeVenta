@@ -41,6 +41,18 @@ class Producto extends Controller{
 		$this->view->render('producto/index');
 	}
 
+	function producto(){
+		$productos = $this->model->getProducts();
+		$this->view->productos = $productos;
+
+		if(isset($_POST['consulta'])){
+			$productos = $this->model->getSearchProducts($_POST['consulta']);
+			$this->view->productos = $productos;
+		}
+
+		$this->view->render('producto/buscarProductos');
+	}
+
 	function searchProducts(){
 		$productos = $this->model->getProducts();
 		$this->view->productos = $productos;
@@ -58,7 +70,7 @@ class Producto extends Controller{
 		$tipoTalla = $_POST['tipoTalla'];
 		$tallas = $this->model->getTallas($tipoTalla);
 		$this->view->tallas = $tallas;
-		
+
 		$this->view->render('producto/tallas');
 	}
 

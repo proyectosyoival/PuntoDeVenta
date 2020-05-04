@@ -6,7 +6,7 @@ botones.forEach(boton => {
     boton.addEventListener("click", function(){
         const id = this.dataset.id;
         const funcion = this.dataset.function;
-        
+
         const confirm = window.confirm("¿Deseas eliminar el registro?");
 
         if(confirm){
