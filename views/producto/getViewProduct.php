@@ -11,11 +11,6 @@
     <div class="col-md-4"><?php echo $this->productoSelected->nombreDepa; ?></div>
   </div>
 
-  <div class="row col-md-12" align="left">              
-    <div class="col-md-4"><span class="label-card">Talla(s):</span></div>
-    <div class="col-md-4"><?php echo $this->productoSelected->talla; ?></div>
-  </div>
-
   <div class="row col-md-12" align="left">
     <div class="col-md-4"><span class="label-card">Tipo de Tela: </span></div>
     <div class="col-md-4"><?php echo $this->productoSelected->tipo_tela; ?></div>

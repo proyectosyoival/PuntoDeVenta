@@ -31,6 +31,21 @@
 					</select>
 				</div>
 
+				<div class="form-group  col-md-3">
+					<label>Tipo de Tela:</label>
+					<select class="form-control" name="idtipotela" required>
+						<option value="">Seleccione una opción..</option>
+						<?php
+						include_once 'models/tipotela.php';
+						foreach ($this->tipostela as $row) {
+							$tipotela = new Tipotela();
+							$tipotela = $row;
+							?>
+							<option value="<?php echo $tipotela->id_tipo_tela; ?>"><?php echo $tipotela->nombreTipoTela; ?></option>
+						<?php } ?>
+					</select>
+				</div>
+
 				<div class="form-group col-md-3">
 					<label>Departamento:</label>
 					<select class="form-control" name="iddepartamento" required>
@@ -44,6 +59,15 @@
 							<option value="<?php echo $departamento->id_departamento; ?>"><?php echo $departamento->nombreDepa; ?></option>
 						<?php } ?>						
 					</select>
+				</div>
+
+			</div>
+
+			<div class="form-row">
+
+				<div class="form-group col-md-6">
+					<label for="descripcion">Descripción:</label>
+					<textarea minlength="1" name="descripcionProd" id="descripcionProd" class="form-control" maxlength="300" rows="1" placeholder="Descripción..." required></textarea>
 				</div>
 
 				<div class="form-group col-md-3">
@@ -64,32 +88,8 @@
 			</div>
 
 			<div class="form-row">
-
-				<div class="form-group col-md-6">
-					<label for="descripcion">Descripción:</label>
-					<textarea minlength="1" name="descripcionProd" id="descripcionProd" class="form-control" maxlength="300" rows="1" placeholder="Descripción..." required></textarea>
-				</div>
-
-				<div class="form-group  col-md-3">
-					<label>Tipo de Tela:</label>
-					<select class="form-control" name="idtipotela" required>
-						<option value="">Seleccione una opción..</option>
-						<?php
-						include_once 'models/tipotela.php';
-						foreach ($this->tipostela as $row) {
-							$tipotela = new Tipotela();
-							$tipotela = $row;
-							?>
-							<option value="<?php echo $tipotela->id_tipo_tela; ?>"><?php echo $tipotela->nombreTipoTela; ?></option>
-						<?php } ?>
-					</select>
-				</div>
-
-			</div>
-
-			<div class="form-row">				
-
-				<div class="form-group col-md-2">
+				
+				<div class="form-group col-md-3">
 					<label for="tipoTalla">Tipo de Numeración:</label>
 					<select class="form-control" name="tipoTalla" id="tipoTalla" required>
 						<option value="">-----</option>
@@ -106,11 +106,56 @@
 					</select>
 				</div>
 
-				<div class="form-group col-md-2" id="selectTallas">
-					
+				<div class="col-md-2">
+					<label>Agregar Talla:</label>
+					<div>
+					<button type="button" class="btn btn-primary form-control" id="add_field"> + </button>
+					</div>
 				</div>
 
-				<div class="form-group col-md-2">
+			</div>
+
+			<div id="listas">
+
+				<div class="form-row">
+
+					<div class="form-group col-md-3" id="selectTallas">
+
+					</div>
+
+					<div class="form-group col-md-3">
+						<label for="cantidad">Cantidad:</label>
+						<input type="text" name="cantidad" id="cantidad" class="form-control" placeholder="Numero de unidades" required>
+					</div>
+					
+					<div>
+					<label>&nbsp;</label>
+					<div>
+					<p></p>
+					</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div id="aquiSeClona">
+				
+			</div>
+
+			<div class="form-row">
+
+				<div class="form-group  col-md-3">
+					<label for="codigointerno">Codigo Interno:</label>
+					<input type="text" name="codigointerno" id="codigointerno" class="form-control" placeholder="Codigo Interno" requiredS>
+				</div>
+
+				<div class="form-group  col-md-3">
+					<label for="codigoexterno">Codigo Externo:</label>
+					<input type="text" name="codigoexterno" id="codigoexterno" class="form-control" placeholder="Codigo Externo" required>
+				</div>
+
+				<div class="form-group col-md-3">
 					<label for="estado">Estado:</label>
 					<div class="form-control">
 						<input type="radio" name="estadoProd" id="estado" class="col-md-2" value="1" required > Activo
@@ -118,7 +163,11 @@
 					</div>
 				</div>
 
-				<div class="form-group col-md-3">
+			</div>
+
+			<div class="form-row">
+				
+				<div class="form-group col-md-9">
 					<label for="proveedor">Proveedor:</label>
 					<input type="text" name="proveedor" id="proveedor" class="form-control" placeholder="Nombre de proveedor" required>
 				</div>		
@@ -126,45 +175,38 @@
 			</div>
 
 			<div class="form-row">
-				<div class="form-group  col-md-3">
-					<label for="codigointerno">Codigo Interno:</label>
-					<input type="text" name="codigointerno" id="codigointerno" class="form-control" placeholder="Codigo Interno" requiredS>
-				</div>
 
-				<div class="form-group  col-md-1">
-					<label for="codigointerno">Barras:</label>
-					<input type="text" name="barrasinterno" id="barrasinterno" class="form-control" placeholder="Barras Código Interno" readonly>
-				</div>
-
-				<div class="form-group  col-md-1"></div>
-
-				<div class="form-group  col-md-3">
-					<label for="codigoexterno">Codigo Externo:</label>
-					<input type="text" name="codigoexterno" id="codigoexterno" class="form-control" placeholder="Codigo Externo" required>
-				</div>
-
-				<div class="form-group  col-md-1">
-					<label for="codigointerno">Barras:</label>
-					<input type="text" name="barrasexterno" id="barrasexterno" class="form-control" placeholder="Barras Código Externo" readonly>
-				</div>
-
-			</div>
-
-			<div class="form-row">
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-2">
 					<label for="precio">Precio:</label>
-					<input type="text" name="precio" id="precio" class="form-control" placeholder="Precio base del producto" required>
+					<input type="text" name="precio" id="precio" class="form-control" placeholder="Precio base" required>
 				</div>
 
-				<div class="form-group col-md-3">
-					<label for="cantidad">Cantidad:</label>
-					<input type="text" name="cantidad" id="cantidad" class="form-control" placeholder="Numero de unidades" required>
+				<div class="form-group col-md-2">
+					<label for="mayoreo">Mayoreo:</label>
+					<input type="text" name="mayoreo" id="mayoreo" class="form-control" placeholder="Precio al mayoreo" required>
 				</div>
 
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-2">
 					<label for="descuento">Descuento:</label>
-					<input type="text" name="descuento" id="descuento" class="form-control" placeholder="Porcentaje de descuento" required>
+					<input type="number" name="descuento" id="descuento" class="form-control" placeholder="Porcentaje" step="0.01" min="0" max="1" required>
 				</div>
+
+				<div class="form-group col-md-3">
+					<label for="idpromocion">Promoción:</label>
+					<select class="form-control" name="idpromocion" id="idpromocion" required>
+						<option value="">-----</option>
+						<?php
+						include_once 'models/promocion.php';
+						$db = new Database();
+						$query = $db->connect()->prepare('SELECT * FROM promocion ORDER BY nombrePromo ASC');
+						$query->execute();
+						foreach ($query as $row) {
+							?>
+						<option value="<?php echo $row['id_promocion']; ?>"><?php echo $row['nombrePromo']; ?></option>
+						<?php } ?>
+					</select>
+				</div>
+
 			</div>
 
 			<div class="form-row">
@@ -196,6 +238,7 @@
 	});
 })
 </script>
+
 <script type="text/javascript">
 function recargarLista(){
 	$.ajax({
@@ -207,4 +250,80 @@ function recargarLista(){
 			}
 	});
 }
+</script>
+
+<script type="text/javascript">
+	var campos_max = 10;   //max de 10 campos
+
+        var x = 0;
+        $('#add_field').click (function(e) {
+                e.preventDefault();     //prevenir novos clicks
+                if (x < campos_max) {
+                        $('#listas').clone().appendTo('#aquiSeClona');
+                        $("#aquiSeClona p:first").replaceWith('<input type="button" class="btn btn-danger remover_campo" value="-"/>');
+                        $('#tipoTalla').attr('disabled', true);
+                        x++;
+                }
+        });
+        // Remover o div anterior
+        $('#aquiSeClona').on("click",".remover_campo",function(e) {
+                e.preventDefault();
+                var parent = $(this).parents().get(2);
+                $(parent).remove();
+                x--;
+                if(x == 0){
+                	$('#tipoTalla').attr('disabled', false);
+                }
+        });
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#add_field').attr('disabled', true); //desactivamos el botón +
+		$('#tipoTalla').change(function(){
+			if($(this).val() != ''){
+				$('#add_field').attr('disabled', false); //activamos el botón + 
+			}else{
+				$('#add_field').attr('disabled', true); //desactivamos el botón +
+			}
+		});
+	});
+</script>
+
+<script type="text/javascript">
+jQuery.validator.setDefaults({
+  debug: false,
+  success: "valid",
+   errorClass: "my-error-class"
+});
+jQuery.validator.addMethod("letterandnumbers", function(value, element) {
+       return this.optional(element) || /^[a-z0-9\s\.]+$/i.test(value);
+    }, "Solo letras y numeros");
+$(function validar() {
+   $("#descuento" ).validate({//#debe tener el nombre del id que le pongan en la etiiqueta form de su formulario
+           rules: {//validaciones que va hacer
+                   porcentaje: {//este es el name del input a validar
+                           required:true,
+                           min:0,
+                           max:1
+                           //este es el requisito a validar
+                   }
+                	// contrasena:{
+		               //      required:true,
+		               //      minlength:8,
+                	// }
+           },
+           messages: {//mensaje si no se cumplen las validaciones
+                   porcentaje: {
+                           required: "&#x1f5d9; Ingresa un IVA",
+                           min: "&#x1f5d9; El valor debe ser mayor a 0",
+                           max: "&#x1f5d9; El valor debe ser menor a 1"//poner el mensaje que quieres que se muestre si no se cumple la validacion, el &#x1f5d9 es el simbolo de equis que se va mostrar si no se cumple la validacon
+                   }
+                	// contrasena:{
+		               //      required:"&#x1f5d9; Ingresa tu contraseña",
+		               //      minlength:"&#x1f5d9; Tu contraseña debe ser mayor a 8 caracteres",
+                	// } debes agregar el mensaje por cada input que pusiste en rules
+           }
+   });
+      });
 </script>

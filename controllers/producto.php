@@ -75,30 +75,30 @@ class Producto extends Controller{
 	}
 
 	function registrarProducto(){
-		$idTipoProd			= $_POST['idtipoprod'];			//Se registra en la tabla producto
-		$idDepartamento		= $_POST['iddepartamento'];		//Se registra en la tabla producto
-		$descripcionProd	= $_POST['descripcionProd'];	//Se registra en la tabla producto
-		$talla				= $_POST['talla'];				//Se registra en la tabla producto
-		$idtipoTela			= $_POST['idtipotela'];			//Se registra en la tabla producto - se deberia de obtener de una tabla externa (tipo tela)
-		$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
-		$estadoProd			= $_POST['estadoProd'];			//Se registra en la tabla producto
-		$foto				= $_FILES["foto"];				//Se registra en la tabla producto
-		//$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)
 		//Recuperamos la session de la persona que esta logeada.
 		$idPersona			= $_SESSION['idPersona'];		//Se obtiene de la session activa (automatco)
-
-		//$idCodigoDeBarras	= $_POST['idcodigodebarras'];	//Se obtiene de la tabla de codigos de barras
-		$codigoInterno		= $_POST['codigointerno'];
-		$codigoExterno		= $_POST['codigoexterno'];
-		//$idPrecio			= $_POST['idprecio'];			//Se obtiene de la tabla de precio
-		$precio				= $_POST['precio'];
-		$cantidad			= $_POST['cantidad'];
-		$idcategoria 		= $_POST['idcategoria'];	//Se obtiene de la tabla de categoria
+		$idTipoProd			= $_POST['idtipoprod'];			//Se registra en la tabla producto
+		$idtipoTela			= $_POST['idtipotela'];			//Se registra en la tabla producto - se deberia de obtener de una tabla externa (tipo tela)
+		$idDepartamento		= $_POST['iddepartamento'];		//Se registra en la tabla producto
+		$descripcionProd	= $_POST['descripcionProd'];	//Se registra en la tabla producto
+		$idcategoria 		= $_POST['idcategoria'];		//Se obtiene de la tabla de categoria
+		#Tipo de numeración solo nos sirve para saber que tipo de talla se insertará- Alfabetico-Numerico-AlfaNumerico
+		$id_talla			= $_POST['idtalla']; 				//Se registra el id de la talla en la tabla prod_talla - se recibe un array
+		$cantidad			= $_POST['cantidad']; 			//Se registra la cantidad en la tabla de stock - se recibe un array
+		$codigoInterno		= $_POST['codigointerno']; 		//Se regista el codigo interno en la tabla de codigo de barras.
+		$codigoExterno		= $_POST['codigoexterno']; 		//Se regista el codigo externo en la tabla de codigo de barras.
+		$estadoProd			= $_POST['estadoProd'];			//Se registra en la tabla producto
 		$proveedor			= $_POST['proveedor'];			//Se registra en la tabla producto
-
+		$precio				= $_POST['precio']; 			//Se registra en la tabla precio
+		$mayoreo			= $_POST['mayoreo']; 			//Se registra en la tabla precio
+		$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
+		$id_promocion		= $_POST['idpromocion'];		//Se guarda el id de producto en la tabla prom_pro y tambien el id_promocion
+		$foto				= $_FILES["foto"];				//Se registra en la tabla producto		
+		//$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)
+		//$idCodigoDeBarras	= $_POST['idcodigodebarras'];	//Se obtiene de la tabla de codigos de barras
 		$mensaje = "";
 
-		if($this->model->insert(['idTipoProd' => $idTipoProd, 'idDepartamento' => $idDepartamento, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'idtipotela' => $idtipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $foto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor])){
+		if($this->model->insert(['idPersona' => $idPersona, 'idTipoProd' => $idTipoProd, 'idtipotela' => $idtipoTela, 'idDepartamento' => $idDepartamento, 'descripcionProd' => $descripcionProd, 'idcategoria' => $idcategoria, 'id_talla' => $id_talla, 'cantidad' => $cantidad, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'estadoProd' => $estadoProd, 'proveedor' => $proveedor, 'precio' => $precio, 'mayoreo' => $mayoreo, 'descuento' => $descuento, 'id_promocion' => $id_promocion, 'foto' => $foto])){
 			$mensaje = "El producto se agreogo correctamente!";
 		}else{
 			$mensaje = "El producto ya existe!";
