@@ -1,6 +1,6 @@
 <div class="form-group">
-	<label for="talla">Talla:</label>
-	<select class="form-control" name="talla" required>		
+	<label for="idtalla">Talla:</label>
+	<select class="form-control" name="idtalla[]" required>		
 		<option value="" hidden>-----</option>
 		<?php
 		include_once 'models/talla.php';

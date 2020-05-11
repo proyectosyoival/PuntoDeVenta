@@ -8,7 +8,6 @@ class Product{
 	public $id_producto;
 	public $descripcionProd;
 	public $estadoProd;
-	public $talla;
 	public $tipo_tela;
 	public $proveedor;
 	public $foto;
@@ -28,9 +27,13 @@ class Product{
 	public $codigo_interno;
 	public $codigo_externo;
 	public $general;
+	public $precio; #general
+	public $mayoreo;
 	public $nombre_categoria;	
 	public $nombreDepa;
 	public $nombreTipoProd;
+	public $nombrePromo;
+	public $descripcionPromo;
 }
 
 ?>

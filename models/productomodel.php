@@ -79,12 +79,12 @@ class ProductoModel extends Model{
             $foto="";
         }else{
          $foto = basename($foto["name"]);
-     }
+        }
 
             //Insercion de los datos a la bd.
-     $query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+     $query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
      $query->bindParam(1, $datos['descripcionProd']);
-     $query->bindParam(2, $datos['talla']);
+     $query->bindParam(2, $datos['id_talla']);
      $query->bindParam(3, $datos['idtipotela']);
      $query->bindParam(4, $datos['descuento']);
      $query->bindParam(5, $datos['estadoProd']);
@@ -98,11 +98,13 @@ class ProductoModel extends Model{
      $query->bindParam(13, $datos['proveedor']);
      $query->bindParam(14, $datos['idTipoProd']);
      $query->bindParam(15, $datos['idDepartamento']);
+     $query->bindParam(16, $datos['mayoreo']);
+     $query->bindParam(17, $datos['id_promocion']);
      $query->execute();
      return true;
- } catch (PDOException $e) {
-   return false;
-}
+    } catch (PDOException $e) {
+    return false;
+    }
 }
 
 #Buscador dinámico envia toda la lista de productos existentes al index.
@@ -119,21 +121,24 @@ public function getProducts(){
                 $item->id_producto          = $row[0];  //id_producto
                 $item->descripcionProd      = $row[1];  //descripcion
                 $item->estadoProd           = $row[2];  //estado
-                $item->talla                = $row[3];  //talla
-                $item->tipo_tela            = $row[4];  //id_tipo_tela
-                $item->foto                 = $row[5];  //foto
-                $item->descuento            = $row[6];  //descuento
-                $item->fecha_reg            = $row[7];  //fecha_reg
-                $item->nombrePers           = $row[8];  //nombre persona quien registra
-                $item->apellido             = $row[9];  //apellido persona quien registra
-                $item->codigo_interno       = $row[10]; //codigo de barras interno
-                $item->codigo_externo       = $row[11]; //codigo de barras externo
-                $item->general              = $row[12]; //precio
+                $item->tipo_tela            = $row[3];  //id_tipo_tela
+                $item->foto                 = $row[4];  //foto
+                $item->descuento            = $row[5];  //descuento
+                $item->fecha_reg            = $row[6];  //fecha_reg
+                $item->nombrePers           = $row[7];  //nombre persona quien registra
+                $item->apellido             = $row[8];  //apellido persona quien registra
+                $item->codigo_interno       = $row[9];  //codigo de barras interno
+                $item->codigo_externo       = $row[10]; //codigo de barras externo
+                $item->general              = $row[11]; //precio
+                $item->mayoreo              = $row[12]; //mayoreo
                 $item->cantidad             = $row[13]; //cantidad
                 $item->nombreCate           = $row[14]; //categoria
                 $item->proveedor            = $row[15]; //proveedor
                 $item->nombreTipoProd       = $row[16]; //trae el nombre del tipo de producto
                 $item->nombreDepa           = $row[17]; //trae el nombre del departamento
+                $item->nombreTalla          = $row[18]; //trae le nombre de la talla -- 32 - G -32D
+                $item->nombrePromo          = $row[19]; //trae el nombre de la promocion
+                $item->descripcionPromo     = $row[20]; //Trae la descripcion de la promocion en turno.
                 array_push($items, $item);
             }
             return $items;
@@ -157,21 +162,24 @@ public function getProducts(){
                 $item->id_producto          = $row[0];  //id_producto
                 $item->descripcionProd      = $row[1];  //descripcion
                 $item->estadoProd           = $row[2];  //estado
-                $item->talla                = $row[3];  //talla
-                $item->tipo_tela            = $row[4];  //id_tipo_tela
-                $item->foto                 = $row[5];  //foto
-                $item->descuento            = $row[6];  //descuento
-                $item->fecha_reg            = $row[7];  //fecha_reg
-                $item->nombrePers           = $row[8];  //nombre persona quien registra
-                $item->apellido             = $row[9];  //apellido persona quien registra
-                $item->codigo_interno       = $row[10]; //codigo de barras interno
-                $item->codigo_externo       = $row[11]; //codigo de barras externo
-                $item->general              = $row[12]; //precio
+                $item->tipo_tela            = $row[3];  //id_tipo_tela
+                $item->foto                 = $row[4];  //foto
+                $item->descuento            = $row[5];  //descuento
+                $item->fecha_reg            = $row[6];  //fecha_reg
+                $item->nombrePers           = $row[7];  //nombre persona quien registra
+                $item->apellido             = $row[8];  //apellido persona quien registra
+                $item->codigo_interno       = $row[9];  //codigo de barras interno
+                $item->codigo_externo       = $row[10]; //codigo de barras externo
+                $item->general              = $row[11]; //precio
+                $item->mayoreo              = $row[12]; //mayoreo
                 $item->cantidad             = $row[13]; //cantidad
                 $item->nombreCate           = $row[14]; //categoria
                 $item->proveedor            = $row[15]; //proveedor
                 $item->nombreTipoProd       = $row[16]; //trae el nombre del tipo de producto
                 $item->nombreDepa           = $row[17]; //trae el nombre del departamento
+                $item->nombreTalla          = $row[18]; //trae le nombre de la talla -- 32 - G -32D
+                $item->nombrePromo          = $row[19]; //trae el nombre de la promocion
+                $item->descripcionPromo     = $row[20]; //Trae la descripcion de la promocion en turno.
                 array_push($items, $item);
             }
             return $items;
@@ -282,6 +290,8 @@ public function getProducts(){
         }
     }
 
+    #Ésta funciÓn se utiliza para mostrar la info completa del producto
+    #asi como para seleccionarlo y editarlo
     public function getProductById($id_producto){
       $item = new Producto();
 
@@ -295,16 +305,16 @@ public function getProducts(){
                 $item->id_producto          = $row[0];  //id_producto
                 $item->descripcionProd      = $row[1];  //descripcion
                 $item->estadoProd           = $row[2];  //estado
-                $item->talla                = $row[3];  //talla
-                $item->tipo_tela            = $row[4];  //id_tipo_tela
-                $item->foto                 = $row[5];  //foto
-                $item->descuento            = $row[6];  //descuento
-                $item->fecha_reg            = $row[7];  //fecha_reg
-                $item->nombrePers           = $row[8];  //nombre persona quien registra
-                $item->apellido             = $row[9]; //apellido persona quien registra
-                $item->codigo_interno       = $row[10]; //codigo de barras interno
-                $item->codigo_externo       = $row[11]; //codigo de barras externo
-                $item->general              = $row[12]; //precio
+                $item->tipo_tela            = $row[3];  //id_tipo_tela
+                $item->foto                 = $row[4];  //foto
+                $item->descuento            = $row[5];  //descuento
+                $item->fecha_reg            = $row[6];  //fecha_reg
+                $item->nombrePers           = $row[7];  //nombre persona quien registra
+                $item->apellido             = $row[8];  //apellido persona quien registra
+                $item->codigo_interno       = $row[9]; //codigo de barras interno
+                $item->codigo_externo       = $row[10]; //codigo de barras externo
+                $item->general              = $row[11]; //precio
+                $item->mayoreo              = $row[12]; //mayoreo
                 $item->cantidad             = $row[13]; //cantidad
                 $item->nombreCate           = $row[14]; //categoria
                 $item->proveedor            = $row[15]; //proveedor
@@ -316,6 +326,9 @@ public function getProducts(){
                 $item->id_departamento      = $row[21]; //id del departamento
                 $item->nombreDepa           = $row[22]; //nombre del deapartamento -> DAMA, CABALLERO
                 $item->nomenclaturaDep      = $row[23]; //nomenclatura del departamento D = DAMA, C = CABALLERO... ETC.
+                $item->nombreTalla          = $row[24]; //nombre de la talla 32-G-32A
+                $item->nombrePromo          = $row[25]; //nombre de la promocion - 2x1
+                $item->descripcionPromo     = $row[26]; //descripcion de la promocion
             }
             return $item;
         }catch(PDOException $e){
@@ -360,21 +373,19 @@ public function getProducts(){
     public function deleteProduct($idProducto){
         #Traemos el dato para poder eliminar la foto del producto
         $db = new Database();
-        $query = $db->connect()->prepare('SELECT foto, id_codigo_de_barras, id_precio, id_stock FROM producto WHERE id_producto= :id_producto');
+        $query = $db->connect()->prepare('SELECT foto, id_codigo_de_barras, id_precio FROM producto WHERE id_producto= :id_producto');
         $query->execute(['id_producto' => $idProducto]);
         foreach ($query as $row) {
             $foto                   = $row['foto'];
             $id_codigo_de_barras    = $row['id_codigo_de_barras'];
             $id_precio              = $row['id_precio'];
-            $id_stock               = $row['id_stock'];
         }
         #Llamamos el StoreProcedure para eliminar el producto y sus dependientes.
-        $query = $this->db->connect()->prepare("CALL procDeleteProducto(?,?,?,?)");
+        $query = $this->db->connect()->prepare("CALL procDeleteProducto(?,?,?)");
         try {
             $query->bindParam(1, $idProducto);
             $query->bindParam(2, $id_codigo_de_barras);
             $query->bindParam(3, $id_precio);
-            $query->bindParam(4, $id_stock);
             $query->execute();
 
             #Si se eliminaron todos los datos correctamente entonces si borramos la imagen.
