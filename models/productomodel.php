@@ -290,7 +290,7 @@ public function getProducts(){
         }
     }
 
-    #Esta funcion se utiliza para mostrar la info completa del producto
+    #Ésta funciÓn se utiliza para mostrar la info completa del producto
     #asi como para seleccionarlo y editarlo
     public function getProductById($id_producto){
       $item = new Producto();
@@ -314,17 +314,21 @@ public function getProducts(){
                 $item->codigo_interno       = $row[9]; //codigo de barras interno
                 $item->codigo_externo       = $row[10]; //codigo de barras externo
                 $item->general              = $row[11]; //precio
-                $item->cantidad             = $row[12]; //cantidad
-                $item->nombreCate           = $row[13]; //categoria
-                $item->proveedor            = $row[14]; //proveedor
-                $item->id_codigo_de_barras  = $row[15]; //id del codigoo de barras
-                $item->id_precio            = $row[16]; //id del precio
-                $item->id_stock             = $row[17]; //id del stock
-                $item->id_cat_tipo_prod     = $row[18]; //id del cat tipo de producto
-                $item->nombreTipoProd       = $row[19]; //nombre del tipo de producto -> PANTALON, CHAMARRA, ETC.
-                $item->id_departamento      = $row[20]; //id del departamento
-                $item->nombreDepa           = $row[21]; //nombre del deapartamento -> DAMA, CABALLERO
-                $item->nomenclaturaDep      = $row[22]; //nomenclatura del departamento D = DAMA, C = CABALLERO... ETC.
+                $item->mayoreo              = $row[12]; //mayoreo
+                $item->cantidad             = $row[13]; //cantidad
+                $item->nombreCate           = $row[14]; //categoria
+                $item->proveedor            = $row[15]; //proveedor
+                $item->id_codigo_de_barras  = $row[16]; //id del codigoo de barras
+                $item->id_precio            = $row[17]; //id del precio
+                $item->id_stock             = $row[18]; //id del stock
+                $item->id_cat_tipo_prod     = $row[19]; //id del cat tipo de producto
+                $item->nombreTipoProd       = $row[20]; //nombre del tipo de producto -> PANTALON, CHAMARRA, ETC.
+                $item->id_departamento      = $row[21]; //id del departamento
+                $item->nombreDepa           = $row[22]; //nombre del deapartamento -> DAMA, CABALLERO
+                $item->nomenclaturaDep      = $row[23]; //nomenclatura del departamento D = DAMA, C = CABALLERO... ETC.
+                $item->nombreTalla          = $row[24]; //nombre de la talla 32-G-32A
+                $item->nombrePromo          = $row[25]; //nombre de la promocion - 2x1
+                $item->descripcionPromo     = $row[26]; //descripcion de la promocion
             }
             return $item;
         }catch(PDOException $e){
@@ -369,21 +373,19 @@ public function getProducts(){
     public function deleteProduct($idProducto){
         #Traemos el dato para poder eliminar la foto del producto
         $db = new Database();
-        $query = $db->connect()->prepare('SELECT foto, id_codigo_de_barras, id_precio, id_stock FROM producto WHERE id_producto= :id_producto');
+        $query = $db->connect()->prepare('SELECT foto, id_codigo_de_barras, id_precio FROM producto WHERE id_producto= :id_producto');
         $query->execute(['id_producto' => $idProducto]);
         foreach ($query as $row) {
             $foto                   = $row['foto'];
             $id_codigo_de_barras    = $row['id_codigo_de_barras'];
             $id_precio              = $row['id_precio'];
-            $id_stock               = $row['id_stock'];
         }
         #Llamamos el StoreProcedure para eliminar el producto y sus dependientes.
-        $query = $this->db->connect()->prepare("CALL procDeleteProducto(?,?,?,?)");
+        $query = $this->db->connect()->prepare("CALL procDeleteProducto(?,?,?)");
         try {
             $query->bindParam(1, $idProducto);
             $query->bindParam(2, $id_codigo_de_barras);
             $query->bindParam(3, $id_precio);
-            $query->bindParam(4, $id_stock);
             $query->execute();
 
             #Si se eliminaron todos los datos correctamente entonces si borramos la imagen.

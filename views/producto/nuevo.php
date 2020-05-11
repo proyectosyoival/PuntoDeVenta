@@ -125,7 +125,7 @@
 
 					<div class="form-group col-md-3">
 						<label for="cantidad">Cantidad:</label>
-						<input type="text" name="cantidad" id="cantidad" class="form-control" placeholder="Numero de unidades" required>
+						<input type="text" name="cantidad[]" id="cantidad" class="form-control" placeholder="Numero de unidades" required>
 					</div>
 					
 					<div>
