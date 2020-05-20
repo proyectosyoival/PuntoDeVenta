@@ -85,18 +85,7 @@ class Producto extends Controller{
 		#Tipo de numeración solo nos sirve para saber que tipo de talla se insertará- Alfabetico-Numerico-AlfaNumerico
 		$id_talla			= $_POST['idtalla']; 				//Se registra el id de la talla en la tabla prod_talla - se recibe un array
 		#Convertimos los valores a una cadena de caracteres separados por guion
-		$idTalla = null;
-		foreach ($id_talla as $value) {
-				$idTalla .= $value . "-";
-		}
-		$id_talla = $idTalla;
-		#Convertimos los valores a una cadena de caracteres separados por guion
 		$cantidad			= $_POST['cantidad']; 			//Se registra la cantidad en la tabla de stock - se recibe un array
-		$Cantidad = null;
-		foreach ($cantidad as $value) {
-			    $Cantidad .= $value . "-";
-		}
-		$cantidad = $Cantidad;
 		$codigoInterno		= $_POST['codigointerno']; 		//Se regista el codigo interno en la tabla de codigo de barras.
 		$codigoExterno		= $_POST['codigoexterno']; 		//Se regista el codigo externo en la tabla de codigo de barras.
 		$estadoProd			= $_POST['estadoProd'];			//Se registra en la tabla producto

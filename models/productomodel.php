@@ -21,10 +21,10 @@ class ProductoModel extends Model{
 
             $foto = $datos['foto'];
             //Checar validacion
-                if (empty($foto)) {
+            if (empty($foto)) {
                     //echo "vacia";
-                    echo $foto;
-                }
+                echo $foto;
+            }
 
             $arrayupfotos=array();
             array_push($arrayupfotos, $foto);
@@ -78,297 +78,335 @@ class ProductoModel extends Model{
         if ($foto['name']=="") {
             $foto="";
         }else{
-         $foto = basename($foto["name"]);
-        }
+           $foto = basename($foto["name"]);
+       }
 
-            //Insercion de los datos a la bd.
-     $query = $this->db->connect()->prepare("CALL procInsertNewProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-     $query->bindParam(1, $datos['descripcionProd']);
-     $query->bindParam(2, $datos['id_talla']);
-     $query->bindParam(3, $datos['idtipotela']);
-     $query->bindParam(4, $datos['descuento']);
-     $query->bindParam(5, $datos['estadoProd']);
-     $query->bindParam(6, $foto);
-     $query->bindParam(7, $datos['idPersona']);
-     $query->bindParam(8, $datos['codigointerno']);
-     $query->bindParam(9, $datos['codigoexterno']);
-     $query->bindParam(10, $datos['precio']);
-     $query->bindParam(11, $datos['cantidad']);
-     $query->bindParam(12, $datos['idcategoria']);
-     $query->bindParam(13, $datos['proveedor']);
-     $query->bindParam(14, $datos['idTipoProd']);
-     $query->bindParam(15, $datos['idDepartamento']);
-     $query->bindParam(16, $datos['mayoreo']);
-     $query->bindParam(17, $datos['id_promocion']);
-     $query->execute();
-     return true;
-    } catch (PDOException $e) {
+        //Insercion de los datos a la bd.
+        $this->db->connect()->beginTransaction();
+        #Insertamos los codigos de barras.
+        $query = $this->db->connect()->prepare("INSERT INTO codigo_de_barras(codigo_interno, codigo_externo) VALUES(:codigointerno, :codigoexterno);");
+        $query->execute(['codigointerno' => $datos['codigointerno'], 'codigoexterno' => $datos['codigoexterno']]);
+        #Buscamos el id del codigo de barras que acabamos de insertar.
+        $query = $this->db->connect()->prepare("SELECT max(id_codigo_de_barras) FROM codigo_de_barras;");
+        $query->execute();
+            foreach ($query as $row) {
+            $id_cod_bar = $row[0]; #Este es el que utilizaremos para almacenarlo en la tabla Productos
+        }
+        #Traemos el ultimo (único) iva almacenado de la tabla IVA
+        $query = $this->db->connect()->prepare("SELECT max(id_iva) FROM iva;");
+        $query->execute();
+            foreach ($query as $row) {
+            $idIva = $row[0]; #Este es el que utilizaremos para almacenarlo en la tabla Precio
+        }
+        #Insertamos en la tabla Precio lo que son los campos de general(precio) y mayoreo
+        $query = $this->db->connect()->prepare("INSERT INTO precio(general, mayoreo, id_iva) VALUES(:precio, :mayoreo, :idIva);");
+        $query->execute(['precio' => $datos['precio'], 'mayoreo' => $datos['mayoreo'], 'idIva' => $idIva]);
+        #De la Tabla Precios traemos el ultimo id de los datos que se ingresan anteriormente.
+        $query = $this->db->connect()->prepare("SELECT max(id_precio) FROM precio;");
+        $query->execute();
+            foreach ($query as $row) {
+            $id_prec = $row[0]; #Este es el que utilizaremos para almacenarlo en la tabla Productos
+        }
+        #Ahora creamos el producto
+        $query = $this->db->connect()->prepare("INSERT INTO producto(descripcionProd, estadoProd, id_tipo_tela, proveedor, foto, descuento, id_persona, id_codigo_de_barras, id_precio, id_categoria, id_cat_tipo_prod, id_departamento) VALUES(:descripcionProd, :estadoProd, :idtipoTela, :proveedor, :foto, :descuento, :idPersona, :id_cod_bar, :id_prec, :idCategoria, :idCatTipoProd, :idDepartamento);");
+        $query->execute(['descripcionProd' => $datos['descripcionProd'], 'estadoProd' => $datos['estadoProd'], 'idtipoTela' => $datos['idtipotela'], 'proveedor' => $datos['proveedor'], 'foto' => $foto, 'descuento' => $datos['descuento'], 'idPersona' => $datos['idPersona'], 'id_cod_bar' => $id_cod_bar, 'id_prec' => $id_prec, 'idCategoria' => $datos['idcategoria'], 'idCatTipoProd' => $datos['idTipoProd'], 'idDepartamento' => $datos['idDepartamento']]);
+        #Los siguientes movimientos son los que ocupan el id del producto creado asi que lo recuperamos.
+        $query = $this->db->connect()->prepare("SELECT max(id_producto) FROM producto;");
+        $query->execute();
+            foreach ($query as $row) {
+            $idProd = $row[0]; #Este es el que utilizaremos para almacenarlo en las diferentes tablas (stock, prod_talla, prom_pro)
+        }
+        #Ya que tenemos el id del producto generado insertamos en la tabla stock lo que es la cantidad(es) y el mismo id del producto antes generado.
+        $cantidad = $datos['cantidad'];
+        #Según el numero de cantidades es el que se ejecutara la insercion en stock.
+        foreach ($cantidad as $row => $valor) {
+            $_cantidad = $valor;
+            $query = $this->db->connect()->prepare("INSERT INTO stock(cantidad, id_producto) VALUES(:cantidad, :idProd);");
+            $query->execute(['cantidad' => $_cantidad, 'idProd' => $idProd]);
+        }
+        unset($valor);
+        #Ya que ingresamos las cantidades ahora debemos de registrar las tallas respecto a su misma cantidad.
+        $id_talla = $datos['id_talla'];
+        #Según el numero de tallas es el que se ejecutara la insercion en stock.
+        foreach ($id_talla as $row => $valor) {
+            $_id_talla = $valor;
+            $query = $this->db->connect()->prepare("INSERT INTO prod_talla (id_producto, id_talla) VALUES(:idProd, :idTalla);");
+            $query->execute(['idProd' => $idProd, 'idTalla' => $_id_talla]);
+        }
+        unset($valor);
+        #Ya solo queda insertar si es que el producto tiene promocion o no.
+        $query = $this->db->connect()->prepare("INSERT INTO prom_pro(id_promocion, id_producto) VALUES(:idPromocion, :idProd);");
+        $query->execute(['idPromocion' => $datos['id_promocion'], 'idProd' => $idProd]);
+        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<CHECAR LA TRANSACTION
+       
+        $this->db->connect()->commit();
+        return true;
+   } catch (PDOException $e) {
+    #$this->db->connect()->rollBack();
     return false;
     }
 }
 
-#Buscador dinámico envia toda la lista de productos existentes al index.
-public function getProducts(){
-  $items = [];
+        #Buscador dinámico envia toda la lista de productos existentes al index.
+        public function getProducts(){
+          $items = [];
 
-  try{
+          try{
 
 
-    $query = $this->db->connect()->query("CALL procGetAllProductos();");
+            $query = $this->db->connect()->query("CALL procGetAllProductos();");
 
-    while($row = $query->fetch()){
-        $item = new Producto();
-                $item->id_producto          = $row[0];  //id_producto
-                $item->descripcionProd      = $row[1];  //descripcion
-                $item->estadoProd           = $row[2];  //estado
-                $item->tipo_tela            = $row[3];  //id_tipo_tela
-                $item->foto                 = $row[4];  //foto
-                $item->descuento            = $row[5];  //descuento
-                $item->fecha_reg            = $row[6];  //fecha_reg
-                $item->nombrePers           = $row[7];  //nombre persona quien registra
-                $item->apellido             = $row[8];  //apellido persona quien registra
-                $item->codigo_interno       = $row[9];  //codigo de barras interno
-                $item->codigo_externo       = $row[10]; //codigo de barras externo
-                $item->general              = $row[11]; //precio
-                $item->mayoreo              = $row[12]; //mayoreo
-                $item->cantidad             = $row[13]; //cantidad
-                $item->nombreCate           = $row[14]; //categoria
-                $item->proveedor            = $row[15]; //proveedor
-                $item->nombreTipoProd       = $row[16]; //trae el nombre del tipo de producto
-                $item->nombreDepa           = $row[17]; //trae el nombre del departamento
-                $item->nombreTalla          = $row[18]; //trae le nombre de la talla -- 32 - G -32D
-                $item->nombrePromo          = $row[19]; //trae el nombre de la promocion
-                $item->descripcionPromo     = $row[20]; //Trae la descripcion de la promocion en turno.
-                array_push($items, $item);
+            while($row = $query->fetch()){
+                $item = new Producto();
+                    $item->id_producto          = $row[0];  //id_producto
+                    $item->descripcionProd      = $row[1];  //descripcion
+                    $item->estadoProd           = $row[2];  //estado
+                    $item->tipo_tela            = $row[3];  //id_tipo_tela
+                    $item->foto                 = $row[4];  //foto
+                    $item->descuento            = $row[5];  //descuento
+                    $item->fecha_reg            = $row[6];  //fecha_reg
+                    $item->nombrePers           = $row[7];  //nombre persona quien registra
+                    $item->apellido             = $row[8];  //apellido persona quien registra
+                    $item->codigo_interno       = $row[9];  //codigo de barras interno
+                    $item->codigo_externo       = $row[10]; //codigo de barras externo
+                    $item->general              = $row[11]; //precio
+                    $item->mayoreo              = $row[12]; //mayoreo
+                    $item->cantidad             = $row[13]; //cantidad
+                    $item->nombreCate           = $row[14]; //categoria
+                    $item->proveedor            = $row[15]; //proveedor
+                    $item->nombreTipoProd       = $row[16]; //trae el nombre del tipo de producto
+                    $item->nombreDepa           = $row[17]; //trae el nombre del departamento
+                    $item->nombreTalla          = $row[18]; //trae le nombre de la talla -- 32 - G -32D
+                    $item->nombrePromo          = $row[19]; //trae el nombre de la promocion
+                    $item->descripcionPromo     = $row[20]; //Trae la descripcion de la promocion en turno.
+                    array_push($items, $item);
+                }
+                return $items;
+            }catch(PDOException $e){
+                return [];
             }
-            return $items;
-        }catch(PDOException $e){
-            return [];
         }
-    }
 
-    #Buscador dinámico envia los productos buscados en index.
-    public function getSearchProducts($searchProd){
-        $items = [];
+        #Buscador dinámico envia los productos buscados en index.
+        public function getSearchProducts($searchProd){
+            $items = [];
 
-        try{
+            try{
 
-           $query = $this->db->connect()->prepare("CALL procGetSearchProduct(?);");
-           $query->bindParam(1, $searchProd);
-           $query->execute();
+             $query = $this->db->connect()->prepare("CALL procGetSearchProduct(?);");
+             $query->bindParam(1, $searchProd);
+             $query->execute();
 
-           while($row = $query->fetch()){
-            $item = new Producto();
-                $item->id_producto          = $row[0];  //id_producto
-                $item->descripcionProd      = $row[1];  //descripcion
-                $item->estadoProd           = $row[2];  //estado
-                $item->tipo_tela            = $row[3];  //id_tipo_tela
-                $item->foto                 = $row[4];  //foto
-                $item->descuento            = $row[5];  //descuento
-                $item->fecha_reg            = $row[6];  //fecha_reg
-                $item->nombrePers           = $row[7];  //nombre persona quien registra
-                $item->apellido             = $row[8];  //apellido persona quien registra
-                $item->codigo_interno       = $row[9];  //codigo de barras interno
-                $item->codigo_externo       = $row[10]; //codigo de barras externo
-                $item->general              = $row[11]; //precio
-                $item->mayoreo              = $row[12]; //mayoreo
-                $item->cantidad             = $row[13]; //cantidad
-                $item->nombreCate           = $row[14]; //categoria
-                $item->proveedor            = $row[15]; //proveedor
-                $item->nombreTipoProd       = $row[16]; //trae el nombre del tipo de producto
-                $item->nombreDepa           = $row[17]; //trae el nombre del departamento
-                $item->nombreTalla          = $row[18]; //trae le nombre de la talla -- 32 - G -32D
-                $item->nombrePromo          = $row[19]; //trae el nombre de la promocion
-                $item->descripcionPromo     = $row[20]; //Trae la descripcion de la promocion en turno.
-                array_push($items, $item);
+             while($row = $query->fetch()){
+                $item = new Producto();
+                    $item->id_producto          = $row[0];  //id_producto
+                    $item->descripcionProd      = $row[1];  //descripcion
+                    $item->estadoProd           = $row[2];  //estado
+                    $item->tipo_tela            = $row[3];  //id_tipo_tela
+                    $item->foto                 = $row[4];  //foto
+                    $item->descuento            = $row[5];  //descuento
+                    $item->fecha_reg            = $row[6];  //fecha_reg
+                    $item->nombrePers           = $row[7];  //nombre persona quien registra
+                    $item->apellido             = $row[8];  //apellido persona quien registra
+                    $item->codigo_interno       = $row[9];  //codigo de barras interno
+                    $item->codigo_externo       = $row[10]; //codigo de barras externo
+                    $item->general              = $row[11]; //precio
+                    $item->mayoreo              = $row[12]; //mayoreo
+                    $item->cantidad             = $row[13]; //cantidad
+                    $item->nombreCate           = $row[14]; //categoria
+                    $item->proveedor            = $row[15]; //proveedor
+                    $item->nombreTipoProd       = $row[16]; //trae el nombre del tipo de producto
+                    $item->nombreDepa           = $row[17]; //trae el nombre del departamento
+                    $item->nombreTalla          = $row[18]; //trae le nombre de la talla -- 32 - G -32D
+                    $item->nombrePromo          = $row[19]; //trae el nombre de la promocion
+                    $item->descripcionPromo     = $row[20]; //Trae la descripcion de la promocion en turno.
+                    array_push($items, $item);
+                }
+                return $items;
+            }catch(PDOException $e){
+                return [];
             }
-            return $items;
-        }catch(PDOException $e){
-            return [];
         }
-    }
 
-    public function getTallas($tipoTalla){
-    #Traemos los datos de los tipos de Tallas
-        $items = [];
-        try {
+        #Traemos los datos de los tipos de Tallas
+        public function getTallas($tipoTalla){
+            $items = [];
+            try {
 
-            $db = new Database();               
-            $query = $db->connect()->prepare('SELECT id_talla, nombreTalla FROM talla WHERE tipoTalla LIKE :tipoTalla');
-            $query->execute(['tipoTalla' => $tipoTalla]);
-            
-            while ($row = $query->fetch()) {
-                $item = new Size();
-                $item->id_talla       = $row[0];
-                $item->nombreTalla    = $row[1];
-                array_push($items, $item);
+                $db = new Database();               
+                $query = $db->connect()->prepare('SELECT id_talla, nombreTalla FROM talla WHERE tipoTalla LIKE :tipoTalla');
+                $query->execute(['tipoTalla' => $tipoTalla]);
+                
+                while ($row = $query->fetch()) {
+                    $item = new Size();
+                    $item->id_talla       = $row[0];
+                    $item->nombreTalla    = $row[1];
+                    array_push($items, $item);
+                }
+                return $items;
+            } catch (PDOException $e) {
+                return [];
             }
-            return $items;
-        } catch (PDOException $e) {
-            return [];
         }
-    }
 
-    public function getTiposProdForProduct(){
-        $items = [];
+        public function getTiposProdForProduct(){
+            $items = [];
 
-        try {
+            try {
 
-            $query = $this->db->connect()->query("CALL procGetAllTiposProd();");
+                $query = $this->db->connect()->query("CALL procGetAllTiposProd();");
 
-            while ($row = $query->fetch()) {
-                $item = new TipoProduct();
-                $item->id_cat_tipo_prod     = $row[0]; //id_catalogo tipo de producto
-                $item->nombreTipoProd       = $row[1]; //nomvre del tipo de producto
-                $item->nomenclaturaTipoProd = $row[2]; //nomenclatura del tipo de producto 001 etc.
-                array_push($items, $item);
+                while ($row = $query->fetch()) {
+                    $item = new TipoProduct();
+                    $item->id_cat_tipo_prod     = $row[0]; //id_catalogo tipo de producto
+                    $item->nombreTipoProd       = $row[1]; //nomvre del tipo de producto
+                    $item->nomenclaturaTipoProd = $row[2]; //nomenclatura del tipo de producto 001 etc.
+                    array_push($items, $item);
+                }
+
+                return $items;
+            } catch (PDOException $e) {
+                return [];
             }
-
-            return $items;
-        } catch (PDOException $e) {
-            return [];
         }
-    }
 
-    public function getDepartamentForProduct(){
-        $items = [];
+        public function getDepartamentForProduct(){
+            $items = [];
 
-        try {
-            $query = $this->db->connect()->query("CALL procGetAllDepartamentos();");
+            try {
+                $query = $this->db->connect()->query("CALL procGetAllDepartamentos();");
 
-            while ($row = $query->fetch()) {
-                $item = new Depto();
-                $item->id_departamento  = $row[0]; //id del departamento
-                $item->nombreDepa       = $row[1]; //nombre del departamento
-                $item->nomenclaturaDep  = $row[3]; //nomenclatura del departamento C = CABALLERO, D = DAMA... etc.
-                array_push($items, $item);
+                while ($row = $query->fetch()) {
+                    $item = new Depto();
+                    $item->id_departamento  = $row[0]; //id del departamento
+                    $item->nombreDepa       = $row[1]; //nombre del departamento
+                    $item->nomenclaturaDep  = $row[3]; //nomenclatura del departamento C = CABALLERO, D = DAMA... etc.
+                    array_push($items, $item);
+                }
+
+                return $items;
+            } catch (PDOException $e) {
+                return [];
             }
-
-            return $items;
-        } catch (PDOException $e) {
-            return [];
         }
-    }
 
-    public function getTipostelaForProduct(){
-        $items = [];
+        public function getTipostelaForProduct(){
+            $items = [];
 
-        try {
+            try {
 
-            $query = $this->db->connect()->query("CALL procGetAllTipostela();");
+                $query = $this->db->connect()->query("CALL procGetAllTipostela();");
 
-            while ($row = $query->fetch()) {
-                $item = new Cate();
-                $item->id_tipo_tela     = $row[0]; //id_categoria
-                $item->nombreTipoTela   = $row[1]; //nombreCate
-                array_push($items, $item);
+                while ($row = $query->fetch()) {
+                    $item = new Cate();
+                    $item->id_tipo_tela     = $row[0]; //id_categoria
+                    $item->nombreTipoTela   = $row[1]; //nombreCate
+                    array_push($items, $item);
+                }
+
+                return $items;
+            } catch (PDOException $e) {
+                return [];
             }
-
-            return $items;
-        } catch (PDOException $e) {
-            return [];
         }
-    }
 
-    public function getCategoriesForProduct(){
-        $items = [];
+        public function getCategoriesForProduct(){
+            $items = [];
 
-        try {
+            try {
 
-            $query = $this->db->connect()->query("CALL procGetAllCategorias();");
+                $query = $this->db->connect()->query("CALL procGetAllCategorias();");
 
-            while ($row = $query->fetch()) {
-                $item = new Cate();
-                $item->id_categoria     = $row[0]; //id_categoria
-                $item->nombreCate       = $row[1]; //nombreCate
-                array_push($items, $item);
+                while ($row = $query->fetch()) {
+                    $item = new Cate();
+                    $item->id_categoria     = $row[0]; //id_categoria
+                    $item->nombreCate       = $row[1]; //nombreCate
+                    array_push($items, $item);
+                }
+
+                return $items;
+            } catch (PDOException $e) {
+                return [];
             }
-
-            return $items;
-        } catch (PDOException $e) {
-            return [];
         }
-    }
 
-    #Ésta funciÓn se utiliza para mostrar la info completa del producto
-    #asi como para seleccionarlo y editarlo
-    public function getProductById($id_producto){
-      $item = new Producto();
+        #Ésta funciÓn se utiliza para mostrar la info completa del producto
+        #asi como para seleccionarlo y editarlo
+        public function getProductById($id_producto){
+          $item = new Producto();
 
-      $query = $this->db->connect()->prepare("CALL procGetSelectedProduct(?);");
-      $query->bindParam(1, $id_producto);
-      $query->execute();
+          $query = $this->db->connect()->prepare("CALL procGetSelectedProduct(?);");
+          $query->bindParam(1, $id_producto);
+          $query->execute();
 
-      try{
+          try{
 
-        while($row = $query->fetch()){
-                $item->id_producto          = $row[0];  //id_producto
-                $item->descripcionProd      = $row[1];  //descripcion
-                $item->estadoProd           = $row[2];  //estado
-                $item->tipo_tela            = $row[3];  //id_tipo_tela
-                $item->foto                 = $row[4];  //foto
-                $item->descuento            = $row[5];  //descuento
-                $item->fecha_reg            = $row[6];  //fecha_reg
-                $item->nombrePers           = $row[7];  //nombre persona quien registra
-                $item->apellido             = $row[8];  //apellido persona quien registra
-                $item->codigo_interno       = $row[9]; //codigo de barras interno
-                $item->codigo_externo       = $row[10]; //codigo de barras externo
-                $item->general              = $row[11]; //precio
-                $item->mayoreo              = $row[12]; //mayoreo
-                $item->cantidad             = $row[13]; //cantidad
-                $item->nombreCate           = $row[14]; //categoria
-                $item->proveedor            = $row[15]; //proveedor
-                $item->id_codigo_de_barras  = $row[16]; //id del codigoo de barras
-                $item->id_precio            = $row[17]; //id del precio
-                $item->id_stock             = $row[18]; //id del stock
-                $item->id_cat_tipo_prod     = $row[19]; //id del cat tipo de producto
-                $item->nombreTipoProd       = $row[20]; //nombre del tipo de producto -> PANTALON, CHAMARRA, ETC.
-                $item->id_departamento      = $row[21]; //id del departamento
-                $item->nombreDepa           = $row[22]; //nombre del deapartamento -> DAMA, CABALLERO
-                $item->nomenclaturaDep      = $row[23]; //nomenclatura del departamento D = DAMA, C = CABALLERO... ETC.
-                $item->nombreTalla          = $row[24]; //nombre de la talla 32-G-32A
-                $item->nombrePromo          = $row[25]; //nombre de la promocion - 2x1
-                $item->descripcionPromo     = $row[26]; //descripcion de la promocion
+            while($row = $query->fetch()){
+                    $item->id_producto          = $row[0];  //id_producto
+                    $item->descripcionProd      = $row[1];  //descripcion
+                    $item->estadoProd           = $row[2];  //estado
+                    $item->tipo_tela            = $row[3];  //id_tipo_tela
+                    $item->foto                 = $row[4];  //foto
+                    $item->descuento            = $row[5];  //descuento
+                    $item->fecha_reg            = $row[6];  //fecha_reg
+                    $item->nombrePers           = $row[7];  //nombre persona quien registra
+                    $item->apellido             = $row[8];  //apellido persona quien registra
+                    $item->codigo_interno       = $row[9]; //codigo de barras interno
+                    $item->codigo_externo       = $row[10]; //codigo de barras externo
+                    $item->general              = $row[11]; //precio
+                    $item->mayoreo              = $row[12]; //mayoreo
+                    $item->cantidad             = $row[13]; //cantidad
+                    $item->nombreCate           = $row[14]; //categoria
+                    $item->proveedor            = $row[15]; //proveedor
+                    $item->id_codigo_de_barras  = $row[16]; //id del codigoo de barras
+                    $item->id_precio            = $row[17]; //id del precio
+                    $item->id_stock             = $row[18]; //id del stock
+                    $item->id_cat_tipo_prod     = $row[19]; //id del cat tipo de producto
+                    $item->nombreTipoProd       = $row[20]; //nombre del tipo de producto -> PANTALON, CHAMARRA, ETC.
+                    $item->id_departamento      = $row[21]; //id del departamento
+                    $item->nombreDepa           = $row[22]; //nombre del deapartamento -> DAMA, CABALLERO
+                    $item->nomenclaturaDep      = $row[23]; //nomenclatura del departamento D = DAMA, C = CABALLERO... ETC.
+                    $item->nombreTalla          = $row[24]; //nombre de la talla 32-G-32A
+                    $item->nombrePromo          = $row[25]; //nombre de la promocion - 2x1
+                    $item->descripcionPromo     = $row[26]; //descripcion de la promocion
+                }
+                return $item;
+            }catch(PDOException $e){
+                return null;
             }
-            return $item;
-        }catch(PDOException $e){
-            return null;
-        }
-    }
-
-    public function updateProd($datos){
-
-        //Insercion de los datos a la bd.
-        try{
-            $query = $this->db->connect()->prepare("CALL procUpdateProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            $query->bindParam(1,  $datos['id_producto']);
-            $query->bindParam(2,  $datos['descripcionProd']);
-            $query->bindParam(3,  $datos['talla']);
-            $query->bindParam(4,  $datos['idtipotela']);
-            $query->bindParam(5,  $datos['descuento']);
-            $query->bindParam(6,  $datos['estadoProd']);
-            $query->bindParam(7,  $datos['foto']);
-            $query->bindParam(8,  $datos['idPersona']);
-            $query->bindParam(9,  $datos['id_codigo_de_barras']);
-            $query->bindParam(10, $datos['codigointerno']);
-            $query->bindParam(11, $datos['codigoexterno']);
-            $query->bindParam(12, $datos['id_precio']);
-            $query->bindParam(13, $datos['precio']);
-            $query->bindParam(14, $datos['id_stock']);
-            $query->bindParam(15, $datos['cantidad']);
-            $query->bindParam(16, $datos['idcategoria']);
-            $query->bindParam(17, $datos['proveedor']);
-            $query->bindParam(18, $datos['idTipoProd']);
-            $query->bindParam(19, $datos['idDepartamento']);
-            $query->execute();
-
-            return true;
-        } catch (PDOException $e) {
-            return false;
         }
 
+        public function updateProd($datos){
 
-    }
+            //Insercion de los datos a la bd.
+            try{
+                $query = $this->db->connect()->prepare("CALL procUpdateProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                $query->bindParam(1,  $datos['id_producto']);
+                $query->bindParam(2,  $datos['descripcionProd']);
+                $query->bindParam(3,  $datos['talla']);
+                $query->bindParam(4,  $datos['idtipotela']);
+                $query->bindParam(5,  $datos['descuento']);
+                $query->bindParam(6,  $datos['estadoProd']);
+                $query->bindParam(7,  $datos['foto']);
+                $query->bindParam(8,  $datos['idPersona']);
+                $query->bindParam(9,  $datos['id_codigo_de_barras']);
+                $query->bindParam(10, $datos['codigointerno']);
+                $query->bindParam(11, $datos['codigoexterno']);
+                $query->bindParam(12, $datos['id_precio']);
+                $query->bindParam(13, $datos['precio']);
+                $query->bindParam(14, $datos['id_stock']);
+                $query->bindParam(15, $datos['cantidad']);
+                $query->bindParam(16, $datos['idcategoria']);
+                $query->bindParam(17, $datos['proveedor']);
+                $query->bindParam(18, $datos['idTipoProd']);
+                $query->bindParam(19, $datos['idDepartamento']);
+                $query->execute();
+
+                return true;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
 
     public function deleteProduct($idProducto){
         #Traemos el dato para poder eliminar la foto del producto
@@ -389,7 +427,7 @@ public function getProducts(){
             $query->execute();
 
             #Si se eliminaron todos los datos correctamente entonces si borramos la imagen.
-             @unlink('img/productos/'.$foto);
+            @unlink('img/productos/'.$foto);
 
             return true;
         } catch (PDOException $e) {
