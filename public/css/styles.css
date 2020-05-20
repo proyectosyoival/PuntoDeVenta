@@ -551,3 +551,6 @@ float: left;
 #datosProdModal{
     margin-left: 200px; 
 }
+.tdProdManita{
+	cursor: pointer;
+}
