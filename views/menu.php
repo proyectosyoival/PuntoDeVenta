@@ -38,9 +38,9 @@
                     // include_once 'models/main.php';
                     // foreach($this->menus as $row){
                     //     $menus = new Menu();
-                    //     $menus = $row; 
-                    $query = $db->connect()->prepare('SELECT * FROM menu ORDER BY nombreMenu');
-                    $query->execute();
+                    //     $menus = $row;
+                    $query = $db->connect()->prepare('SELECT menu.* FROM menu INNER JOIN menu_rol ON menu.id_menu=menu_rol.id_menu WHERE menu_rol.id_rol= :id_rol ORDER BY nombreMenu');
+                    $query->execute(['id_rol' => $rol]);
 
                     foreach ($query as $currentUser) {
                         $query->nombreMenu = $currentUser['nombreMenu'];

@@ -19,7 +19,7 @@
                     include_once 'models/main.php';
                     foreach($this->menus as $row){
                         $menus = new Menu();
-                        $menus = $row; 
+                        $menus = $row;
         ?>
         <div class="row row-cols-1 row-cols-md-3">
             <div class="col mb-4" id="col2">
@@ -27,7 +27,7 @@
                     <div class="card-header text-center" id="card-header"><h5 class="text-center"><?php echo $menus->iconoMenu." ".$menus->nombreMenu;?></h5></div>
                     <div class="card-body">
                         <p class="card-text text-left"><?php echo $menus->descripcionMenu;?></p>
-                        <div class="text-center"><a type="button" class="btn" id="btn-ira" href="<?php echo constant('URL'); ?>caja">Ir a <?php echo $menus->nombreMenu;?></a></div>
+                        <div class="text-center"><a type="button" class="btn" id="btn-ira" href="<?php echo constant('URL'); echo $menus->controlerMenu?>">Ir a <?php echo $menus->nombreMenu;?></a></div>
                     </div>
                 </div>
             </div>

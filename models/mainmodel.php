@@ -19,15 +19,15 @@ class MainModel extends Model{
             //echo "Ya existe esa matrícula";
             return false;
         }
-        
+
     }
-    
+
     public function get(){
         $items = [];
-
+        $rol=$_SESSION['rol'];
         try{
 
-            $query = $this->db->connect()->query("SELECT*FROM menu ORDER BY nombreMenu");
+            $query = $this->db->connect()->query("SELECT menu.* FROM menu INNER JOIN menu_rol ON menu.id_menu=menu_rol.id_menu WHERE menu_rol.id_rol= $rol ORDER BY nombreMenu");
 
             while($row = $query->fetch()){
                 $item = new Menu();
