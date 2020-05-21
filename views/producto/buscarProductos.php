@@ -27,7 +27,7 @@
       $producto = $row;
       ?>
       <tr id="fila-<?php echo $producto->id_producto; ?>">
-        <td><div onclick="ShowModal(<?php echo $producto->id_producto; ?>)" ><?php echo $producto->id_producto; ?></div></td>
+        <td class="tdProdManita"><div onclick="ShowModal(<?php echo $producto->id_producto; ?>)" ><?php echo $producto->id_producto; ?></div></td>
         <td><div align="left"><?php echo $producto->descripcionProd; ?></div></td>
         <td><div align="right">$<?php echo $producto->general; ?></div></td>
         <td><div><?php echo $producto->cantidad; ?></div></td>
