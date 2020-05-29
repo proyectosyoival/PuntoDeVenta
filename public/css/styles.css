@@ -241,7 +241,7 @@ a img{
 }
 
 #head-login{
-	font-size: 30px; 
+	font-size: 30px;
 	color: #FFFFFF;
 	font-weight: bold;
 	margin-top: 10px;
@@ -255,7 +255,7 @@ a img{
 
 #img-login{
 	margin-bottom: 10px;
-	width: 100px; 
+	width: 100px;
 	height: 100px;
 	padding: 0;
 	margin: 0;
@@ -284,7 +284,7 @@ a img{
 }
 
 .my-error-class {
-	color: #F4F7FA; 
+	color: #F4F7FA;
 	font-size: 16px;
 	padding-left: 5px;
 	border-color: white;
@@ -293,7 +293,7 @@ a img{
 	padding-right: 5px;
 }
 .my-error-class input{
-	color:  #F4F7FA; 
+	color:  #F4F7FA;
 	background: white;
 }
 
@@ -321,7 +321,7 @@ a img{
 
 #modal-header{
 	background: #51596C;
-	color: #F4F7FA; 
+	color: #F4F7FA;
 	font-weight: bolder;
 }
 
@@ -422,7 +422,7 @@ a img{
     background-color: #7A95C3;
     border-color: #7A95C3;
     opacity: 0.9;
-} 
+}
 
 a.btn.btn-danger{
 	color: #F4F7FA;
@@ -549,8 +549,20 @@ float: left;
   width: 200px;
 }
 #datosProdModal{
-    margin-left: 200px; 
+    margin-left: 200px;
 }
 .tdProdManita{
 	cursor: pointer;
+}
+#caja{
+	background-color: #6F7E95;
+}
+.nav-item{
+	color: white;
+}
+.nav-item:hover{
+	color: white;
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link {
+    border-color: #e9ecef #e9ecef #dee2e6;
 }
