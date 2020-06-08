@@ -5,7 +5,6 @@
 </div>
 
 <div id="datosProdModal">
-
   <div class="row col-md-12" align="left">              
     <div class="col-md-4"><span class="label-card">Departamento:</span></div>
     <div class="col-md-8"><?php echo $this->productoSelected->nombreDepa; ?></div>
@@ -20,15 +19,31 @@
     <div class="col-md-4"><span class="label-card">Categoría: </span></div>
     <div class="col-md-8"><?php echo $this->productoSelected->nombreCate; ?></div>
   </div>
-
+  <!--Traemos las tallas de los productos con el id del mismo-->
   <div class="row col-md-12" align="left">
     <div class="col-md-4"><span class="label-card">Talla(s): </span></div>
-    <div class="col-md-8"><?php echo $this->productoSelected->nombreTalla; ?></div>
+    <?php $idProd = $this->productoSelected->id_producto; 
+      $db = new Database();
+            $query = $db->connect()->prepare('SELECT t.nombreTalla FROM prod_talla pt INNER JOIN talla t ON pt.id_talla = t.id_talla WHERE pt.id_producto = :idProd ORDER BY t.id_talla ASC');
+            $query->execute(['idProd' => $idProd]);
+            foreach ($query as $row) {
+              ?>
+              <div class="col-md-1"><?php echo $talla  = $row[0];?></div>
+            <?php } ?>
+    <!--<div class="col-md-8"><?php echo $this->productoSelected->nombreTalla; ?></div>-->
   </div>
 
   <div class="row col-md-12" align="left">
     <div class="col-md-4"><span class="label-card">Cantidad: </span></div>
-    <div class="col-md-8"><?php echo $this->productoSelected->cantidad; ?></div>
+    <?php $idProd = $this->productoSelected->id_producto; 
+      $db = new Database();
+            $query = $db->connect()->prepare('SELECT s.cantidad FROM prod_talla pt INNER JOIN stock s ON pt.id_prod_talla = s.id_prod_talla WHERE pt.id_producto = :idProd ORDER BY s.id_stock ASC');
+            $query->execute(['idProd' => $idProd]);
+            foreach ($query as $row) {
+              ?>
+              <div class="col-md-1"><?php echo $cantidad  = $row[0];?></div>
+            <?php } ?>
+    <!--<div class="col-md-8"><?php echo $this->productoSelected->cantidad; ?></div>-->
   </div>
 
   <div class="row col-md-12" align="left">
