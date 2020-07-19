@@ -44,8 +44,10 @@ class tipoVenta extends Controller{
 	}
 
 	function actualizarTipo_Venta(){
-		$id_tipo_venta = $_SESSION['id_tipo_venta'];
+		//$id_tipo_venta = $_SESSION['id_tipo_venta'];
+		$id_tipo_venta = $_POST['id_tipo_venta'];
 		$descripcionTipoVenta = $_POST['descripcionTipoVenta'];
+
 
 		if ($this->model->update(['id_tipo_venta' => $id_tipo_venta, 'descripcionTipoVenta' => $descripcionTipoVenta])) {
 			$tiposVenta = new tipo_venta();

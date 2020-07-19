@@ -18,7 +18,7 @@
 				
 				<div class="form-group col-md-3">
 					<label>Producto:</label>
-					<select class="form-control" name="idtipoprod" required>
+					<select class="form-control" name="idtipoprod" id="idtipoprod" required>
 						<option value="" hidden>Seleccione una opción..</option>
 						<?php
 						include_once 'models/tipoProducto.php';
@@ -33,7 +33,7 @@
 
 				<div class="form-group  col-md-3">
 					<label>Tipo de Tela:</label>
-					<select class="form-control" name="idtipotela" required>
+					<select class="form-control" name="idtipotela" id="idtipotela" required>
 						<option value="">Seleccione una opción..</option>
 						<?php
 						include_once 'models/tipotela.php';
@@ -48,7 +48,7 @@
 
 				<div class="form-group col-md-3">
 					<label>Departamento:</label>
-					<select class="form-control" name="iddepartamento" required>
+					<select class="form-control" name="iddepartamento" id="iddepartamento" onchange="FormaDescripcion();" required>
 						<option value="" hidden>Seleccione una opción..</option>
 						<?php
 						include_once 'models/departamento.php';
@@ -119,11 +119,11 @@
 
 				<div class="form-row">
 
-					<div class="form-group col-md-3" id="selectTallas">
+					<div class="form-group col-md-2" id="selectTallas">
 
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label for="cantidad">Cantidad:</label>
 						<input type="text" name="cantidad[]" id="cantidad" class="form-control" placeholder="Numero de unidades" required>
 					</div>
@@ -326,4 +326,26 @@ $(function validar() {
            }
    });
       });
+</script>
+
+<script type="text/javascript">
+	function FormaDescripcion()
+	{
+		var product = "";
+		var product = document.getElementById("idtipoprod").value;
+		var comboProduct = document.getElementById("idtipoprod");
+		var productSelected = comboProduct.options[comboProduct.selectedIndex].text;
+
+		var tipoDeTela = "";
+		var tipoDeTela = document.getElementById("idtipotela").value;
+		var comboTipoDeTela = document.getElementById("idtipotela");
+		var tipoDeTelaSelected = comboTipoDeTela.options[comboTipoDeTela.selectedIndex].text;
+
+		var apartament = "";
+		var apartament = document.getElementById("iddepartamento").value;
+		var comboApartament = document.getElementById("iddepartamento");
+		var apartamentSelected = comboApartament.options[comboApartament.selectedIndex].text;
+
+		document.getElementById("descripcionProd").value = productSelected + " DE " + tipoDeTelaSelected + " PARA " + apartamentSelected;
+	}
 </script>

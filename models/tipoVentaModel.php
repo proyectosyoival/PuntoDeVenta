@@ -27,7 +27,7 @@ class tipoVentaModel extends Model{
 
 			try{
 
-					$query = $this->db->connect()->query("SELECT*FROM tipo_venta");
+					$query = $this->db->connect()->query("SELECT * FROM tipo_venta");
 
 					while($row = $query->fetch()){
 							$item = new tipo_venta();
@@ -53,7 +53,7 @@ class tipoVentaModel extends Model{
 
 					while($row = $query->fetch()){
 							$item->id_tipo_venta = $row['id_tipo_venta'];
-							$item->descripcionTipoVenta = $row['descripcionTipoPago'];
+							$item->descripcionTipoVenta = $row['descripcionTipoVenta'];
 							$item->fecha_alta = $row['fecha_alta'];
 					}
 
@@ -67,8 +67,8 @@ class tipoVentaModel extends Model{
 			$query = $this->db->connect()->prepare("UPDATE tipo_venta SET descripcionTipoVenta = :descripcionTipoVenta WHERE id_tipo_venta = :id_tipo_venta");
 			try{
 					$query->execute([
-							'id_tipo_venta'=> $item['id_tipo_venta'],
-							'descripcionTipoVenta'=> $item['descripcionTipoVenta'],
+							'id_tipo_venta' => $item['id_tipo_venta'],
+							'descripcionTipoVenta' => $item['descripcionTipoVenta'],
 					]);
 					return true;
 			}catch(PDOException $e){
