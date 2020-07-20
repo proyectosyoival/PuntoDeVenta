@@ -127,13 +127,6 @@
 						<label for="cantidad">Cantidad:</label>
 						<input type="text" name="cantidad[]" id="cantidad" class="form-control" placeholder="Unidades" required>
 					</div>
-					
-					<div>
-						<label>&nbsp;</label>
-						<div>
-							<p></p>
-						</div>
-					</div>
 
 					<div class="form-group  col-md-2">
 						<label for="codigointerno">Codigo Interno:</label>
@@ -143,6 +136,13 @@
 					<div class="form-group  col-md-2">
 						<label for="codigoexterno">Codigo Externo:</label>
 						<input type="text" name="codigoexterno[]" id="codigoexterno" class="form-control" placeholder="Codigo Externo" required>
+					</div>
+
+					<div>
+						<label>&nbsp;</label>
+						<div>
+							<p></p>
+						</div>
 					</div>
 
 				</div>

@@ -412,6 +412,9 @@
                 }
 
                 public function deleteProduct($idProducto){
+
+                ##REALIZAR POR MEDIO DE TRASACCIÓN POR MEDIO DE CÓDIGO DURO.
+
                 #Traemos el dato para poder eliminar la foto del producto
                     $db = new Database();
                     $query = $db->connect()->prepare('SELECT foto, id_codigo_de_barras, id_precio FROM producto WHERE id_producto= :id_producto');
