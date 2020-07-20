@@ -85,15 +85,6 @@
                            $foto = basename($foto["name"]);
                        }
 
-                        #Insertamos los codigos de barras.
-                        $query = $pdo->prepare("INSERT INTO codigo_de_barras(codigo_interno, codigo_externo) VALUES(:codigointerno, :codigoexterno);");
-                        $query->execute(['codigointerno' => $datos['codigointerno'], 'codigoexterno' => $datos['codigoexterno']]);
-                        #Buscamos el id del codigo de barras que acabamos de insertar.
-                        $query = $pdo->prepare("SELECT max(id_codigo_de_barras) FROM codigo_de_barras;");
-                        $query->execute();
-                            foreach ($query as $row) {
-                            $id_cod_bar = $row[0]; #Este es el que utilizaremos para almacenarlo en la tabla Productos
-                        }
                         #Traemos el ultimo (único) iva almacenado de la tabla IVA
                         $query = $pdo->prepare("SELECT max(id_iva) FROM iva;");
                         $query->execute();
@@ -110,8 +101,8 @@
                             $id_prec = $row[0]; #Este es el que utilizaremos para almacenarlo en la tabla Productos
                         }
                         #Ahora creamos el producto
-                        $query = $pdo->prepare("INSERT INTO producto(descripcionProd, estadoProd, id_tipo_tela, proveedor, foto, descuento, id_persona, id_codigo_de_barras, id_precio, id_categoria, id_cat_tipo_prod, id_departamento) VALUES(:descripcionProd, :estadoProd, :idtipoTela, :proveedor, :foto, :descuento, :idPersona, :id_cod_bar, :id_prec, :idCategoria, :idCatTipoProd, :idDepartamento);");
-                        $query->execute(['descripcionProd' => $datos['descripcionProd'], 'estadoProd' => $datos['estadoProd'], 'idtipoTela' => $datos['idtipotela'], 'proveedor' => $datos['proveedor'], 'foto' => $foto, 'descuento' => $datos['descuento'], 'idPersona' => $datos['idPersona'], 'id_cod_bar' => $id_cod_bar, 'id_prec' => $id_prec, 'idCategoria' => $datos['idcategoria'], 'idCatTipoProd' => $datos['idTipoProd'], 'idDepartamento' => $datos['idDepartamento']]);
+                        $query = $pdo->prepare("INSERT INTO producto(descripcionProd, estadoProd, id_tipo_tela, proveedor, foto, descuento, id_persona, id_precio, id_categoria, id_cat_tipo_prod, id_departamento) VALUES(:descripcionProd, :estadoProd, :idtipoTela, :proveedor, :foto, :descuento, :idPersona, :id_prec, :idCategoria, :idCatTipoProd, :idDepartamento);");
+                        $query->execute(['descripcionProd' => $datos['descripcionProd'], 'estadoProd' => $datos['estadoProd'], 'idtipoTela' => $datos['idtipotela'], 'proveedor' => $datos['proveedor'], 'foto' => $foto, 'descuento' => $datos['descuento'], 'idPersona' => $datos['idPersona'], 'id_prec' => $id_prec, 'idCategoria' => $datos['idcategoria'], 'idCatTipoProd' => $datos['idTipoProd'], 'idDepartamento' => $datos['idDepartamento']]);
                         #Los siguientes movimientos son los que ocupan el id del producto creado asi que lo recuperamos.
                         $query = $pdo->prepare("SELECT max(id_producto) FROM producto;");
                         $query->execute();
@@ -135,7 +126,17 @@
                                     #Al macenamos la cantidad correspondiente en stock.
                                     $query = $pdo->prepare("INSERT INTO stock(cantidad, cantidad_real, id_prod_talla) VALUES(:cantidad, 0, :idProdTalla);");
                                     $query->execute(['cantidad' => $cantidad[$i], 'idProdTalla' => $idProdTalla]);
-                            }            
+                            }
+                        #Desglozamos lo que son los codigos de barras para poder ingresarlos en sus tabla según el numero que se hayan generado.
+                        $codigointerno = $datos['codigointerno'];
+                        $codigoexterno = $datos['codigoexterno'];
+                        for($i = 0; $i < count($codigointerno); $i++)
+                        {
+                            #Insertamos los codigos de barras tomando el id del producto generado anteriormente.
+                            $query = $pdo->prepare("INSERT INTO codigo_de_barras(codigo_interno, codigo_externo, id_producto) VALUES(:codigointerno, :codigoexterno, :idProd);");
+                            $query->execute(['codigointerno' => $codigointerno[$i], 'codigoexterno' => $codigoexterno[$i], 'idProd' => $idProd]);
+                        }                       
+
                         #Ya solo queda insertar si es que el producto tiene promocion o no.
                         $query = $pdo->prepare("INSERT INTO prom_pro(id_promocion, id_producto) VALUES(:idPromocion, :idProd);");
                         $query->execute(['idPromocion' => $datos['id_promocion'], 'idProd' => $idProd]);

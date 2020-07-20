@@ -101,7 +101,7 @@
 						foreach ($query as $row) {
 							$tipoTalla 	= $row['tipoTalla'];
 							?>
-						<option value="<?php echo $tipoTalla; ?>"><?php echo $tipoTalla; ?></option>
+							<option value="<?php echo $tipoTalla; ?>"><?php echo $tipoTalla; ?></option>
 						<?php } ?>
 					</select>
 				</div>
@@ -109,7 +109,7 @@
 				<div class="col-md-2">
 					<label>Agregar Talla:</label>
 					<div>
-					<button type="button" class="btn btn-primary form-control" id="add_field"> + </button>
+						<button type="button" class="btn btn-primary form-control" id="add_field"> + </button>
 					</div>
 				</div>
 
@@ -119,20 +119,30 @@
 
 				<div class="form-row">
 
-					<div class="form-group col-md-2" id="selectTallas">
+					<div class="form-group col-md-1" id="selectTallas">
 
 					</div>
 
 					<div class="form-group col-md-2">
 						<label for="cantidad">Cantidad:</label>
-						<input type="text" name="cantidad[]" id="cantidad" class="form-control" placeholder="Numero de unidades" required>
+						<input type="text" name="cantidad[]" id="cantidad" class="form-control" placeholder="Unidades" required>
 					</div>
 					
 					<div>
-					<label>&nbsp;</label>
-					<div>
-					<p></p>
+						<label>&nbsp;</label>
+						<div>
+							<p></p>
+						</div>
 					</div>
+
+					<div class="form-group  col-md-2">
+						<label for="codigointerno">Codigo Interno:</label>
+						<input type="text" name="codigointerno[]" id="codigointerno" class="form-control" placeholder="Codigo Interno" requiredS>
+					</div>
+
+					<div class="form-group  col-md-2">
+						<label for="codigoexterno">Codigo Externo:</label>
+						<input type="text" name="codigoexterno[]" id="codigoexterno" class="form-control" placeholder="Codigo Externo" required>
 					</div>
 
 				</div>
@@ -144,16 +154,6 @@
 			</div>
 
 			<div class="form-row">
-
-				<div class="form-group  col-md-3">
-					<label for="codigointerno">Codigo Interno:</label>
-					<input type="text" name="codigointerno" id="codigointerno" class="form-control" placeholder="Codigo Interno" requiredS>
-				</div>
-
-				<div class="form-group  col-md-3">
-					<label for="codigoexterno">Codigo Externo:</label>
-					<input type="text" name="codigoexterno" id="codigoexterno" class="form-control" placeholder="Codigo Externo" required>
-				</div>
 
 				<div class="form-group col-md-3">
 					<label for="estado">Estado:</label>
@@ -202,7 +202,7 @@
 						$query->execute();
 						foreach ($query as $row) {
 							?>
-						<option value="<?php echo $row['id_promocion']; ?>"><?php echo $row['nombrePromo']; ?></option>
+							<option value="<?php echo $row['id_promocion']; ?>"><?php echo $row['nombrePromo']; ?></option>
 						<?php } ?>
 					</select>
 				</div>
@@ -231,54 +231,54 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-	recargarLista();
-
-	$('#tipoTalla').change(function(){
 		recargarLista();
-	});
-})
+
+		$('#tipoTalla').change(function(){
+			recargarLista();
+		});
+	})
 </script>
 
 <script type="text/javascript">
-function recargarLista(){
-	$.ajax({
+	function recargarLista(){
+		$.ajax({
 			url: "obtenerTallas",
 			type: "POST",
 			data: "tipoTalla=" + $('#tipoTalla').val(),
 			success:function(r){
 				$('#selectTallas').html(r);
 			}
-	});
-}
+		});
+	}
 </script>
 
 <script type="text/javascript">
 	var campos_max = 10;   //max de 10 campos
 
-        var x = 0;
-        $('#add_field').click (function(e) {
+	var x = 0;
+	$('#add_field').click (function(e) {
                 e.preventDefault();     //prevenir novos clicks
                 if (x < campos_max) {
-                        $('#listas').clone().appendTo('#aquiSeClona');
-                        $("#aquiSeClona p:first").replaceWith('<input type="button" class="btn btn-danger remover_campo" value="-"/>');
-                        $('#tipoTalla').attr('disabled', true);
-                        x++;
+                	$('#listas').clone().appendTo('#aquiSeClona');
+                	$("#aquiSeClona p:first").replaceWith('<input type="button" class="btn btn-danger remover_campo" value="-"/>');
+                	$('#tipoTalla').attr('disabled', true);
+                	x++;
                 }
-        });
+            });
         // Remover o div anterior
         $('#aquiSeClona').on("click",".remover_campo",function(e) {
-                e.preventDefault();
-                var parent = $(this).parents().get(2);
-                $(parent).remove();
-                x--;
-                if(x == 0){
-                	$('#tipoTalla').attr('disabled', false);
-                }
+        	e.preventDefault();
+        	var parent = $(this).parents().get(2);
+        	$(parent).remove();
+        	x--;
+        	if(x == 0){
+        		$('#tipoTalla').attr('disabled', false);
+        	}
         });
-</script>
+    </script>
 
-<script type="text/javascript">
-	$(document).ready(function(){
+    <script type="text/javascript">
+    	$(document).ready(function(){
 		$('#add_field').attr('disabled', true); //desactivamos el botón +
 		$('#tipoTalla').change(function(){
 			if($(this).val() != ''){
@@ -291,41 +291,41 @@ function recargarLista(){
 </script>
 
 <script type="text/javascript">
-jQuery.validator.setDefaults({
-  debug: false,
-  success: "valid",
-   errorClass: "my-error-class"
-});
-jQuery.validator.addMethod("letterandnumbers", function(value, element) {
-       return this.optional(element) || /^[a-z0-9\s\.]+$/i.test(value);
-    }, "Solo letras y numeros");
-$(function validar() {
+	jQuery.validator.setDefaults({
+		debug: false,
+		success: "valid",
+		errorClass: "my-error-class"
+	});
+	jQuery.validator.addMethod("letterandnumbers", function(value, element) {
+		return this.optional(element) || /^[a-z0-9\s\.]+$/i.test(value);
+	}, "Solo letras y numeros");
+	$(function validar() {
    $("#descuento" ).validate({//#debe tener el nombre del id que le pongan en la etiiqueta form de su formulario
            rules: {//validaciones que va hacer
                    porcentaje: {//este es el name del input a validar
-                           required:true,
-                           min:0,
-                           max:1
+                   	required:true,
+                   	min:0,
+                   	max:1
                            //este es el requisito a validar
-                   }
+                       }
                 	// contrasena:{
 		               //      required:true,
 		               //      minlength:8,
                 	// }
-           },
+                },
            messages: {//mensaje si no se cumplen las validaciones
-                   porcentaje: {
-                           required: "&#x1f5d9; Ingresa un IVA",
-                           min: "&#x1f5d9; El valor debe ser mayor a 0",
+           	porcentaje: {
+           		required: "&#x1f5d9; Ingresa un IVA",
+           		min: "&#x1f5d9; El valor debe ser mayor a 0",
                            max: "&#x1f5d9; El valor debe ser menor a 1"//poner el mensaje que quieres que se muestre si no se cumple la validacion, el &#x1f5d9 es el simbolo de equis que se va mostrar si no se cumple la validacon
-                   }
+                       }
                 	// contrasena:{
 		               //      required:"&#x1f5d9; Ingresa tu contraseña",
 		               //      minlength:"&#x1f5d9; Tu contraseña debe ser mayor a 8 caracteres",
                 	// } debes agregar el mensaje por cada input que pusiste en rules
-           }
-   });
-      });
+                }
+            });
+});
 </script>
 
 <script type="text/javascript">

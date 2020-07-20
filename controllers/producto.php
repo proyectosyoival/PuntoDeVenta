@@ -86,8 +86,8 @@ class Producto extends Controller{
 		$id_talla			= $_POST['idtalla']; 				//Se registra el id de la talla en la tabla prod_talla - se recibe un array
 		#Convertimos los valores a una cadena de caracteres separados por guion
 		$cantidad			= $_POST['cantidad']; 			//Se registra la cantidad en la tabla de stock - se recibe un array
-		$codigoInterno		= $_POST['codigointerno']; 		//Se regista el codigo interno en la tabla de codigo de barras.
-		$codigoExterno		= $_POST['codigoexterno']; 		//Se regista el codigo externo en la tabla de codigo de barras.
+		$codigoInterno		= $_POST['codigointerno']; 		//Se regista el codigo interno en la tabla de codigo de barras - se recibe como array.
+		$codigoExterno		= $_POST['codigoexterno']; 		//Se regista el codigo externo en la tabla de codigo de barras - se recibe como array.
 		$estadoProd			= $_POST['estadoProd'];			//Se registra en la tabla producto
 		$proveedor			= $_POST['proveedor'];			//Se registra en la tabla producto
 		$precio				= $_POST['precio']; 			//Se registra en la tabla precio
