@@ -414,34 +414,35 @@
                 public function deleteProduct($idProducto){
 
                 ##REALIZAR POR MEDIO DE TRASACCIÓN POR MEDIO DE CÓDIGO DURO.
+                $db = new  Database();
+                $pdo = $this->db->connect();
+                $pdo->beginTransaction();
+                
 
                 #Traemos el dato para poder eliminar la foto del producto
                     $db = new Database();
-                    $query = $db->connect()->prepare('SELECT foto, id_codigo_de_barras, id_precio FROM producto WHERE id_producto= :id_producto');
+                    $query = $pdo->prepare('SELECT foto, id_precio FROM producto WHERE id_producto= :id_producto');
                     $query->execute(['id_producto' => $idProducto]);
                     foreach ($query as $row) {
                         $foto                   = $row['foto'];
-                        $id_codigo_de_barras    = $row['id_codigo_de_barras'];
                         $id_precio              = $row['id_precio'];
                     }
-                #Llamamos el StoreProcedure para eliminar el producto y sus dependientes.
-                    $query = $this->db->connect()->prepare("CALL procDeleteProducto(?,?,?)");
+
                     try {
-                        $query->bindParam(1, $idProducto);
-                        $query->bindParam(2, $id_codigo_de_barras);
-                        $query->bindParam(3, $id_precio);
-                        $query->execute();
+                        $query = $pdo->prepare('DELETE FROM producto WHERE id_producto = :id_producto;');
+                        $query->execute(['id_producto' => $idProducto]);
+                        $query = $pdo->prepare('DELETE FROM precio WHERE id_precio = :id_precio;');
+                        $query->execute(['id_precio' => $id_precio]);
 
                     #Si se eliminaron todos los datos correctamente entonces si borramos la imagen.
                         @unlink('img/productos/'.$foto);
 
+                        $pdo->commit();    
                         return true;
                     } catch (PDOException $e) {
+                        $pdo->rollback();
                         return false;
                     }
-
                 }
-
             }
-
-            ?>
+?>
