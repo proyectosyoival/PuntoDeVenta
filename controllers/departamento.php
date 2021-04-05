@@ -6,6 +6,7 @@ class Departamento extends Controller{
     parent::_construct();
     $this->view->departamento =[];
   }
+
   function nuevo(){
     $this->view->render('departamento/nuevo');
   }
@@ -40,7 +41,8 @@ class Departamento extends Controller{
     $this->view->mensaje = "";
     $this->view->render('departamento/edit');
   }
-   function actualizarDepto(){
+
+  function actualizarDepto(){
 
     $id_departamento = $_SESSION['id_departamento'];
 
@@ -62,9 +64,9 @@ class Departamento extends Controller{
       $this->view->mensaje = "No se pudo actualizar el registro correctamente";
     }
     $this->view->render('departamento/edit');
-   }
+  }
 
-   function deletDepto($param = null){
+  function deletDepto($param = null){
        $id_departamento = $param[0];
 
        if($this->model->delete($id_departamento)){
@@ -73,7 +75,6 @@ class Departamento extends Controller{
            $mensaje = 0;
        }
        echo $mensaje;
-   }
+  }
 }
-
 ?>

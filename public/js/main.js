@@ -11,7 +11,7 @@ botones.forEach(boton => {
 
         if(confirm){
             // solicitud AJAX
-            httpRequest("http://localhost/PuntodeVenta/"+funcion+"/"+ id, function(){
+            httpRequest("http://localhost:88/PuntodeVenta/"+funcion+"/"+ id, function(){
                 var respuesta=this.responseText;
                 console.log(respuesta);
                 if (respuesta==1) {

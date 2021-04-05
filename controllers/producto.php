@@ -35,9 +35,6 @@ class Producto extends Controller{
 	}
 
 	function render(){
-		#$productos = $this->model->getProducts();
-		#$this->view->productos = $productos;
-
 		$this->view->render('producto/index');
 	}
 
@@ -65,6 +62,11 @@ class Producto extends Controller{
 		$this->view->render('producto/buscarProductos');
 	}
 
+	function buscarDeptos(){
+		$dep = $this->model->getDeptoByIdForProduct($_POST['idDept']);
+		$this->view->dpt = $dep;
+	}
+
 	#Uso de AJAX al momento de cargar el tipo de Talla
 	function obtenerTallas(){
 		$tipoTalla = $_POST['tipoTalla'];
@@ -83,23 +85,23 @@ class Producto extends Controller{
 		$descripcionProd	= $_POST['descripcionProd'];	//Se registra en la tabla producto
 		$idcategoria 		= $_POST['idcategoria'];		//Se obtiene de la tabla de categoria
 		#Tipo de numeración solo nos sirve para saber que tipo de talla se insertará- Alfabetico-Numerico-AlfaNumerico
-		$id_talla			= $_POST['idtalla']; 				//Se registra el id de la talla en la tabla prod_talla - se recibe un array
+		//$id_talla			= $_POST['idtalla']; 				//Se registra el id de la talla en la tabla prod_talla - se recibe un array
 		#Convertimos los valores a una cadena de caracteres separados por guion
-		$cantidad			= $_POST['cantidad']; 			//Se registra la cantidad en la tabla de stock - se recibe un array
-		$codigoInterno		= $_POST['codigointerno']; 		//Se regista el codigo interno en la tabla de codigo de barras - se recibe como array.
-		$codigoExterno		= $_POST['codigoexterno']; 		//Se regista el codigo externo en la tabla de codigo de barras - se recibe como array.
+		//$cantidad			= $_POST['cantidad']; 			//Se registra la cantidad en la tabla de stock - se recibe un array
+		//$codigoInterno		= $_POST['codigointerno']; 		//Se regista el codigo interno en la tabla de codigo de barras - se recibe como array.
+		//$codigoExterno		= $_POST['codigoexterno']; 		//Se regista el codigo externo en la tabla de codigo de barras - se recibe como array.
 		$estadoProd			= $_POST['estadoProd'];			//Se registra en la tabla producto
 		$proveedor			= $_POST['proveedor'];			//Se registra en la tabla producto
-		$precio				= $_POST['precio']; 			//Se registra en la tabla precio
-		$mayoreo			= $_POST['mayoreo']; 			//Se registra en la tabla precio
-		$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
-		$id_promocion		= $_POST['idpromocion'];		//Se guarda el id de producto en la tabla prom_pro y tambien el id_promocion
+		//$precio				= $_POST['precio']; 			//Se registra en la tabla precio
+		//$mayoreo			= $_POST['mayoreo']; 			//Se registra en la tabla precio
+		//$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
+		//$id_promocion		= $_POST['idpromocion'];		//Se guarda el id de producto en la tabla prom_pro y tambien el id_promocion
 		$foto				= $_FILES["foto"];				//Se registra en la tabla producto		
 		//$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)
 		//$idCodigoDeBarras	= $_POST['idcodigodebarras'];	//Se obtiene de la tabla de codigos de barras
 		$mensaje = "";
 
-		if($this->model->insert(['idPersona' => $idPersona, 'idTipoProd' => $idTipoProd, 'idtipotela' => $idtipoTela, 'idDepartamento' => $idDepartamento, 'descripcionProd' => $descripcionProd, 'idcategoria' => $idcategoria, 'id_talla' => $id_talla, 'cantidad' => $cantidad, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'estadoProd' => $estadoProd, 'proveedor' => $proveedor, 'precio' => $precio, 'mayoreo' => $mayoreo, 'descuento' => $descuento, 'id_promocion' => $id_promocion, 'foto' => $foto])){
+		if($this->model->insertProducto(['idPersona' => $idPersona, 'idTipoProd' => $idTipoProd, 'idtipotela' => $idtipoTela, 'idDepartamento' => $idDepartamento, 'descripcionProd' => $descripcionProd, 'idcategoria' => $idcategoria, 'estadoProd' => $estadoProd, 'proveedor' => $proveedor, 'foto' => $foto])){
 			$mensaje = "El producto se agreogo correctamente!";
 		}else{
 			$mensaje = "El producto ya existe!";
@@ -147,7 +149,7 @@ class Producto extends Controller{
 		$descripcionProd	= $_POST['descripcionProd'];	//Se registra en la tabla producto
 		$talla				= $_POST['talla'];				//Se registra en la tabla producto
 		$idtipoTela			= $_POST['idtipotela'];			//Se registra en la tabla producto - se deberia de obtener de una tabla externa (tipo tela)
-		$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
+		//$descuento			= $_POST['descuento'];			//Se registra en la tabla producto
 		$estadoProd			= $_POST['estadoProd'];			//Se registra en la tabla producto
 		$foto				= $_FILES["foto"];				//Se registra en la tabla producto
 		//$fechaReg			= $_POST['fechareg'];			//Se genera de manera automática (automatico)
@@ -157,7 +159,7 @@ class Producto extends Controller{
 		$codigoInterno		= $_POST['codigointerno'];
 		$codigoExterno		= $_POST['codigoexterno'];
 		$idPrecio			= $_POST['idprecio'];			//Se obtiene de la tabla de precio
-		$precio				= $_POST['precio'];
+		//$precio				= $_POST['precio'];
 		$cantidad			= $_POST['cantidad'];
 		$idcategoria 		= $_POST['idcategoria'];	//Se obtiene de la tabla de categoria
 		$proveedor			= $_POST['proveedor'];			//Se registra en la tabla producto
@@ -199,7 +201,7 @@ class Producto extends Controller{
             $nfoto=basename( $foto["name"]);            
          }
 
-		if($this->model->updateProd(['id_producto' => $id_producto, 'idTipoProd' => $idTipoProd, 'idDepartamento' => $idDepartamento, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'idtipotela' => $idtipoTela, 'descuento' => $descuento, 'estadoProd' => $estadoProd, 'foto' => $nfoto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'precio' => $precio, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor, 'id_codigo_de_barras' => $idCodigoDeBarras, 'id_precio' => $idPrecio, 'id_stock' => $id_stock])){
+		if($this->model->updateProd(['id_producto' => $id_producto, 'idTipoProd' => $idTipoProd, 'idDepartamento' => $idDepartamento, 'descripcionProd' => $descripcionProd, 'talla' => $talla, 'idtipotela' => $idtipoTela, 'estadoProd' => $estadoProd, 'foto' => $nfoto, 'idPersona' => $idPersona, 'codigointerno' => $codigoInterno, 'codigoexterno' => $codigoExterno, 'cantidad' => $cantidad, 'idcategoria' => $idcategoria, 'proveedor' => $proveedor, 'id_codigo_de_barras' => $idCodigoDeBarras, 'id_precio' => $idPrecio, 'id_stock' => $id_stock])){
 			//Actualizar el prodcuto con éxito
 			//Obtener el el valor del tipo con nombre
 
@@ -237,7 +239,7 @@ class Producto extends Controller{
 			$productoSelected->descripcionProd		= $descripcionProd;
 			$productoSelected->talla				= $talla;
 			$productoSelected->tipo_tela 			= $tipoDeTela;
-			$productoSelected->descuento			= $descuento;
+			//$productoSelected->descuento			= $descuento;
 			$productoSelected->estadoProd			= $estadoProd;
 			$productoSelected->foto 				= $nfoto;
 			$productoSelected->idPersona 			= $idPersona;
@@ -248,7 +250,7 @@ class Producto extends Controller{
 			$productoSelected->nombreCate 			= $nombreCate;
 			$productoSelected->proveedor 			= $proveedor;
 			$productoSelected->id_codigo_de_barras 	= $idCodigoDeBarras;
-			$productoSelected->id_precio	 		= $idPrecio;
+			//$productoSelected->id_precio	 		= $idPrecio;
 			$productoSelected->id_stock 			= $id_stock;
 			$productoSelected->id_cat_tipo_prod		= $idTipoProd;
 			$productoSelected->nombreTipoProd		= $nombreTipoProd;

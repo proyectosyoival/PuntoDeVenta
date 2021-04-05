@@ -9,7 +9,7 @@ function ShowModal(id){
 $('.modal#masInformacionProd')
   .modal('show')
 ;
-$('#modalContainer').load('http://localhost/PuntoDeVenta/producto/verProducto/'+id);
+$('#modalContainer').load('http://localhost:88/PuntoDeVenta/producto/verProducto/'+id);
 }
 
 //Buscador dinámico en Index

@@ -11,7 +11,6 @@ class Product{
 	public $tipo_tela;
 	public $proveedor;
 	public $foto;
-	public $descuento;
 	public $fecha_reg;
 	public $id_persona;
 	public $id_codigo_de_barras;
