@@ -34,7 +34,7 @@
         <!--<td><div><?php echo $producto->cantidad; ?></div></td>-->
         <td><div><?php echo $producto->proveedor; ?></div></td>
         <td><div><img src="<?php echo constant('URL'); ?>img/productos/<?php echo $producto->foto; ?>" class="img-responsive" width="50"  title="<?php echo $producto->descripcionProd; ?>"></div></td>
-        <th><div><a type="button" class="btn btn-dark" id="btn-agregar" href="#"><span class="icon-plus"></span></a></div></th>
+        <td><a type="button" class="btn btn-dark" id="btn-agregar" onclick="SMAI(<?php echo $producto->id_producto; ?>)"><span class="icon-plus"></span></a></td>
         <td><div><a type="button" class="btn" id="btn-editar" href="<?php echo constant('URL') . 'producto/editProduct/' . $producto->id_producto; ?>"><span class="icon-pencil2"></span></a></div></td>
         <td><div><a type="button" class="btn btn-danger bEliminar" data-id="<?php echo $producto->id_producto;?>" data-function="producto/eliminarProducto"><span class="icon-bin" title="Eliminar"></span></a></div></td>
       </tr>

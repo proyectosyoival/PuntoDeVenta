@@ -120,6 +120,15 @@ class Producto extends Controller{
 		$this->view->render('producto/getViewProduct');
 	}
 
+	function verDetalleProducto($param = null){
+		$id_producto = $param[0];
+		$productoSelected = $this->model->getProductById($id_producto);
+
+		$_SESSION['id_producto'] = $productoSelected->id_producto;
+		$this->view->productoSelected = $productoSelected;
+		$this->view->render('producto/detalleProducto');
+	}
+
 	function editProduct($param = null){
 		$id_producto = $param[0];
 		$productoSelected = $this->model->getProductById($id_producto);

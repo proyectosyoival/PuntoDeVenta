@@ -367,28 +367,28 @@
                             $item->estadoProd           = $row[2];  //estado
                             $item->tipo_tela            = $row[3];  //id_tipo_tela
                             $item->foto                 = $row[4];  //foto
-                            $item->descuento            = $row[5];  //descuento
-                            $item->fecha_reg            = $row[6];  //fecha_reg
-                            $item->nombrePers           = $row[7];  //nombre persona quien registra
-                            $item->apellido             = $row[8];  //apellido persona quien registra
-                            $item->codigo_interno       = $row[9]; //codigo de barras interno
-                            $item->codigo_externo       = $row[10]; //codigo de barras externo
-                            $item->general              = $row[11]; //precio
-                            $item->mayoreo              = $row[12]; //mayoreo
-                            $item->cantidad             = $row[13]; //cantidad
-                            $item->nombreCate           = $row[14]; //categoria
-                            $item->proveedor            = $row[15]; //proveedor
-                            $item->id_codigo_de_barras  = $row[16]; //id del codigoo de barras
-                            $item->id_precio            = $row[17]; //id del precio
-                            $item->id_stock             = $row[18]; //id del stock
-                            $item->id_cat_tipo_prod     = $row[19]; //id del cat tipo de producto
-                            $item->nombreTipoProd       = $row[20]; //nombre del tipo de producto -> PANTALON, CHAMARRA, ETC.
-                            $item->id_departamento      = $row[21]; //id del departamento
-                            $item->nombreDepa           = $row[22]; //nombre del deapartamento -> DAMA, CABALLERO
-                            $item->nomenclaturaDep      = $row[23]; //nomenclatura del departamento D = DAMA, C = CABALLERO... ETC.
-                            $item->nombreTalla          = $row[24]; //nombre de la talla 32-G-32A
-                            $item->nombrePromo          = $row[25]; //nombre de la promocion - 2x1
-                            $item->descripcionPromo     = $row[26]; //descripcion de la promocion
+                            //$item->descuento            = $row[5];  //descuento
+                            $item->fecha_reg            = $row[5];  //fecha_reg
+                            $item->nombrePers           = $row[6];  //nombre persona quien registra
+                            $item->apellido             = $row[7];  //apellido persona quien registra
+                            //$item->codigo_interno       = $row[9]; //codigo de barras interno
+                            //$item->codigo_externo       = $row[10]; //codigo de barras externo
+                            //$item->general              = $row[11]; //precio
+                            //$item->mayoreo              = $row[12]; //mayoreo
+                            //$item->cantidad             = $row[13]; //cantidad
+                            $item->nombreCate           = $row[8]; //categoria
+                            $item->proveedor            = $row[9]; //proveedor
+                            //$item->id_codigo_de_barras  = $row[16]; //id del codigoo de barras
+                            //$item->id_precio            = $row[17]; //id del precio
+                            //$item->id_stock             = $row[18]; //id del stock
+                            $item->id_cat_tipo_prod     = $row[10]; //id del cat tipo de producto
+                            $item->nombreTipoProd       = $row[11]; //nombre del tipo de producto -> PANTALON, CHAMARRA, ETC.
+                            $item->id_departamento      = $row[12]; //id del departamento
+                            $item->nombreDepa           = $row[13]; //nombre del deapartamento -> DAMA, CABALLERO
+                            //$item->nomenclaturaDep      = $row[23]; //nomenclatura del departamento D = DAMA, C = CABALLERO... ETC.
+                            //$item->nombreTalla          = $row[24]; //nombre de la talla 32-G-32A
+                            //$item->nombrePromo          = $row[25]; //nombre de la promocion - 2x1
+                            //$item->descripcionPromo     = $row[26]; //descripcion de la promocion
                         }
                         return $item;
                     }catch(PDOException $e){

@@ -55,6 +55,31 @@
   </div>
 </div>
 <!-- fin modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="agregarInventario" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" id="modal-header">
+        <h8 class="modal-title text-center" id="exampleModalCenterTitle">Agregar Inventario</h8>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn-cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <!--Inicia contenedor del modal -->
+        <div id="modalContAI">
+          <!-- EN ESTE DIV SE MUESTRA EL CONTENIDO DE LA PAG detalleProducto.php -->
+        </div>
+        <!--Termina contenedor del modal -->
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- fin modal -->
+
 <?php require 'views/footer.php'; ?>
 <!-- <script src="<?php echo constant('URL'); ?>public/js/main.js"></script> -->
 </body>

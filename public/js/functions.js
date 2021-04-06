@@ -12,6 +12,13 @@ $('.modal#masInformacionProd')
 $('#modalContainer').load('http://localhost:88/PuntoDeVenta/producto/verProducto/'+id);
 }
 
+function SMAI(id){
+$('.modal#agregarInventario')
+  .modal('show')
+;
+$('#modalContAI').load('http://localhost:88/PuntoDeVenta/producto/verDetalleProducto/'+id);
+}
+
 //Buscador dinámico en Index
 
 $(buscar_datos());
